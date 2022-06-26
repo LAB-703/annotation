@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup as bs
 from datetime import datetime, timedelta
 import clipboard
+import random
 import pandas as pd
 
 #@st.cache(allow_output_mutation=True, persist=True)
