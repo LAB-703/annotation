@@ -101,7 +101,7 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
-    st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
+    st.markdown('<p align="center" style=" font-size: 120%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
 
     URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
     col1,col2=st.columns([5,5])  
