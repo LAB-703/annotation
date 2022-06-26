@@ -106,10 +106,9 @@ if select_event == "👀 기사 인용 도우미":
     URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
  #   col1,col2=st.columns([5,5])  
  #   with col1:
-    APA_DT=st.markdown('APA : 기자. (기사작성일). 기사제목. 언론사. URL, 최종검색일', unsafe_allow_html=True)
 
     STYLE=st.radio("인용 스타일을 선택해주세요.",
-             (APA_DT, 
+             ("APA", 
               'CHICAGO',
               'by JOURNAL : ⏳ 개발 중'))
     final_search=st.checkbox('최종 검색일(오늘) 추가')
@@ -164,7 +163,7 @@ if select_event == "👀 기사 인용 도우미":
             if final_search==True:
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
-            if STYLE==APA_DT :# "APA":
+            if STYLE=="APA":
                 title='''
                     <style>
                     #Copy to clipboard {
