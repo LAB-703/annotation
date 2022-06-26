@@ -192,7 +192,7 @@ if select_event == "👀 기사 인용 도우미":
         st.session_state.last_updated = st.session_state.update_time
 
     with st.form(key='my_form'):
-        st.time_input(label='Enter the time', value=datetime.datetime.now().time(), key='update_time')
+        st.time_input(label='Enter the time', value=datetime.now().time(), key='update_time')
         st.number_input('Enter a value', value=0, step=1, key='increment_value')
         submit = st.form_submit_button(label='Update', on_click=update_counter)
 
