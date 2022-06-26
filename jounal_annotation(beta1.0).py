@@ -179,12 +179,12 @@ if select_event == "👀 기사 인용 도우미":
         st.session_state.emoji = random.choice(emojis)
 
     # initialize emoji as a Session State variable
-    if "emoji" not in st.session_state:
-        st.session_state.emoji = "🤍"
+    #if "emoji" not in st.session_state:
+    #    st.session_state.emoji = "🤍"
 
-    emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]
+   # emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]
 
-    st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+    #st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
