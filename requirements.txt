@@ -1,0 +1,9 @@
+streamlit
+clipboard
+parse
+requests
+BeautifulSoup
+datetime
+timedelta
+clipboard
+pandas
