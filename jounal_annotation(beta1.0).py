@@ -80,14 +80,16 @@ footer {
     content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
     visibility:visible;
     font-size: 10%;
+    font-family: 'Pretendard';
 }
 
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
-    font-size: 10%;
+    font-size: 10px;
     display:block;
     position:relative;
     color:silver;
+    font-family: 'Pretendard';
 }
 
 </style>
