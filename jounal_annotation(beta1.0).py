@@ -151,8 +151,7 @@ if select_event == "👀 기사 인용 도우미":
 #---------------------------------------------------------------------------------------------------------
             else :
                 st.error('링크가 없거나 네이버/다음 포털뉴스의 링크가 아닙니다!')
-                e = NameError('This is an exception of type RuntimeError')
-                st.exception(e)
+                st.stop()
             APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
             CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
             FINAL=str(datetime.now().strftime("%Y.%m.%d."))
