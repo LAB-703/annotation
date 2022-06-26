@@ -79,12 +79,12 @@ hide_menu='''
 footer {
     content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
     visibility:visible;
-    size: 10%;
+    size: 10px;
 }
 
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
-    size: 10%;
+    size: 10px;
     display:block;
     position:relative;
     color:silver;
@@ -107,10 +107,12 @@ if select_event == "👀 기사 인용 도우미":
         STYLE=st.radio("인용 스타일을 선택해주세요.",
              ('APA', 'CHICAGO','by JOURNAL'))
         final_search=st.checkbox('최종 검색일(오늘) 추가')
-        submit=st.button('복사')
-    with col2:
         if STYLE=="by JOURNAL":
-            st.markdown('<p style=" font-size: 70%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+            st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+        submit=st.button('복사')
+ #   with col2:
+  #      if STYLE=="by JOURNAL":
+  #          st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             #journal_list=['Email', 'Home phone', 'Mobile phone']
             #option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
             #st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
@@ -151,7 +153,8 @@ if select_event == "👀 기사 인용 도우미":
 #---------------------------------------------------------------------------------------------------------
             else :
                 st.error('링크가 없거나 네이버/다음 포털뉴스의 링크가 아닙니다!')
-            
+                e = NameError('This is an exception of type RuntimeError')
+                st.exception(e)
             APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
             CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
             FINAL=str(datetime.now().strftime("%Y.%m.%d."))
@@ -208,27 +211,27 @@ if select_event == "📜 학술지 목록":
 #           'LEFT':'(',
 #        'RIGHT':')',
 #          'DOT':'.'}
-    
-    multiselect= expander.multiselect('순서대로 놓아주세요.',
-                                list(dic.values()), 
-                                list(dic.values())[:2]) #default
-    annotation=""
-    for selection in multiselect:
-        if selection in list(dic.values())[:6]:
-            annotation+=selection+". "
-        elif selection in list(dic.values())[6]:
-            annotation+=selection+" "
-        else :
-            annotation+=selection
-    expander.markdown(annotation)
-    add=expander.button("추가")
-    if add:
-        expander.write("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
+#     
+#    multiselect= expander.multiselect('순서대로 놓아주세요.',
+#                                list(dic.values()), 
+#                                list(dic.values())[:2]) #default
+#    annotation=""
+#    for selection in multiselect:
+#        if selection in list(dic.values())[:6]:
+#            annotation+=selection+". "
+#        elif selection in list(dic.values())[6]:
+#            annotation+=selection+" "
+#        else :
+#            annotation+=selection
+#    expander.markdown(annotation)
+#    add=expander.button("추가")
+#    if add:
+#        expander.write("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
 #page3#######################################################################################################
 if select_event == "📌 개발":
-    st.subheader("👩🏻‍💻 개발자 소개")
+    st.header("👩🏻‍💻 개발자")
     st.markdown("---")
-    st.subheader("📆 개발 기록")
+    st.header("📆 개발 기록")
     st.markdown("1️⃣ 2022. 06. 26. beta 1.0 배포")
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
