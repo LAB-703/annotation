@@ -135,10 +135,12 @@ if select_event == "👀 기사 인용 도우미":
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
             if STYLE=="APA":
-                clipboard.copy(APA)
+                st.code(APA)
+                #clipboard.copy(APA)
                 st.write('복사완료!, 붙여넣기하세요.')
             elif STYLE=="CHICAGO":
-                clipboard.copy(CHICAGO)
+                st.code(CHICAGO)
+                #clipboard.copy(CHICAGO)
                 st.write('복사완료!, 붙여넣기하세요.') 
 
 #page2#######################################################################################################     
