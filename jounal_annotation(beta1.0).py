@@ -164,7 +164,7 @@ if select_event == "👀 기사 인용 도우미":
             if final_search==True:
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
-            if STYLE==APA_DT# "APA":
+            if STYLE==APA_DT :# "APA":
                 title='''
                     <style>
                     #Copy to clipboard {
