@@ -93,7 +93,7 @@ footer {
 
 st.markdown(hide_menu, unsafe_allow_html=True)
 
-select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","🛠 개발"))
+select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
     st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
@@ -107,7 +107,7 @@ if select_event == "👀 기사 인용 도우미":
         submit=st.button('복사')
     with col2:
         if STYLE=="by JOURNAL":
-            st.caption("⏳개발 중")
+            st.markdown('<p style=" font-size: 70%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             #journal_list=['Email', 'Home phone', 'Mobile phone']
             #option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
             #st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
@@ -177,28 +177,11 @@ if select_event == "👀 기사 인용 도우미":
 
     # initialize emoji as a Session State variable
     if "emoji" not in st.session_state:
-        st.session_state.emoji = "👈"
+        st.session_state.emoji = "🤍"
 
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]
 
     st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
-    
-    st.title('Counter Example')
-    if 'count' not in st.session_state:
-        st.session_state.count = 0
-        st.session_state.last_updated = datetime.time(0,0)
-
-    def update_counter():
-        st.session_state.count += st.session_state.increment_value
-        st.session_state.last_updated = st.session_state.update_time
-
-    with st.form(key='my_form'):
-        st.time_input(label='Enter the time', value=datetime.now().time(), key='update_time')
-        st.number_input('Enter a value', value=0, step=1, key='increment_value')
-        submit = st.form_submit_button(label='Update', on_click=update_counter)
-
-    st.write('Current Count = ', st.session_state.count)
-    st.write('Last Updated = ', st.session_state.last_updated)
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
@@ -239,10 +222,10 @@ if select_event == "📜 학술지 목록":
     if add:
         expander.write("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
 #page3#######################################################################################################
-if select_event == "🛠 개발":
+if select_event == "📌 개발":
     st.subheader("👩🏻‍💻 개발자 소개")
     st.markdown("---")
-    st.subheader("개발 기록")
+    st.subheader("📆 개발 기록")
     st.markdown("1️⃣ 2022. 06. 26. beta 1.0 배포")
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
