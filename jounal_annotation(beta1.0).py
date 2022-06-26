@@ -84,7 +84,7 @@ footer:before{
 }
 
 footer {
-    visibility:hidden;
+    visibility:visible;
 }
 
 </style>
@@ -93,7 +93,7 @@ footer {
 
 st.markdown(hide_menu, unsafe_allow_html=True)
 
-select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","👩🏻‍💻 개발"))
+select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","🛠 개발"))
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
     st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
@@ -107,9 +107,10 @@ if select_event == "👀 기사 인용 도우미":
         submit=st.button('복사')
     with col2:
         if STYLE=="by JOURNAL":
-            journal_list=['Email', 'Home phone', 'Mobile phone']
-            option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
-            st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
+            st.caption("⏳개발 중")
+            #journal_list=['Email', 'Home phone', 'Mobile phone']
+            #option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
+            #st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
 #---------------------------------------------------------------------------------------------        
@@ -201,25 +202,26 @@ if select_event == "👀 기사 인용 도우미":
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
-    st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
-    LIST=['Email', 'Home phone', 'Mobile phone']
-    journal = st.selectbox('학술지를 찾아보세요!',LIST)
-    st.write("---")
-    st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
-    expander = st.expander("더보기")
-    expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
-    expander.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
-    expander.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
-    dic = {'AUTHOR':'기자',
-       'TITLE': '기사 제목',
-       'COMPANY': '언론사', 
-       'DATE_write':'기사작성일',
-       'URL' :'기사 URL',
-       'FINAL_SEARCH':'최종검색일',
-           'COMMA':',',
-           'LEFT':'(',
-        'RIGHT':')',
-          'DOT':'.'}
+    st.subheader("⏳개발 중")
+#    st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
+#    LIST=['Email', 'Home phone', 'Mobile phone']
+#    journal = st.selectbox('학술지를 찾아보세요!',LIST)
+#    st.write("---")
+#    st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
+#    expander = st.expander("더보기")
+#    expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
+#    expander.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
+#    expander.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
+#    dic = {'AUTHOR':'기자',
+#       'TITLE': '기사 제목',
+#       'COMPANY': '언론사', 
+#       'DATE_write':'기사작성일',
+#       'URL' :'기사 URL',
+#       'FINAL_SEARCH':'최종검색일',
+#           'COMMA':',',
+#           'LEFT':'(',
+#        'RIGHT':')',
+#          'DOT':'.'}
     
     multiselect= expander.multiselect('순서대로 놓아주세요.',
                                 list(dic.values()), 
@@ -237,8 +239,8 @@ if select_event == "📜 학술지 목록":
     if add:
         expander.write("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
 #page3#######################################################################################################
-if select_event == "👩🏻‍💻 개발":
-    st.subheader("개발자 소개")
+if select_event == "🛠 개발":
+    st.subheader("👩🏻‍💻 개발자 소개")
     st.markdown("---")
     st.subheader("개발 기록")
     st.markdown("1️⃣ 2022. 06. 26. beta 1.0 배포")
