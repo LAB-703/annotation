@@ -171,7 +171,7 @@ if select_event == "👀 기사 인용 도우미":
                 st.write('오른쪽 복사버튼을 클릭하세요.')
                 
     def random_emoji():
-    st.session_state.emoji = random.choice(emojis)
+        st.session_state.emoji = random.choice(emojis)
 
     # initialize emoji as a Session State variable
     if "emoji" not in st.session_state:
