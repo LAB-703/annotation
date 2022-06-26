@@ -72,7 +72,10 @@ footer {
 
 </style>
 '''
+
+
 st.markdown(hide_menu, unsafe_allow_html=True)
+
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","👩🏻‍💻 개발"))
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
@@ -135,12 +138,19 @@ if select_event == "👀 기사 인용 도우미":
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
             if STYLE=="APA":
+                title='''
+                    <style>
+                    #Copy to clipboard {
+                        color:red;
+                    }
+                    </style>
+                    '''
+                st.markdown(title, unsafe_allow_html=True)
                 st.code(APA,language="Markdown")
-                st.code(APA,language="Plain Text")
                 #clipboard.copy(APA)
-                st.write('복사완료!, 붙여넣기하세요.')
+                st.write('오른쪽 복사 붙여넣기하세요.')
             elif STYLE=="CHICAGO":
-                st.code(CHICAGO)
+                st.code(CHICAGO,language="Markdown")
                 #clipboard.copy(CHICAGO)
                 st.write('복사완료!, 붙여넣기하세요.') 
 
