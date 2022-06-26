@@ -174,7 +174,7 @@ if select_event == "👀 기사 인용 도우미":
                 st.code(CHICAGO,language="Markdown")
                 #clipboard.copy(CHICAGO)
                 st.write('오른쪽 복사버튼을 클릭하세요.')
-            elif STYLE=="by JOURNAL":
+            else:
                 st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
                 
     def random_emoji():
