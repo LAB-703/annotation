@@ -37,19 +37,35 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
 )
 
 #전체 폰트 
+
 st.markdown("""
         <style>
+        
 @font-face {
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css) format('woff');
+font-family: 'Pretendard';
+font-weight: 400;
+font-display: swap;
+src: local('Pretendard Regular'), url('./woff2/Pretendard-Regular.woff2') format('woff2'), url('./woff/Pretendard-Regular.woff') format('woff');
 }
-    html, body, [class*="css"]  {
+html, body, [class*="css"]  {
     font-family: 'Pretendard';
     font-size: 20px;
     }
     </style>""",unsafe_allow_html=True)
+
+#st.markdown("""        <style>
+#        
+#@font-face {
+#  font-family: 'Pretendard';
+#  font-style: normal;
+#  font-weight: 400;
+#  src: url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css) format('woff');
+#}
+#    html, body, [class*="css"]  {
+#    font-family: 'Pretendard';
+#    font-size: 20px;
+#    }
+#    </style>""",unsafe_allow_html=True)
 
 # 메인메뉴 없애고, 
 hide_menu='''
@@ -58,12 +74,12 @@ hide_menu='''
     visibility:hidden;
 }
 
-footer:after{
-    content: 'Copyright @ 2022 : Streamlit';
+footer:before{
+    content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
     size: 30%;
     display:block;
     position:relative;
-    color:gray;
+    color:silver;
 }
 
 footer {
@@ -148,11 +164,22 @@ if select_event == "👀 기사 인용 도우미":
                 st.markdown(title, unsafe_allow_html=True)
                 st.code(APA,language="Markdown")
                 #clipboard.copy(APA)
-                st.write('오른쪽 복사 붙여넣기하세요.')
+                st.write('오른쪽 복사버튼을 클릭하세요.')
             elif STYLE=="CHICAGO":
                 st.code(CHICAGO,language="Markdown")
                 #clipboard.copy(CHICAGO)
-                st.write('복사완료!, 붙여넣기하세요.') 
+                st.write('오른쪽 복사버튼을 클릭하세요.')
+                
+    def random_emoji():
+    st.session_state.emoji = random.choice(emojis)
+
+    # initialize emoji as a Session State variable
+    if "emoji" not in st.session_state:
+        st.session_state.emoji = "👈"
+
+    emojis = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼"]
+
+    st.button(f"Click Me {st.session_state.emoji}", on_click=random_emoji)
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
