@@ -79,12 +79,11 @@ hide_menu='''
 footer {
     content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
     visibility:visible;
-    size: 10px;
 }
 
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
-    size: 10px;
+    font-size: 10px;
     display:block;
     position:relative;
     color:silver;
