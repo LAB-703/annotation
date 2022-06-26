@@ -105,7 +105,7 @@ if select_event == "👀 기사 인용 도우미":
     col1,col2=st.columns([5,5])  
     with col1:
         STYLE=st.radio("인용 스타일을 선택해주세요.",
-             ('APA', 'CHICAGO','by JOURNAL  ⏳개발 중'))
+             ('APA', 'CHICAGO','by JOURNAL              ⏳개발 중'))
         final_search=st.checkbox('최종 검색일(오늘) 추가')
         submit=st.button('복사')
  #   with col2:
@@ -174,6 +174,8 @@ if select_event == "👀 기사 인용 도우미":
                 st.code(CHICAGO,language="Markdown")
                 #clipboard.copy(CHICAGO)
                 st.write('오른쪽 복사버튼을 클릭하세요.')
+            elif STYLE=="by JOURNAL":
+                st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
                 
     def random_emoji():
         st.session_state.emoji = random.choice(emojis)
@@ -188,7 +190,7 @@ if select_event == "👀 기사 인용 도우미":
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
-    st.subheader("⏳개발 중")
+    st.subheader("⏳ 개발 중")
 #    st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
 #    LIST=['Email', 'Home phone', 'Mobile phone']
 #    journal = st.selectbox('학술지를 찾아보세요!',LIST)
@@ -229,7 +231,8 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown("1️⃣ 2022. 06. 26. beta 1.0 배포")
+  #  st.markdown("1️⃣ 2022. 06. 26. beta 1.0 배포")
+    st.markdown('<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 26. beta 1.0 배포</b></p>', unsafe_allow_html=True)
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
 #    <a href="JavaScript:window.external.AddFavorite('https://blog.naver.com/hyoyeol/70152225558','늑대털쓴양 홈페이지')">
