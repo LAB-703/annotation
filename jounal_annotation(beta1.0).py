@@ -105,10 +105,8 @@ if select_event == "👀 기사 인용 도우미":
     col1,col2=st.columns([5,5])  
     with col1:
         STYLE=st.radio("인용 스타일을 선택해주세요.",
-             ('APA', 'CHICAGO','by JOURNAL'))
+             ('APA', 'CHICAGO','by JOURNAL  ⏳개발 중'))
         final_search=st.checkbox('최종 검색일(오늘) 추가')
-        if STYLE=="by JOURNAL":
-            st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
         submit=st.button('복사')
  #   with col2:
   #      if STYLE=="by JOURNAL":
