@@ -1,10 +1,9 @@
 [theme]
-primaryColor="#4b4bcb"
 base="light"
-backgroundColor="#FFFFFF"
-secondaryBackgroundColor="#dae4f7"
-textColor="#262730"
-font="sans serif"
+primaryColor="#dee1f7"
+secondaryBackgroundColor="#e8f0ff"
+textColor="#000000"
+
 
 #[theme]
 #base="light"
