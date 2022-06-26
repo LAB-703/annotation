@@ -2,7 +2,7 @@ streamlit
 clipboard
 parse
 requests
-BeautifulSoup
+beautifulsoup4
 datetime
 timedelta
 clipboard
