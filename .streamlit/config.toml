@@ -1,7 +1,13 @@
 [theme]
-primaryColor="#f1cb41"
-secondaryBackgroundColor="#f2f7ef"
+primaryColor="#C0504D"
+secondaryBackgroundColor="#FCF9F6"
 textColor="#000000"
+
+#연두+진노랑
+#[theme]
+#primaryColor="#f1cb41"
+#secondaryBackgroundColor="#f2f7ef"
+#textColor="#000000"
 
 
 
