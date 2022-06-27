@@ -41,14 +41,13 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
 
 st.markdown("""
         <style>
-        
 @font-face {
-font-family: 'Pretendard';
-font-weight: 400;
-font-display: swap;
-src: local('Pretendard Regular'), url('./woff2/Pretendard-Regular.woff2') format('woff2'), url('./woff/Pretendard-Regular.woff') format('woff');
+  font-family: 'Pretendard';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css) format('woff');
 }
-html, body, [class*="css"]  {
+    html, body, [class*="css"]  {
     font-family: 'Pretendard';
     font-size: 20px;
     }
@@ -236,8 +235,7 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
-  #  st.markdown("1️⃣ 2022. 06. 26. beta 1.0 배포")
-    st.markdown('<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 26. beta 1.0 배포</b></p>', unsafe_allow_html=True)
+    st.markdown('<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b></p>', unsafe_allow_html=True)
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
 #    <a href="JavaScript:window.external.AddFavorite('https://blog.naver.com/hyoyeol/70152225558','늑대털쓴양 홈페이지')">
