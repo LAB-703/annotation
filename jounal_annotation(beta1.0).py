@@ -26,7 +26,7 @@ headers = {
 
 #나중에 배포 전에 손 볼 것들 
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
-    page_icon="🤪",
+    page_icon="👀",
     layout="wide",
     initial_sidebar_state="collapsed",
     menu_items={
@@ -232,7 +232,6 @@ if select_event == "📜 학술지 목록":
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
-    st.markdown('<a><button name="button" style = "color: red" onclick="https://www.w3schools.com/CPP/cpp_math.asp">`cmath`on w3schools</button></a>', unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
     st.markdown('<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b></p>', unsafe_allow_html=True)
