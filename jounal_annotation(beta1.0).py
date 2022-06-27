@@ -44,7 +44,7 @@ st.markdown("""
 @font-face {
   font-family: 'Pretendard';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 800;
   src: url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css) format('woff');
 }
     html, body, [class*="css"]  {
@@ -76,14 +76,13 @@ hide_menu='''
 
 
 footer {
-    content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
     visibility:visible;
     font-size: 10%;
     font-family: 'Pretendard';
 }
 
 footer:after{
-    content: 'SPDX-FileCopyrightText: © 2022 Lee Jeong Min SPDX-License-Identifier: BSD-3-Clause';
+    content: 'SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT';
     font-size: 10px;
     display:block;
     position:relative;
@@ -233,6 +232,7 @@ if select_event == "📜 학술지 목록":
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
+    st.markdown('<a><button name="button" style = "color: red" onclick="https://www.w3schools.com/CPP/cpp_math.asp">`cmath`on w3schools</button></a>', unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
     st.markdown('<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b></p>', unsafe_allow_html=True)
