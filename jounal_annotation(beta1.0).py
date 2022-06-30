@@ -24,7 +24,7 @@ headers = {
     'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'}
 
 
-#나중에 배포 전에 손 볼 것들 
+# 전체 페이지
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
     page_icon="👀",
     layout="wide",
@@ -234,6 +234,7 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
+    st.download_button("확인용", "google52b343991595ad94.html", file_name="google52b343991595ad94.html", disabled=True)
     st.markdown('<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b></p>', unsafe_allow_html=True)
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
