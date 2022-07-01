@@ -77,16 +77,15 @@ headers = {
     'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 
-#나중에 배포 전에 손 볼 것들 
+#wwj
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
     page_icon="👀",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="auto",
     menu_items={
         'Get Help': 'https://github.com/LAB-703',
         'Report a bug': "https://github.com/LAB-703",
-        'About': '''SPDX-FileCopyrightText: © 2022 Lee Jeong Min
-        SPDX-License-Identifier: BSD-3-Clause'''
+        'About': '''SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT'''
     }
 )
 
@@ -153,18 +152,18 @@ if select_event == "👀 기사 인용 도우미":
     st.markdown('<p align="center" style=" font-size: 120%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
 
     URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
- #   col1,col2=st.columns([5,5])  
- #   with col1:
+    col1,col2=st.columns([5,5])  
+    with col1:
 
     STYLE=st.radio("인용 스타일을 선택해주세요.",
              ("APA", 
               'CHICAGO',
-              'by JOURNAL : ⏳ 개발 중'))
+              'by JOURNAL')) # : ⏳ 개발 중'))
     final_search=st.checkbox('최종 검색일(오늘) 추가')
     submit=st.button('인용')
     with col2:
         if STYLE=="by JOURNAL":
-            st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+            #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             journal_list=['Email', 'Home phone', 'Mobile phone']
             option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
@@ -349,4 +348,3 @@ if select_event == "📌 개발":
 #    st.markdown("[![Foo](https://postfiles.pstatic.net/MjAyMjA2MjZfOTgg/MDAxNjU2MjM0OTkwMjU5.OGRjH6YMCvGKy6AtjnTDjbGh-3MVP5yUsQmKHTlljNsg.6qk6L05rB42FP4F7P5M-TsF4gzRLKI23hIHBv_aW0nkg.PNG.faraway10/SE-f1959757-e2c6-4df0-85a5-1f2987b88c5d.png?type=w773)](https://postfiles.pstatic.net/MjAyMjA2MjZfMzYg/MDAxNjU2MjM1MDM1NDUz.hDsSoeeQATTXFBzlJ9DKBLoYS5rrYTLm8WekqElLNDAg.WqSp45bEruil_YHoScx-y_ZcF1t6Rub4DtJ7ObGGLiAg.PNG.faraway10/SE-9886a95b-a8ad-4edb-99b5-78bff09acb9d.png?type=w773)")
 
 ####################
-   
