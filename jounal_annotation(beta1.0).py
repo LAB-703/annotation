@@ -159,7 +159,11 @@ if select_event == "👀 기사 인용 도우미":
              ("APA", 
               'CHICAGO',
               'by JOURNAL')) # : ⏳ 개발 중'))
-        final_search=st.checkbox('최종 검색일(오늘) 추가')
+        
+        ex=st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+        final_search=st.checkbox(label=ex)
+        
+        #final_search=st.checkbox('최종 검색일(오늘) 추가')
         submit=st.button('인용')
     with col2:
         if STYLE=="by JOURNAL":
@@ -277,15 +281,6 @@ if select_event == "📜 학술지 목록":
             annotation+=selection
     expander.markdown(annotation)
     gsheet_connector = connect_to_gsheet()
-    cols = expander.columns((1, 1))
-    author = cols[0].text_input("Report author:")
-    bug_type = cols[1].selectbox(
-        "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
-    )
-    comment = expander.text_area("Comment:")
-    cols = expander.columns(2)
-    date = cols[0].date_input("Bug date occurrence:")
-    bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
     submitted = expander.button("추가")
     if submitted:
         add_row_to_gsheet(
@@ -294,46 +289,6 @@ if select_event == "📜 학술지 목록":
         )
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()
-
-
-
-
-    
-
-#    st.sidebar.write(
-#        f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
-#    )
-#
-#    st.sidebar.write(
-#        f"[Read more](https://docs.streamlit.io/knowledge-base/tutorials/databases/public-gsheet) about connecting your Streamlit app to Google Sheets."
-#    )
-#
- #   form = expander.form(key="annotation")
-#
- #   with form:
- #       cols = st.columns((1, 1))
- #       author = cols[0].text_input("Report author:")
- #       bug_type = cols[1].selectbox(
- #           "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
- #       )
- #       comment = expander.text_area("Comment:")
- #       cols = expander.columns(2)
- #       date = cols[0].date_input("Bug date occurrence:")
- #       bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
- #       submitted = st.form_submit_button(label="추가")
-#
- #   if submitted:
- #       add_row_to_gsheet(
- #           gsheet_connector,
- #           [[author, bug_type, comment, str(date), bug_severity]],
- #       )
- #       st.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
- #       st.balloons()
-
-#    expander = st.expander("See all records")
-#    with expander:
-#        st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-#        st.dataframe(get_data(gsheet_connector))     
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
