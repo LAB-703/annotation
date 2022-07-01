@@ -104,7 +104,7 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
     }
 )
 
-st.markdown("""<style> font-family: 'Pretendard';</style>""", unsafe_allow_html=True)
+st.markdown("""<style> @font-face {font-family: 'Pretendard';}</style>""", unsafe_allow_html=True)
 #전체 폰트 
 st.markdown("""
         <style>
