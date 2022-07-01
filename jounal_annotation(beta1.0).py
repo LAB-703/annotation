@@ -204,7 +204,7 @@ if select_event == "👀 기사 인용 도우미":
                 st.stop()
             APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
             CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
-            FINAL=str(datetime.now().strftime("%Y.%m.%d."))
+            FINAL=str(datetime.now().astimezone().strftime("%Y.%m.%d."))
             if final_search==True:
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
@@ -240,7 +240,7 @@ if select_event == "📜 학술지 목록":
     #st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
     journal=expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
-    col1,col2=expander.columns([7,3])  
+    col1,col2=expander.columns([5,5])  
     with col1:
         st.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
     with col2:
@@ -268,7 +268,7 @@ if select_event == "📜 학술지 목록":
         else :
             annotation+=selection
     expander.markdown(annotation)
-    today=str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    today=str(datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S"))
     gsheet_connector = connect_to_gsheet()
     submitted = expander.button("추가")
     if submitted:
@@ -283,9 +283,12 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
+    st.markdown("`코드` ")
     st.markdown('''<p align="left" style="font-size: 70%;"> <b>1️⃣ 2022. 06. 28. beta 1.0 배포</b> </p>''', unsafe_allow_html=True)
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
-    beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> ✔📌📍 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
+    beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
+    beta2_0=st.expander("1️⃣ 2022. 07. 02. beta 2.0 배포")
+    beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
     
     m = st.markdown("""
 <style>
@@ -295,6 +298,9 @@ div.stButton > button:first-child {
 </style>""", unsafe_allow_html=True)
 
     b = st.button("test")
+    
+    with st.echo():
+    st.write('This code will be printed')
     
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
