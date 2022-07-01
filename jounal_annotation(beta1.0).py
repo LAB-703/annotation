@@ -104,12 +104,14 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
     }
 )
 
+st.markdown("""<style> font-family: 'Pretendard';</style>""", unsafe_allow_html=True)
 #전체 폰트 
 st.markdown("""
         <style>
 @font-face {
 font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 	font-weight: 45 920;
+    
 	font-style: normal;
 	font-display: block;
 	src: url('https://tistory1.daumcdn.net/tistory/814207/skin/images/PretendardVariable.subset.blog.woff2') format('woff2-variations');
