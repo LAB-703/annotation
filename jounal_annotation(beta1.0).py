@@ -107,15 +107,12 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
 st.markdown("""
         <style>
 @font-face {
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 800;
-  src: url(https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css) format('woff');
+	font-family: 'Pretendard Variable Subset';
+	font-weight: 45 920;
+	font-style: normal;
+	font-display: block;
+	src: url('https://tistory1.daumcdn.net/tistory/814207/skin/images/PretendardVariable.subset.blog.woff2') format('woff2-variations');
 }
-    html, body, [class*="css"]  {
-    font-family: 'Pretendard';
-    font-size: 20px;
-    }
     </style>""",unsafe_allow_html=True)
 
 #전체 버튼
@@ -130,15 +127,7 @@ div.stButton > button:first-child {
 </style>""", unsafe_allow_html=True)
 
 #전체 multiselect
-st.markdown("""
 
-
-<style>
-
-div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
-div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
-</style>
-""", unsafe_allow_html=True)
 
 #st.markdown("""        <style>
 #        
@@ -202,6 +191,11 @@ if select_event == "👀 기사 인용 도우미":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             journal_list=['Email', 'Home phone', 'Mobile phone']
             #st.table(list(get_data(gsheet_connector)['학술지']))
+            st.markdown("""<style>
+div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
+div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
+</style>
+""", unsafe_allow_html=True)
             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
