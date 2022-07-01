@@ -130,14 +130,11 @@ hide_menu='''
 #MainMenu {
     visibility:hidden;
 }
-
-
 footer {
     visibility:visible;
     size: 10%;
     font-family: 'Pretendard';
 }
-
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT';
     font-size: 15px;
@@ -146,7 +143,6 @@ footer:after{
     color:silver;
     font-family: 'Pretendard';
 }
-
 </style>
 '''
 st.markdown(hide_menu, unsafe_allow_html=True)
@@ -281,7 +277,11 @@ if select_event == "📜 학술지 목록":
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
-    st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
+    col1,col2=st.columns(2)
+    with col1 :
+        st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
+    with col2 :
+        st.markdown("개발자에게<br>커피 한잔은<br>큰 힘이 됩니다☕️")
     st.markdown("---")
     st.header("📆 개발 기록")
     st.markdown("`📌 배포 완료` `🐞 버그 수정`")
