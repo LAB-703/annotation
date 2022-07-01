@@ -170,7 +170,6 @@ if select_event == "👀 기사 인용 도우미":
     URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
     col1,col2=st.columns([5,5])  
     with col1:
-
         STYLE=st.radio("인용 스타일을 선택해주세요.",
              ("APA", 
               'CHICAGO',
@@ -182,7 +181,7 @@ if select_event == "👀 기사 인용 도우미":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             journal_list=['Email', 'Home phone', 'Mobile phone']
             #st.table(list(get_data(gsheet_connector)['학술지']))
-            option = st.selectbox('찾으시는 학술지가 있나요?',placeholder="찾으시는",list(get_data(gsheet_connector)['학술지']))
+            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']),,placeholder="찾으시는")
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
