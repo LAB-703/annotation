@@ -287,7 +287,7 @@ if select_event == "📜 학술지 목록":
     cols = expander.columns(2)
     date = cols[0].date_input("Bug date occurrence:")
     bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
-    submitted = st.form_submit_button(label="추가")
+    submitted = expander.button("추가")
     if submitted:
         add_row_to_gsheet(
             gsheet_connector,
