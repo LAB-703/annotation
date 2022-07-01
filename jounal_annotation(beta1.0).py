@@ -28,25 +28,24 @@ def connect_to_gsheet():
         st.secrets["gcp_service_account"],
         scopes=[SCOPE],
     )
+    # Create a new Http() object for every request
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
 
-# Create a new Http() object for every request
-def build_request(http, *args, **kwargs):
-    new_http = google_auth_httplib2.AuthorizedHttp(
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
         credentials, http=httplib2.Http()
     )
-    return HttpRequest(new_http, *args, **kwargs)
-
-authorized_http = google_auth_httplib2.AuthorizedHttp(
-    credentials, http=httplib2.Http()
-)
-service = build(
-    "sheets",
-    "v4",
-    requestBuilder=build_request,
-    http=authorized_http,
-)
-gsheet_connector = service.spreadsheets()
-return gsheet_connector
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
+    gsheet_connector = service.spreadsheets()
+    return gsheet_connector
 
 
 def get_data(gsheet_connector) -> pd.DataFrame:
