@@ -19,7 +19,7 @@ from dateutil import tz
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-SHEET_NAME = ["Database", "reaction"]
+SHEET_NAME = "Database"
 timezone = tz.tzlocal()
 
 
@@ -50,12 +50,12 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector,page) -> pd.DataFrame:
+def get_data(gsheet_connector) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
             spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME[page]}!A:C",
+            range=f"{SHEET_NAME}!A:E",
         )
         .execute()
     )
@@ -66,10 +66,10 @@ def get_data(gsheet_connector,page) -> pd.DataFrame:
     return df
 
 
-def add_row_to_gsheet(gsheet_connector, row,page) -> None:
+def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME[page]}!A:B",
+        range=f"{SHEET_NAME}!A:E",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
@@ -78,8 +78,14 @@ def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
 
-def likes():
-    e
+def likes(gsheet_connector, row) -> None:
+    gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME}!D2",
+        body=dict(values=row),
+        valueInputOption="USER_ENTERED",
+    ).execute()
+    
 
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
@@ -125,6 +131,10 @@ div.stButton > button:first-child {
 
 #전체 multiselect
 st.markdown("""
+
+div[role="listbox"] option:first-child {
+    background-color: #ffffff;
+}
 <style>
 div.st-cs.st-c5.st-bc.st-ct.st-cu {visibility: hidden;}
 div.st-cs.st-c5.st-bc.st-ct.st-cu:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
@@ -172,8 +182,8 @@ select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "�
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
-if likes:
-    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+#if likes:
+#    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
@@ -191,7 +201,9 @@ if select_event == "👀 기사 인용 도우미":
     with col2:
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector,0)['학술지']))
+            journal_list=['Email', 'Home phone', 'Mobile phone']
+            #st.table(list(get_data(gsheet_connector)['학술지']))
+            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
@@ -253,7 +265,7 @@ if select_event == "📜 학술지 목록":
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     gsheet_connector = connect_to_gsheet()
-    journal_list = st.selectbox('',list(get_data(gsheet_connector,0)['학술지']))
+    journal_list = st.selectbox('',list(get_data(gsheet_connector)['학술지']))
     st.write("---")
     #st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
@@ -291,7 +303,7 @@ if select_event == "📜 학술지 목록":
     if submitted:
         add_row_to_gsheet(
             gsheet_connector,
-            [[journal, annotation,today]], 0
+            [[journal, annotation,today]],
         )
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()
