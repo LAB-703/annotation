@@ -108,7 +108,7 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
 st.markdown("""
         <style>
 @font-face {
-	font-family: 'Pretendard Variable Subset';
+font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 	font-weight: 45 920;
 	font-style: normal;
 	font-display: block;
@@ -191,7 +191,6 @@ if select_event == "👀 기사 인용 도우미":
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             gsheet_connector = connect_to_gsheet()
-            st.table(get_data(gsheet_connector))
 #             st.markdown("""<style>
 # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
 # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
