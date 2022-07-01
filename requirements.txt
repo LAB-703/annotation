@@ -9,3 +9,4 @@ clipboard
 pandas
 pyperclip
 gsheetsdb
+google_auth_httplib2
