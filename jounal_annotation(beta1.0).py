@@ -154,7 +154,7 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
-select_event.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
     st.markdown('<p align="center" style=" font-size: 120%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
