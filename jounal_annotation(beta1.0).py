@@ -50,12 +50,12 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector) -> pd.DataFrame:
+def get_data(gsheet_connector,page) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
             spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME[0]}!A:C",
+            range=f"{SHEET_NAME[page]}!A:C",
         )
         .execute()
     )
@@ -66,10 +66,10 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     return df
 
 
-def add_row_to_gsheet(gsheet_connector, row) -> None:
+def add_row_to_gsheet(gsheet_connector, row,page) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME[0]}!A:B",
+        range=f"{SHEET_NAME[page]}!A:B",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
@@ -78,7 +78,9 @@ def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
 
-gsheet_connector = connect_to_gsheet()
+def likes():
+    e
+
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
@@ -169,7 +171,10 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
-st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+if likes:
+    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
     st.markdown('<p align="center" style=" font-size: 120%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
@@ -186,9 +191,7 @@ if select_event == "👀 기사 인용 도우미":
     with col2:
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-            journal_list=['Email', 'Home phone', 'Mobile phone']
-            #st.table(list(get_data(gsheet_connector)['학술지']))
-            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
+            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector,0)['학술지']))
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
@@ -249,8 +252,8 @@ if select_event == "👀 기사 인용 도우미":
 if select_event == "📜 학술지 목록":
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
-    LIST=['Email', 'Home phone', 'Mobile phone']
-    journallist = st.selectbox('',LIST)
+    gsheet_connector = connect_to_gsheet()
+    journal_list = st.selectbox('',list(get_data(gsheet_connector,0)['학술지']))
     st.write("---")
     #st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
@@ -288,7 +291,7 @@ if select_event == "📜 학술지 목록":
     if submitted:
         add_row_to_gsheet(
             gsheet_connector,
-            [[journal, annotation,today]],
+            [[journal, annotation,today]], 0
         )
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()
