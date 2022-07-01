@@ -78,6 +78,7 @@ def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
 
+gsheet_connector = connect_to_gsheet()
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
@@ -180,7 +181,7 @@ if select_event == "👀 기사 인용 도우미":
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             journal_list=['Email', 'Home phone', 'Mobile phone']
-            st.table(get_data(gsheet_connector))
+            st.dataframe(get_data(gsheet_connector))
             option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
@@ -277,7 +278,6 @@ if select_event == "📜 학술지 목록":
             annotation+=selection
     expander.markdown(annotation)
     today=str(datetime.now().astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"))
-    gsheet_connector = connect_to_gsheet()
     submitted = expander.button("추가")
     if submitted:
         add_row_to_gsheet(
