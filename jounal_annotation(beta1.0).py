@@ -14,12 +14,13 @@ import streamlit as st
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
-import pytz
+from dateutil import tz
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 SHEET_NAME = ["Database", "reaction"]
+timezone = tz.tzlocal()
 
 
 @st.experimental_singleton(show_spinner=False, suppress_st_warning=True) #구글 시트 연결
@@ -72,6 +73,11 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
+    
+def random_emoji():
+    emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
+    st.session_state.emoji = random.choice(emojis)
+
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
@@ -146,6 +152,9 @@ footer:after{
 st.markdown(hide_menu, unsafe_allow_html=True)
 
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
+if "emoji" not in st.session_state:
+    st.session_state.emoji = "🤍"
+select_event.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
     st.markdown('<p align="center" style=" font-size: 120%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
@@ -205,7 +214,7 @@ if select_event == "👀 기사 인용 도우미":
                 st.stop()
             APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
             CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
-            FINAL=str(pytz.timezone('Asia/Seoul').strftime("%Y.%m.%d."))
+            FINAL=str(datetime.now().astimezone(timezone).strftime("%Y.%m.%d."))
             if final_search==True:
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
@@ -221,13 +230,7 @@ if select_event == "👀 기사 인용 도우미":
                 st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
                 
               
-    def random_emoji():
-        emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
-        st.session_state.emoji = random.choice(emojis)
 
-    if "emoji" not in st.session_state:
-        st.session_state.emoji = "🤍"
-    st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
@@ -267,7 +270,7 @@ if select_event == "📜 학술지 목록":
         else :
             annotation+=selection
     expander.markdown(annotation)
-    today=str(pytz.timezone('Asia/Seoul').strftime("%Y-%m-%d %H:%M:%S"))
+    today=str(datetime.now().astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"))
     gsheet_connector = connect_to_gsheet()
     submitted = expander.button("추가")
     if submitted:
@@ -292,6 +295,8 @@ if select_event == "📌 개발":
     m = st.markdown("""
 <style>
 div.stButton > button:first-child {
+  font-family: 'Pretendard';
+  font-size:70%;
     background-color: #FCF9F6;
     font-color: #C0504D;
 }
