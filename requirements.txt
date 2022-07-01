@@ -8,3 +8,4 @@ timedelta
 clipboard
 pandas
 pyperclip
+gsheetsdb
