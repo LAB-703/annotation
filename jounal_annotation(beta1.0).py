@@ -7,21 +7,74 @@ from datetime import datetime, timedelta
 import clipboard
 import random
 import pandas as pd
+import google_auth_httplib2
+import httplib2
+import pandas as pd
+import streamlit as st
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import HttpRequest
 
-#@st.cache(allow_output_mutation=True, persist=True)
-#def get_data(): #사용자로부터 데이터를 받을 때 
-#    return []
+SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+SHEET_NAME = ["Database", "reaction"]
+GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
-#[theme]
-#base="light"
-#primaryColor="#4b4bcb"
-#secondaryBackgroundColor="#dae4f7"
+
+@st.experimental_singleton()
+def connect_to_gsheet():
+    # Create a connection object.
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=[SCOPE],
+    )
+
+    # Create a new Http() object for every request
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
+
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
+        credentials, http=httplib2.Http()
+    )
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
+    gsheet_connector = service.spreadsheets()
+    return gsheet_connector
+
+
+def get_data(gsheet_connector) -> pd.DataFrame:
+    values = (
+        gsheet_connector.values()
+        .get(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME[0]}!A:E",
+        )
+        .execute()
+    )
+
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    return df
+
+
+def add_row_to_gsheet(gsheet_connector, row) -> None:
+    gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME[0]}!A:E",
+        body=dict(values=row),
+        valueInputOption="USER_ENTERED",
+    ).execute()
 
 headers = {
-    'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
-    'accept' : "*/*",
-    'accept-encoding' : 'gzip, deflate, br',
-    'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'}
+    'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 
 #나중에 배포 전에 손 볼 것들 
@@ -77,13 +130,13 @@ hide_menu='''
 
 footer {
     visibility:visible;
-    font-size: 10%;
+    size: 10%;
     font-family: 'Pretendard';
 }
 
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT';
-    font-size: 10px;
+    font-size: 15px;
     display:block;
     position:relative;
     color:silver;
@@ -92,8 +145,6 @@ footer:after{
 
 </style>
 '''
-
-
 st.markdown(hide_menu, unsafe_allow_html=True)
 
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
@@ -111,12 +162,12 @@ if select_event == "👀 기사 인용 도우미":
               'by JOURNAL : ⏳ 개발 중'))
     final_search=st.checkbox('최종 검색일(오늘) 추가')
     submit=st.button('인용')
- #   with col2:
-  #      if STYLE=="by JOURNAL":
-  #          st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-            #journal_list=['Email', 'Home phone', 'Mobile phone']
-            #option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
-            #st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
+    with col2:
+        if STYLE=="by JOURNAL":
+            st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+            journal_list=['Email', 'Home phone', 'Mobile phone']
+            option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
+            st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
 #---------------------------------------------------------------------------------------------        
@@ -194,41 +245,82 @@ if select_event == "👀 기사 인용 도우미":
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
     st.subheader("⏳ 개발 중")
-#    st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
-#    LIST=['Email', 'Home phone', 'Mobile phone']
-#    journal = st.selectbox('학술지를 찾아보세요!',LIST)
-#    st.write("---")
-#    st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
-#    expander = st.expander("더보기")
-#    expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
-#    expander.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
-#    expander.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
-#    dic = {'AUTHOR':'기자',
-#       'TITLE': '기사 제목',
-#       'COMPANY': '언론사', 
-#       'DATE_write':'기사작성일',
-#       'URL' :'기사 URL',
-#       'FINAL_SEARCH':'최종검색일',
-#           'COMMA':',',
-#           'LEFT':'(',
-#        'RIGHT':')',
-#          'DOT':'.'}
-#     
-#    multiselect= expander.multiselect('순서대로 놓아주세요.',
-#                                list(dic.values()), 
-#                                list(dic.values())[:2]) #default
-#    annotation=""
-#    for selection in multiselect:
-#        if selection in list(dic.values())[:6]:
-#            annotation+=selection+". "
-#        elif selection in list(dic.values())[6]:
-#            annotation+=selection+" "
-#        else :
-#            annotation+=selection
-#    expander.markdown(annotation)
-#    add=expander.button("추가")
-#    if add:
-#        expander.write("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
+    st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
+    LIST=['Email', 'Home phone', 'Mobile phone']
+    journal = st.selectbox('학술지를 찾아보세요!',LIST)
+    st.write("---")
+    st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
+    expander = st.expander("더보기")
+    expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
+    
+    expander.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
+    expander.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
+    dic = {'AUTHOR':'기자',
+       'TITLE': '기사 제목',
+       'COMPANY': '언론사', 
+       'DATE_write':'기사작성일',
+       'URL' :'기사 URL',
+       'FINAL_SEARCH':'최종검색일',
+           'COMMA':',',
+           'LEFT':'(',
+        'RIGHT':')',
+          'DOT':'.'}
+     
+    multiselect= expander.multiselect('순서대로 놓아주세요.',
+                                list(dic.values()), 
+                                list(dic.values())[:2]) #default
+    annotation=""
+    for selection in multiselect:
+        if selection in list(dic.values())[:6]:
+            annotation+=selection+". "
+        elif selection in list(dic.values())[6]:
+            annotation+=selection+" "
+        else :
+            annotation+=selection
+    expander.markdown(annotation)
+    add=expander.button("추가")
+    if add:
+        expander.write("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
+
+
+
+
+    gsheet_connector = connect_to_gsheet()
+
+#    st.sidebar.write(
+#        f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
+#    )
+#
+#    st.sidebar.write(
+#        f"[Read more](https://docs.streamlit.io/knowledge-base/tutorials/databases/public-gsheet) about connecting your Streamlit app to Google Sheets."
+#    )
+#
+    form = expander.form(key="annotation")
+
+    with form:
+        cols = st.columns((1, 1))
+        author = cols[0].text_input("Report author:")
+        bug_type = cols[1].selectbox(
+            "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
+        )
+        comment = expander.text_area("Comment:")
+        cols = expander.columns(2)
+        date = cols[0].date_input("Bug date occurrence:")
+        bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
+        submitted = expander.form_submit_button(label="추가")
+
+    if submitted:
+        add_row_to_gsheet(
+            gsheet_connector,
+            [[author, bug_type, comment, str(date), bug_severity]],
+        )
+        expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
+        expander.balloons()
+
+#    expander = st.expander("See all records")
+#    with expander:
+#        st.write(f"Open original [Google Sheet]({GSHEET_URL})")
+#        st.dataframe(get_data(gsheet_connector))     
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
@@ -243,138 +335,4 @@ if select_event == "📌 개발":
 #    st.markdown("[![Foo](https://postfiles.pstatic.net/MjAyMjA2MjZfOTgg/MDAxNjU2MjM0OTkwMjU5.OGRjH6YMCvGKy6AtjnTDjbGh-3MVP5yUsQmKHTlljNsg.6qk6L05rB42FP4F7P5M-TsF4gzRLKI23hIHBv_aW0nkg.PNG.faraway10/SE-f1959757-e2c6-4df0-85a5-1f2987b88c5d.png?type=w773)](https://postfiles.pstatic.net/MjAyMjA2MjZfMzYg/MDAxNjU2MjM1MDM1NDUz.hDsSoeeQATTXFBzlJ9DKBLoYS5rrYTLm8WekqElLNDAg.WqSp45bEruil_YHoScx-y_ZcF1t6Rub4DtJ7ObGGLiAg.PNG.faraway10/SE-9886a95b-a8ad-4edb-99b5-78bff09acb9d.png?type=w773)")
 
 ####################
-
-#     from google.oauth2 import service_account
-#     from gsheetsdb import connect
-
-#     # Create a connection object.
-#     credentials = service_account.Credentials.from_service_account_info(
-#         st.secrets["gcp_service_account"],
-#         scopes=[
-#             "https://www.googleapis.com/auth/spreadsheets",
-#         ],
-#     )
-#     conn = connect(credentials=credentials)
-
-#     # Perform SQL query on the Google Sheet.
-#     # Uses st.cache to only rerun when the query changes or after 10 min.
-#     @st.cache(ttl=5)
-#     def run_query(query):
-#         rows = conn.execute(query, headers=1)
-#         rows = rows.fetchall()
-#         return rows
-
-#     sheet_url = st.secrets["private_gsheets_url"]
-#     rows = run_query(f'SELECT * FROM "{sheet_url}"')
-    
-
-#     # Print results.
-#     for row in rows:
-#         st.write(row)
-#         #st.write(f"{row.name} has a :{row.pet}:")
-
-    import google_auth_httplib2
-    import httplib2
-    import pandas as pd
-    import streamlit as st
-    from google.oauth2 import service_account
-    from googleapiclient.discovery import build
-    from googleapiclient.http import HttpRequest
-
-    SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-    SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-    SHEET_NAME = "Database"
-    GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-
-
-    @st.experimental_singleton()
-    def connect_to_gsheet():
-        # Create a connection object.
-        credentials = service_account.Credentials.from_service_account_info(
-            st.secrets["gcp_service_account"],
-            scopes=[SCOPE],
-        )
-
-        # Create a new Http() object for every request
-        def build_request(http, *args, **kwargs):
-            new_http = google_auth_httplib2.AuthorizedHttp(
-                credentials, http=httplib2.Http()
-            )
-            return HttpRequest(new_http, *args, **kwargs)
-
-        authorized_http = google_auth_httplib2.AuthorizedHttp(
-            credentials, http=httplib2.Http()
-        )
-        service = build(
-            "sheets",
-            "v4",
-            requestBuilder=build_request,
-            http=authorized_http,
-        )
-        gsheet_connector = service.spreadsheets()
-        return gsheet_connector
-
-
-    def get_data(gsheet_connector) -> pd.DataFrame:
-        values = (
-            gsheet_connector.values()
-            .get(
-                spreadsheetId=SPREADSHEET_ID,
-                range=f"{SHEET_NAME}!A:E",
-            )
-            .execute()
-        )
-
-        df = pd.DataFrame(values["values"])
-        df.columns = df.iloc[0]
-        df = df[1:]
-        return df
-
-
-    def add_row_to_gsheet(gsheet_connector, row) -> None:
-        gsheet_connector.values().append(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
-            body=dict(values=row),
-            valueInputOption="USER_ENTERED",
-        ).execute()
-
-
-
-    gsheet_connector = connect_to_gsheet()
-
-    st.sidebar.write(
-        f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
-    )
-
-    st.sidebar.write(
-        f"[Read more](https://docs.streamlit.io/knowledge-base/tutorials/databases/public-gsheet) about connecting your Streamlit app to Google Sheets."
-    )
-
-    form = st.form(key="annotation")
-
-    with form:
-        cols = st.columns((1, 1))
-        author = cols[0].text_input("Report author:")
-        bug_type = cols[1].selectbox(
-            "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
-        )
-        comment = st.text_area("Comment:")
-        cols = st.columns(2)
-        date = cols[0].date_input("Bug date occurrence:")
-        bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
-        submitted = st.form_submit_button(label="Submit")
-
-
-    if submitted:
-        add_row_to_gsheet(
-            gsheet_connector,
-            [[author, bug_type, comment, str(date), bug_severity]],
-        )
-        st.success("Thanks! Your bug was recorded.")
-        st.balloons()
-
-    expander = st.expander("See all records")
-    with expander:
-        st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-        st.dataframe(get_data(gsheet_connector))        
+   
