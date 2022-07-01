@@ -17,11 +17,11 @@ from googleapiclient.http import HttpRequest
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAME = ["Database", "reaction"]
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+SHEET_NAME = ["Database", "reaction"]
 
 
-@st.experimental_singleton()
+@st.experimental_singleton() #구글 시트 연결
 def connect_to_gsheet():
     # Create a connection object.
     credentials = service_account.Credentials.from_service_account_info(
@@ -29,24 +29,24 @@ def connect_to_gsheet():
         scopes=[SCOPE],
     )
 
-    # Create a new Http() object for every request
-    def build_request(http, *args, **kwargs):
-        new_http = google_auth_httplib2.AuthorizedHttp(
-            credentials, http=httplib2.Http()
-        )
-        return HttpRequest(new_http, *args, **kwargs)
-
-    authorized_http = google_auth_httplib2.AuthorizedHttp(
+# Create a new Http() object for every request
+def build_request(http, *args, **kwargs):
+    new_http = google_auth_httplib2.AuthorizedHttp(
         credentials, http=httplib2.Http()
     )
-    service = build(
-        "sheets",
-        "v4",
-        requestBuilder=build_request,
-        http=authorized_http,
-    )
-    gsheet_connector = service.spreadsheets()
-    return gsheet_connector
+    return HttpRequest(new_http, *args, **kwargs)
+
+authorized_http = google_auth_httplib2.AuthorizedHttp(
+    credentials, http=httplib2.Http()
+)
+service = build(
+    "sheets",
+    "v4",
+    requestBuilder=build_request,
+    http=authorized_http,
+)
+gsheet_connector = service.spreadsheets()
+return gsheet_connector
 
 
 def get_data(gsheet_connector) -> pd.DataFrame:
@@ -68,16 +68,15 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME[0]}!A:E",
+        range=f"{SHEET_NAME[0]}!A:B",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
 
-headers = {
-    'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
+headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 
-#wwj
+#전체 페이지
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
     page_icon="👀",
     layout="wide",
@@ -119,7 +118,7 @@ st.markdown("""
 #    }
 #    </style>""",unsafe_allow_html=True)
 
-# 메인메뉴 없애고, 
+# 메인메뉴 없애고, 저작권 표시
 hide_menu='''
 <style>
 #MainMenu {
@@ -178,6 +177,7 @@ if select_event == "👀 기사 인용 도우미":
                 DATE_retrieve=datetime.now().strftime("%Y.%m.%d")
                 DATE_write=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text()[:10]
                 #DATE_modify=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME"}).get_text()[:10]
+                
                 AUTHOR=soup.find("em",{"class":"media_end_head_journalist_name"}).get_text().split()[0]
                 COMPANY=soup.find("em",{"class":"media_end_linked_more_point"}).get_text()
             elif URL.find("v.daum.net/")>0 :
@@ -189,7 +189,7 @@ if select_event == "👀 기사 인용 도우미":
                     #     'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
                     #     'referer' : URL,
                     #     }
-                    html = requests.get(URL, headers = header)
+                    html = requests.get(URL, headers = headers)
                     test_text= html.text  
                     soup = bs(test_text, 'html.parser')
                     DATE_retrieve=datetime.now().strftime("%Y.%m.%d")
@@ -219,7 +219,7 @@ if select_event == "👀 기사 인용 도우미":
                     }
                     </style>
                     '''
-                st.markdown(title, unsafe_allow_html=True)
+                    st.markdown(title, unsafe_allow_html=True)
                 st.code(APA,language="Markdown")
                 #clipboard.copy(APA)
                 st.write('오른쪽 복사버튼을 클릭하세요.')
@@ -230,11 +230,12 @@ if select_event == "👀 기사 인용 도우미":
             else:
                 st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
                 
+    emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]            
     def random_emoji():
-        emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]
         st.session_state.emoji = random.choice(emojis)
-        if "emoji" not in st.session_state:
-            st.session_state.emoji = "🤍"
+
+    if "emoji" not in st.session_state:
+        st.session_state.emoji = "🤍"
 
    
 
@@ -250,8 +251,11 @@ if select_event == "📜 학술지 목록":
     #st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
     journal=expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
-    expander.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
-    expander.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
+    col1,col2=expander.columns([7,3])  
+    with col1:
+        st.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
+    with col2:
+        st.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
     dic = {'AUTHOR':'기자',
        'TITLE': '기사 제목',
        'COMPANY': '언론사', 
@@ -289,8 +293,8 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown('''<p align="left" style=" font-size: 70%;"> <b>1️⃣ 2022. 06. 28. beta 1.0 배포</b> </p>''', unsafe_allow_html=True)
-    st.markdown('''<p align="left" style=" font-size: 70%;"> <blockquote> 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
+    st.markdown('''<p align="left" style="font-size: 70%;"> <b>1️⃣ 2022. 06. 28. beta 1.0 배포</b> </p>''', unsafe_allow_html=True)
+    st.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;">  네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     
     
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
