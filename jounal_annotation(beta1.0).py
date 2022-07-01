@@ -96,7 +96,6 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
 )
 
 #전체 폰트 
-
 st.markdown("""
         <style>
 @font-face {
@@ -111,7 +110,7 @@ st.markdown("""
     }
     </style>""",unsafe_allow_html=True)
 
-#버튼
+#전체 버튼
 st.markdown("""
 <style>
 div.stButton > button:first-child {
@@ -121,6 +120,14 @@ div.stButton > button:first-child {
     font-color: #C0504D;
 }
 </style>""", unsafe_allow_html=True)
+
+#전체 multiselect
+st.markdown("""
+<style>
+div.st-cs.st-c5.st-bc.st-ct.st-cu {visibility: hidden;}
+div.st-cs.st-c5.st-bc.st-ct.st-cu:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
+</style>
+""", unsafe_allow_html=True)
 
 #st.markdown("""        <style>
 #        
