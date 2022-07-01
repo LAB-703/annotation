@@ -155,12 +155,12 @@ if select_event == "👀 기사 인용 도우미":
     col1,col2=st.columns([5,5])  
     with col1:
 
-    STYLE=st.radio("인용 스타일을 선택해주세요.",
+        STYLE=st.radio("인용 스타일을 선택해주세요.",
              ("APA", 
               'CHICAGO',
               'by JOURNAL')) # : ⏳ 개발 중'))
-    final_search=st.checkbox('최종 검색일(오늘) 추가')
-    submit=st.button('인용')
+        final_search=st.checkbox('최종 검색일(오늘) 추가')
+        submit=st.button('인용')
     with col2:
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
@@ -339,7 +339,8 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown('<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b></p>', unsafe_allow_html=True)
+    st.markdown('''<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b></p>
+                <blockquote> 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가''', unsafe_allow_html=True)
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
 #    <a href="JavaScript:window.external.AddFavorite('https://blog.naver.com/hyoyeol/70152225558','늑대털쓴양 홈페이지')">
