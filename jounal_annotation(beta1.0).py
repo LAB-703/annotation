@@ -281,26 +281,26 @@ if select_event == "📜 학술지 목록":
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
+    st.markdown("[![Foo](https://postfiles.pstatic.net/MjAyMjA2MjZfOTgg/MDAxNjU2MjM0OTkwMjU5.OGRjH6YMCvGKy6AtjnTDjbGh-3MVP5yUsQmKHTlljNsg.6qk6L05rB42FP4F7P5M-TsF4gzRLKI23hIHBv_aW0nkg.PNG.faraway10/SE-f1959757-e2c6-4df0-85a5-1f2987b88c5d.png?type=w773)](https://postfiles.pstatic.net/MjAyMjA2MjZfMzYg/MDAxNjU2MjM1MDM1NDUz.hDsSoeeQATTXFBzlJ9DKBLoYS5rrYTLm8WekqElLNDAg.WqSp45bEruil_YHoScx-y_ZcF1t6Rub4DtJ7ObGGLiAg.PNG.faraway10/SE-9886a95b-a8ad-4edb-99b5-78bff09acb9d.png?type=w773)")
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown("`코드` ")
-    st.markdown('''<p align="left" style="font-size: 70%;"> <b>1️⃣ 2022. 06. 28. beta 1.0 배포</b> </p>''', unsafe_allow_html=True)
+    with form:
+        st.markdown("`📌 배포 완료` `🐞 버그 수정`")
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("1️⃣ 2022. 07. 02. beta 2.0 배포")
-    beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
+    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
     
     m = st.markdown("""
 <style>
 div.stButton > button:first-child {
-    background-color: rgb(204, 49, 49);
+    background-color: #FCF9F6;
+    font-color: #C0504D;
 }
 </style>""", unsafe_allow_html=True)
 
-    b = st.button("test")
+    b = st.button("추가")
     
-    with st.echo():
-        st.write('This code will be printed')
     
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
