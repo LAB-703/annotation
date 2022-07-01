@@ -1,20 +1,20 @@
-#import streamlit as st
-#import streamlit.components.v1 as components
-#from urllib import parse
-#import requests
-#from bs4 import BeautifulSoup as bs
-#from datetime import datetime, timedelta
-#import clipboard
-#import random
-#import pandas as pd
-#import google_auth_httplib2
-#import httplib2
-#import pandas as pd
-#import streamlit as st
-#from google.oauth2 import service_account
-#from googleapiclient.discovery import build
-#from googleapiclient.http import HttpRequest
-#import pytz
+import streamlit as st
+import streamlit.components.v1 as components
+from urllib import parse
+import requests
+from bs4 import BeautifulSoup as bs
+from datetime import datetime, timedelta
+import clipboard
+import random
+import pandas as pd
+import google_auth_httplib2
+import httplib2
+import pandas as pd
+import streamlit as st
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import HttpRequest
+import pytz
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
