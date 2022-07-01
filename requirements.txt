@@ -9,5 +9,5 @@ clipboard
 pandas
 pyperclip
 gsheetsdb
-google_auth_httplib2
 googleapiclient
+google_api_python_client
