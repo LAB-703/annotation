@@ -132,12 +132,11 @@ div.stButton > button:first-child {
 #전체 multiselect
 st.markdown("""
 
-div[role="listbox"] option:first-child {
-    background-color: #ffffff;
-}
+
 <style>
-div.st-cs.st-c5.st-bc.st-ct.st-cu {visibility: hidden;}
-div.st-cs.st-c5.st-bc.st-ct.st-cu:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
+
+div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
+div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -321,7 +320,7 @@ if select_event == "📌 개발":
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("1️⃣ 2022. 07. 02. beta 2.0 배포")
-    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
+    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 최종검색일 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
     
     
