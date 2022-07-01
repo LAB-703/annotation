@@ -219,7 +219,7 @@ if select_event == "👀 기사 인용 도우미":
                     }
                     </style>
                     '''
-                    st.markdown(title, unsafe_allow_html=True)
+                st.markdown(title, unsafe_allow_html=True)
                 st.code(APA,language="Markdown")
                 #clipboard.copy(APA)
                 st.write('오른쪽 복사버튼을 클릭하세요.')
