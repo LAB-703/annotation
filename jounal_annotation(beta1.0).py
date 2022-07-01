@@ -53,7 +53,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
         gsheet_connector.values()
         .get(
             spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME[0]}!A:E",
+            range=f"{SHEET_NAME[0]}!A:C",
         )
         .execute()
     )
@@ -162,8 +162,8 @@ if select_event == "👀 기사 인용 도우미":
     with col2:
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-  #          journal_list=['Email', 'Home phone', 'Mobile phone']
-            option = st.selectbox('찾으시는 학술지가 있나요?',st.dataframe(get_data(gsheet_connector)))
+            journal_list=['Email', 'Home phone', 'Mobile phone']
+            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
@@ -173,7 +173,6 @@ if select_event == "👀 기사 인용 도우미":
                 html_doc = req.text  
                 soup = bs(html_doc, 'html.parser')
                 TITLE=soup.find("h2",{"class":"media_end_head_headline"}).get_text()
-                DATE_retrieve=datetime.now().strftime("%Y.%m.%d")
                 DATE_write=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text()[:10]
                 #DATE_modify=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME"}).get_text()[:10]
                 
@@ -191,7 +190,6 @@ if select_event == "👀 기사 인용 도우미":
                     html = requests.get(URL, headers = headers)
                     test_text= html.text  
                     soup = bs(test_text, 'html.parser')
-                    DATE_retrieve=datetime.now().strftime("%Y.%m.%d")
                     DATE_write=soup.find("span",{"class":"num_date"}).get_text()[:12].replace(" ","")
                     COMPANY=soup.select_one('meta[property="og:article:author"]')['content']
                     TITLE=soup.find("h3",{"class":"tit_view"}).get_text()#.replace("\'",'"')
@@ -211,14 +209,6 @@ if select_event == "👀 기사 인용 도우미":
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
             if STYLE=="APA":
-                title='''
-                    <style>
-                    #Copy to clipboard {
-                        color:red;
-                    }
-                    </style>
-                    '''
-                st.markdown(title, unsafe_allow_html=True)
                 st.code(APA,language="Markdown")
                 #clipboard.copy(APA)
                 st.write('오른쪽 복사버튼을 클릭하세요.')
@@ -252,9 +242,9 @@ if select_event == "📜 학술지 목록":
     journal=expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
     col1,col2=expander.columns([7,3])  
     with col1:
-        st.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
-    with col2:
         st.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
+    with col2:
+        st.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
     dic = {'AUTHOR':'기자',
        'TITLE': '기사 제목',
        'COMPANY': '언론사', 
@@ -278,7 +268,7 @@ if select_event == "📜 학술지 목록":
         else :
             annotation+=selection
     expander.markdown(annotation)
-    today=datetime.now().strftime("%Y-%m-%d")
+    today=str(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     gsheet_connector = connect_to_gsheet()
     submitted = expander.button("추가")
     if submitted:
@@ -297,6 +287,14 @@ if select_event == "📌 개발":
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> ✔📌📍 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     
+    m = st.markdown("""
+<style>
+div.stButton > button:first-child {
+    background-color: rgb(204, 49, 49);
+}
+</style>""", unsafe_allow_html=True)
+
+    b = st.button("test")
     
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
