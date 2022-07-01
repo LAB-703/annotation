@@ -167,7 +167,14 @@ footer:after{
     position:relative;
     color:silver;
     font-family: 'Pretendard';
+code {
+    color: sienna;
+    overflow-wrap: break-word;
+    background: linen;
+    font-family: 'Source Code Pro';
 }
+}
+
 </style>
 '''
 st.markdown(hide_menu, unsafe_allow_html=True)
