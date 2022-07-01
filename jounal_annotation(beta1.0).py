@@ -300,7 +300,7 @@ div.stButton > button:first-child {
     b = st.button("test")
     
     with st.echo():
-    st.write('This code will be printed')
+        st.write('This code will be printed')
     
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
