@@ -180,7 +180,7 @@ if select_event == "👀 기사 인용 도우미":
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             journal_list=['Email', 'Home phone', 'Mobile phone']
-            option = st.selectbox('찾으시는 학술지가 있나요?',list(pd.DataFrame(get_data(gsheet_connector))['학술지']))
+            option = st.selectbox('찾으시는 학술지가 있나요?',list(st.dataframe(get_data(gsheet_connector))['학술지']))
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
@@ -288,7 +288,7 @@ if select_event == "📜 학술지 목록":
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
-    col1,col2=st.columns(2)
+    col1,col2=st.columns([3,7])
     with col1 :
         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
     with col2 :
