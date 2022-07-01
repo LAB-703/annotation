@@ -190,8 +190,7 @@ if select_event == "👀 기사 인용 도우미":
     with col2:
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-            journal_list=['Email', 'Home phone', 'Mobile phone']
-            st.table(list(get_data(gsheet_connector)['학술지']))
+            st.table(get_data(gsheet_connector))
 #             st.markdown("""<style>
 # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
 # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
