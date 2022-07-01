@@ -21,7 +21,7 @@ GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 SHEET_NAME = ["Database", "reaction"]
 
 
-@st.experimental_singleton() #구글 시트 연결
+@st.experimental_singleton(show_spinner=False, suppress_st_warning=True) #구글 시트 연결
 def connect_to_gsheet():
     # Create a connection object.
     credentials = service_account.Credentials.from_service_account_info(
@@ -278,12 +278,13 @@ if select_event == "📜 학술지 목록":
         else :
             annotation+=selection
     expander.markdown(annotation)
+    today=datetime.now().strftime("%Y-%m-%d")
     gsheet_connector = connect_to_gsheet()
     submitted = expander.button("추가")
     if submitted:
         add_row_to_gsheet(
             gsheet_connector,
-            [[journal, annotation]],
+            [[journal, annotation,today]],
         )
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()
@@ -293,7 +294,8 @@ if select_event == "📌 개발":
     st.markdown("---")
     st.header("📆 개발 기록")
     st.markdown('''<p align="left" style="font-size: 70%;"> <b>1️⃣ 2022. 06. 28. beta 1.0 배포</b> </p>''', unsafe_allow_html=True)
-    st.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;">  네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
+    beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
+    beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> ✔📌📍 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     
     
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
