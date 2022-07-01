@@ -152,6 +152,9 @@ hide_menu='''
 #MainMenu {
     visibility:hidden;
 }
+#document{
+    font-family: 'Pretendard';
+}
 footer {
     visibility:visible;
     size: 10%;
