@@ -204,7 +204,7 @@ if select_event == "👀 기사 인용 도우미":
                 st.stop()
             APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
             CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
-            FINAL=str(datetime.now().astimezone(KST).strftime("%Y.%m.%d."))
+            FINAL=str(datetime.now().astimezone("KST").strftime("%Y.%m.%d."))
             if final_search==True:
                 APA=APA+", 최종검색일: "+FINAL
                 CHICAGO=CHICAGO+", 최종검색일: "+FINAL
@@ -219,15 +219,13 @@ if select_event == "👀 기사 인용 도우미":
             else:
                 st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
                 
-    emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]            
+              
     def random_emoji():
+        emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
         st.session_state.emoji = random.choice(emojis)
 
     if "emoji" not in st.session_state:
         st.session_state.emoji = "🤍"
-
-   
-
     st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page2#######################################################################################################     
@@ -268,7 +266,7 @@ if select_event == "📜 학술지 목록":
         else :
             annotation+=selection
     expander.markdown(annotation)
-    today=str(datetime.now().astimezone(KST).strftime("%Y-%m-%d %H:%M:%S"))
+    today=str(datetime.now().astimezone("KST").strftime("%Y-%m-%d %H:%M:%S"))
     gsheet_connector = connect_to_gsheet()
     submitted = expander.button("추가")
     if submitted:
@@ -284,8 +282,7 @@ if select_event == "📌 개발":
     st.markdown("[![Foo](https://postfiles.pstatic.net/MjAyMjA2MjZfOTgg/MDAxNjU2MjM0OTkwMjU5.OGRjH6YMCvGKy6AtjnTDjbGh-3MVP5yUsQmKHTlljNsg.6qk6L05rB42FP4F7P5M-TsF4gzRLKI23hIHBv_aW0nkg.PNG.faraway10/SE-f1959757-e2c6-4df0-85a5-1f2987b88c5d.png?type=w773)](https://postfiles.pstatic.net/MjAyMjA2MjZfMzYg/MDAxNjU2MjM1MDM1NDUz.hDsSoeeQATTXFBzlJ9DKBLoYS5rrYTLm8WekqElLNDAg.WqSp45bEruil_YHoScx-y_ZcF1t6Rub4DtJ7ObGGLiAg.PNG.faraway10/SE-9886a95b-a8ad-4edb-99b5-78bff09acb9d.png?type=w773)")
     st.markdown("---")
     st.header("📆 개발 기록")
-    with form:
-        st.markdown("`📌 배포 완료` `🐞 버그 수정`")
+    st.markdown("`📌 배포 완료` `🐞 버그 수정`")
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("1️⃣ 2022. 07. 02. beta 2.0 배포")
