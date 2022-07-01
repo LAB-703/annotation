@@ -110,6 +110,17 @@ st.markdown("""
     }
     </style>""",unsafe_allow_html=True)
 
+#버튼
+st.markdown("""
+<style>
+div.stButton > button:first-child {
+  font-family: 'Pretendard';
+  font-size:70%;
+    background-color: #FCF9F6;
+    font-color: #C0504D;
+}
+</style>""", unsafe_allow_html=True)
+
 #st.markdown("""        <style>
 #        
 #@font-face {
@@ -169,7 +180,7 @@ if select_event == "👀 기사 인용 도우미":
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
             journal_list=['Email', 'Home phone', 'Mobile phone']
-            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
+            option = st.selectbox('찾으시는 학술지가 있나요?',list(pd.DataFrame(get_data(gsheet_connector))['학술지']))
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
@@ -281,7 +292,7 @@ if select_event == "📌 개발":
     with col1 :
         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
     with col2 :
-        st.markdown("개발자에게<br>커피 한잔은<br>큰 힘이 됩니다☕️", unsafe_allow_html=True)
+        st.markdown("개발자에게 커피 한잔은 큰 힘이 됩니다☕️<br>후원은 익명으로 가능합니다🎭", unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
     st.markdown("`📌 배포 완료` `🐞 버그 수정`")
@@ -289,16 +300,9 @@ if select_event == "📌 개발":
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("1️⃣ 2022. 07. 02. beta 2.0 배포")
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
+    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
     
-    m = st.markdown("""
-<style>
-div.stButton > button:first-child {
-  font-family: 'Pretendard';
-  font-size:70%;
-    background-color: #FCF9F6;
-    font-color: #C0504D;
-}
-</style>""", unsafe_allow_html=True)
+
 
     b = st.button("추가")
     
