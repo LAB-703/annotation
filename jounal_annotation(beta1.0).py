@@ -246,11 +246,11 @@ if select_event == "📜 학술지 목록":
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     LIST=['Email', 'Home phone', 'Mobile phone']
-    journal = st.selectbox('',LIST)
+    journallist = st.selectbox('',LIST)
     st.write("---")
     #st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
-    expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
+    journal=expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
     expander.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
     expander.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
     dic = {'AUTHOR':'기자',
@@ -290,7 +290,7 @@ if select_event == "📜 학술지 목록":
     if submitted:
         add_row_to_gsheet(
             gsheet_connector,
-            [[author, bug_type, comment, str(date), bug_severity]],
+            [[journal, annotation]],
         )
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()
@@ -339,8 +339,8 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown('''<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b></p>
-                <blockquote> 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가''', unsafe_allow_html=True)
+    st.markdown('''<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b>
+                <blockquote> 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
 #    <a href="JavaScript:window.external.AddFavorite('https://blog.naver.com/hyoyeol/70152225558','늑대털쓴양 홈페이지')">
