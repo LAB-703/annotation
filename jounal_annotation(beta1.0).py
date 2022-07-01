@@ -307,15 +307,15 @@ if select_event == "📜 학술지 목록":
         cols = expander.columns(2)
         date = cols[0].date_input("Bug date occurrence:")
         bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
-        submitted = expander.form_submit_button(label="추가")
+        submitted = st.form_submit_button(label="추가")
 
     if submitted:
         add_row_to_gsheet(
             gsheet_connector,
             [[author, bug_type, comment, str(date), bug_severity]],
         )
-        expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
-        expander.balloons()
+        st.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
+        st.balloons()
 
 #    expander = st.expander("See all records")
 #    with expander:
