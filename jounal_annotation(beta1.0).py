@@ -238,7 +238,7 @@ if select_event == "👀 기사 인용 도우미":
 
    
 
-   st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+    st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
