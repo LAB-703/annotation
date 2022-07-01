@@ -10,3 +10,4 @@ pandas
 pyperclip
 gsheetsdb
 google_auth_httplib2
+googleapiclient
