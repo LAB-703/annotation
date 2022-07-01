@@ -259,7 +259,7 @@ conn = connect(credentials=credentials)
 # Uses st.cache to only rerun when the query changes or after 10 min.
 @st.cache(ttl=5)
 def run_query(query):
-    rows = conn.execute(query, headers=2)
+    rows = conn.execute(query, headers=1)
     rows = rows.fetchall()
     return rows
 
