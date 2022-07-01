@@ -153,7 +153,7 @@ hide_menu='''
     visibility:hidden;
 }
 #document{
-    font-family: 'Pretendard';
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 footer {
     visibility:visible;
@@ -162,7 +162,7 @@ footer {
 }
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT';
-    font-size: 15px;
+    font-size: 10%;
     display:block;
     position:relative;
     color:silver;
