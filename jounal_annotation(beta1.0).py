@@ -282,7 +282,7 @@ if select_event == "📌 개발":
     from googleapiclient.http import HttpRequest
 
     SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-    SPREADSHEET_ID = "1QlPTiVvfRM82snGN6LELpNkOwVI1_Mp9J9xeJe-QoaA"
+    SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
     SHEET_NAME = "Database"
     GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
@@ -340,9 +340,6 @@ if select_event == "📌 개발":
         ).execute()
 
 
-    st.set_page_config(page_title="Bug report", page_icon="🐞", layout="centered")
-
-    st.title("🐞 Bug report!")
 
     gsheet_connector = connect_to_gsheet()
 
