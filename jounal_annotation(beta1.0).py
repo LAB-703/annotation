@@ -23,13 +23,14 @@ SHEET_NAME = "Database"
 timezone = tz.tzlocal()
 
 
-@st.experimental_singleton(show_spinner=False, suppress_st_warning=True) #구글 시트 연결
+@st.experimental_singleton()
 def connect_to_gsheet():
     # Create a connection object.
     credentials = service_account.Credentials.from_service_account_info(
         st.secrets["gcp_service_account"],
         scopes=[SCOPE],
     )
+
     # Create a new Http() object for every request
     def build_request(http, *args, **kwargs):
         new_http = google_auth_httplib2.AuthorizedHttp(
