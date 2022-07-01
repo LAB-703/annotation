@@ -281,7 +281,7 @@ if select_event == "📌 개발":
     with col1 :
         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
     with col2 :
-        st.markdown("개발자에게<br>커피 한잔은<br>큰 힘이 됩니다☕️")
+        st.markdown("개발자에게<br>커피 한잔은<br>큰 힘이 됩니다☕️", unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
     st.markdown("`📌 배포 완료` `🐞 버그 수정`")
