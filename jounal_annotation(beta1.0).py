@@ -158,18 +158,14 @@ if select_event == "👀 기사 인용 도우미":
         STYLE=st.radio("인용 스타일을 선택해주세요.",
              ("APA", 
               'CHICAGO',
-              'by JOURNAL')) # : ⏳ 개발 중'))
-        
-        ex=st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-        final_search=st.checkbox(label=ex)
-        
-        #final_search=st.checkbox('최종 검색일(오늘) 추가')
+              'by JOURNAL')) # : ⏳ 개발 중'))        
+        final_search=st.checkbox('최종 검색일(오늘) 추가')
         submit=st.button('인용')
     with col2:
         if STYLE=="by JOURNAL":
             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-            journal_list=['Email', 'Home phone', 'Mobile phone']
-            option = st.selectbox('찾으시는 학술지가 있나요?',journal_list)
+  #          journal_list=['Email', 'Home phone', 'Mobile phone']
+            option = st.selectbox('찾으시는 학술지가 있나요?',st.dataframe(get_data(gsheet_connector)))
             st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
             
     if submit==True:
@@ -185,14 +181,14 @@ if select_event == "👀 기사 인용 도우미":
                 AUTHOR=soup.find("em",{"class":"media_end_head_journalist_name"}).get_text().split()[0]
                 COMPANY=soup.find("em",{"class":"media_end_linked_more_point"}).get_text()
             elif URL.find("v.daum.net/")>0 :
-                    header = {
-                        'authority' : 'comment.daum.net',
-                        'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
-                        'accept' : "*/*",
-                        'accept-encoding' : 'gzip, deflate, br',
-                        'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
-                        'referer' : URL,
-                        }
+                    # header = {
+                    #     'authority' : 'comment.daum.net',
+                    #     'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36',
+                    #     'accept' : "*/*",
+                    #     'accept-encoding' : 'gzip, deflate, br',
+                    #     'accept-language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+                    #     'referer' : URL,
+                    #     }
                     html = requests.get(URL, headers = header)
                     test_text= html.text  
                     soup = bs(test_text, 'html.parser')
@@ -235,15 +231,14 @@ if select_event == "👀 기사 인용 도우미":
                 st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
                 
     def random_emoji():
+        emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]
         st.session_state.emoji = random.choice(emojis)
+        if "emoji" not in st.session_state:
+            st.session_state.emoji = "🤍"
 
-    # initialize emoji as a Session State variable
-    #if "emoji" not in st.session_state:
-    #    st.session_state.emoji = "🤍"
+   
 
-   # emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]
-
-    #st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+   st.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
@@ -294,8 +289,10 @@ if select_event == "📌 개발":
     st.header("👩🏻‍💻 개발자")
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown('''<p align="left" style=" font-size: 70%;"><b>1️⃣ 2022. 06. 28. beta 1.0 배포</b>
-                <blockquote> 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
+    st.markdown('''<p align="left" style=" font-size: 70%;"> <b>1️⃣ 2022. 06. 28. beta 1.0 배포</b> </p>''', unsafe_allow_html=True)
+    st.markdown('''<p align="left" style=" font-size: 70%;"> <blockquote> 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
+    
+    
 #    #즐겨찾기 추가인데 윈도우에서만 먹혀
 #    a='''
 #    <a href="JavaScript:window.external.AddFavorite('https://blog.naver.com/hyoyeol/70152225558','늑대털쓴양 홈페이지')">
