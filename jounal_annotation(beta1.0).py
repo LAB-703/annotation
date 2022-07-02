@@ -208,7 +208,7 @@ if select_event == "👀 기사 인용 도우미":
 # </style>
 # """, unsafe_allow_html=True)
             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
-            st.markdown('<p style=" font-size: 70%; color:silver"> <b>학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</b></p>', unsafe_allow_html=True)
+            st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
     final_search=st.checkbox('최종 검색일(오늘) 추가')
     submit=st.button('인용')        
     if submit==True:
@@ -277,9 +277,9 @@ if select_event == "📜 학술지 목록":
     journal=expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
     col1,col2=expander.columns([5,5])  
     with col1:
-        st.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/main.kci)")
+        st.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/po/search/poSereSear.kci)")
     with col2:
-        st.markdown('<p style=" font-size: 80%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
+        st.markdown('<p style=" font-size: 100%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
     dic = {'AUTHOR':'기자',
        'TITLE': '기사 제목',
        'COMPANY': '언론사', 
@@ -319,15 +319,17 @@ if select_event == "📌 개발":
     with col1 :
         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
     with col2 :
-        st.markdown('''<br>개발자에게 커피 한잔은 큰 힘이 됩니다☕️<br>후원은 익명으로 가능합니다🎭<br> QR코드를 스캔하거나 클릭시 
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=30px>로 연결됩니다.''', unsafe_allow_html=True)
+        st.markdown('''<p align="left" style="font-size: 70%;">☕️ 개발자에게 커피 한잔은 큰 힘이 됩니다<br>
+                        🎭 후원은 익명으로 가능합니다<br> 
+                        👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=20px>로 연결됩니다.<br> </p>''', unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown('<p align="right" style="font-color:#C0504D;">`📌 배포 완료` `🐞 버그 수정`</p>')
+    st.markdown('<p align="right" style="color:#C0504D;">`📌 기능 추가` `🐞 버그 수정`</p>')
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("2️⃣ 2022. 07. 02. beta 2.0 배포")
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 최종검색일 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
+    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 학술지 페이지 오픈 🆕 새로운 학술지 추가에 동참해주세요! </p>''', unsafe_allow_html=True)
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
     
     
