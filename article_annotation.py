@@ -78,6 +78,16 @@ def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
 
+#def likes(gsheet_connector, row) -> None:
+#    gsheet_connector.values().append(
+#        spreadsheetId=SPREADSHEET_ID,
+#        range=f"{SHEET_NAME}!D2",
+#        body=dict(values=row),
+#        valueInputOption="USER_ENTERED",
+#    ).execute()
+#    
+
+
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 
@@ -172,11 +182,10 @@ select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "�
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
-
-#gsheet_connector = connect_to_gsheet()
-#st.table(get_data(gsheet_connector))
-#likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'].count())
-
+gsheet_connector = connect_to_gsheet()
+likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
+#if likes:
+#    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
@@ -316,7 +325,7 @@ if select_event == "📌 개발":
     with col1 :
         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
     with col2 :
-        st.markdown('''<p align="left" style="font-size: 90%;"><br>☕️ 개발자에게 커피 한잔은 큰 힘이 됩니다<br><br>
+        st.markdown('''<p align="left" style="font-size: 90%;">☕️ 개발자에게 커피 한잔은 큰 힘이 됩니다<br><br>
                         🎭 후원은 익명으로 가능합니다<br> <br>
                         👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=13px>로 연결됩니다<br> </p>''', unsafe_allow_html=True)
     st.markdown("---")
