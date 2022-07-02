@@ -388,3 +388,18 @@ if select_event == "시간대":
     st.text(f'local_time.tm_zone: {local_time.tm_zone}')
     st.text(f'local_time.tm_isdst: {local_time.tm_isdst}')
     st.markdown("""---""")
+    from pytz import timezone
+    from datetime import datetime
+    today = datetime.now(timezone('Asia/Seoul'))
+    st.markdwon(today)
+    from pytz import timezone
+    from datetime import datetime
+
+    # 한국
+    KST = timezone('Asial/Seoul')
+
+    today = datetime.now()
+    st.markdwon(today)
+    today = today.astimezone(KST)
+    st.markdwon(today)
+    
