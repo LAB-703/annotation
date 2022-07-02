@@ -17,7 +17,7 @@ from googleapiclient.http import HttpRequest
 from pytz import timezone
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+SPREADSHEET_ID = "1grpTFuy11UDNnqLVxiD3JyY24t7H8DMS-eAznhG43hU"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 SHEET_NAME = "Database"
 
@@ -173,8 +173,8 @@ if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
-gsheet_connector = connect_to_gsheet()
-st.table(get_data(gsheet_connector))
+#gsheet_connector = connect_to_gsheet()
+#st.table(get_data(gsheet_connector))
 #likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'].count())
 
 
