@@ -14,7 +14,7 @@ import streamlit as st
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
-from dateutil import tz
+from pytz import timezone
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
@@ -252,10 +252,10 @@ if select_event == "👀 기사 인용 도우미":
                 st.stop()
             APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
             CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
-            FINAL=str(datetime.now().astimezone(timezone).strftime("%Y.%m.%d."))
+            TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y.%m.%d."))
             if final_search==True:
-                APA=APA+", 최종검색일: "+FINAL
-                CHICAGO=CHICAGO+", 최종검색일: "+FINAL
+                APA=APA+", 최종검색일: "+TODAY
+                CHICAGO=CHICAGO+", 최종검색일: "+TODAY
             if STYLE=="APA":
                 st.code(APA,language="Markdown")
                 #clipboard.copy(APA)
@@ -306,7 +306,7 @@ if select_event == "📜 학술지 목록":
         else :
             annotation+=selection
     expander.markdown(annotation)
-    today=str(datetime.now().astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"))
+    TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y-%m-%d %H:%M:%S"))
     submitted = expander.button("추가")
     if submitted:
         if journal=="":
@@ -315,7 +315,7 @@ if select_event == "📜 학술지 목록":
         else:    
             add_row_to_gsheet(
                 gsheet_connector,
-                [[journal, annotation,today]],
+                [[journal, annotation,TODAY]],
             )
             expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
             expander.balloons()
@@ -388,18 +388,5 @@ if select_event == "시간대":
     st.text(f'local_time.tm_zone: {local_time.tm_zone}')
     st.text(f'local_time.tm_isdst: {local_time.tm_isdst}')
     st.markdown("""---""")
-    from pytz import timezone
-    from datetime import datetime
-    today = datetime.now(timezone('Asia/Seoul'))
-    st.markdown(today)
-    from pytz import timezone
-    from datetime import datetime
-
-    # 한국
-    KST = timezone('Asial/Seoul')
-
-    today = datetime.now()
-    st.markdown(today)
-    today = today.astimezone(KST)
-    st.markdown(today)
     
+    st.markdown(today)
