@@ -80,10 +80,11 @@ def random_emoji():
     st.session_state.emoji ="💖"
 
 def likes(gsheet_connector, row) -> None:
-    emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
+    gsheet_connector = connect_to_gsheet()
     st.session_state.emoji ="💖"
+    likes=get_data(gsheet_connector)['좋아요'][1]
     likes+=1
-    gsheet_connector.values().append(
+    gsheet_connector.values().replace(
         spreadsheetId=SPREADSHEET_ID,
         range=f"{SHEET_NAME}!D2",
         body=dict(values=row),
@@ -186,10 +187,7 @@ gsheet_connector = connect_to_gsheet()
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
-likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=likes(
-                gsheet_connector,
-                [['좋아요']],
-            ))
+likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=likes(gsheet_connector,[['좋아요']],))
 likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
