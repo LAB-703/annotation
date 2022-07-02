@@ -183,7 +183,7 @@ if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 gsheet_connector = connect_to_gsheet()
-likes_cnt=st.sidebar.markdown(get_data(gsheet_connector))#['좋아요'][1])
+#likes_cnt=st.sidebar.markdown(get_data(gsheet_connector))#['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
@@ -208,7 +208,7 @@ if select_event == "👀 기사 인용 도우미":
 # </style>
 # """, unsafe_allow_html=True)
             gsheet_connector = connect_to_gsheet()
-            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
+            #option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
     final_search=st.checkbox('최종 검색일(오늘) 추가')
     submit=st.button('인용')        
@@ -271,7 +271,7 @@ if select_event == "📜 학술지 목록":
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     gsheet_connector = connect_to_gsheet()
-    journal_list = st.selectbox('',list(get_data(gsheet_connector)['학술지']))
+   # journal_list = st.selectbox('',list(get_data(gsheet_connector)['학술지']))
     st.write("---")
     st.write(" ")
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
@@ -310,11 +310,11 @@ if select_event == "📜 학술지 목록":
         if journal=="":
             expander.error('❗ 학술지 한글 명칭을 입력해 주세요.')
             st.stop()
-        else:    
-            add_row_to_gsheet(
-                gsheet_connector,
-                [[journal, annotation,TODAY]],
-            )
+       # else:    
+       #     add_row_to_gsheet(
+       #         gsheet_connector,
+       #         [[journal, annotation,TODAY]],
+       #     )
             expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
             expander.balloons()
 #page3#######################################################################################################
@@ -339,3 +339,33 @@ if select_event == "📌 개발":
    # st.markdown('''<a href="JavaScript:window.external.AddFavorite('http://yes-today.tistory.com', '내일을 만드는 어제와 오늘')"> 즐겨찾기 추가</a>''', unsafe_allow_html=True)
     
 
+#####################
+if select_event=="new":
+    
+import streamlit as st
+from google.oauth2 import service_account
+from gsheetsdb import connect
+
+# Create a connection object.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=[
+        "https://www.googleapis.com/auth/spreadsheets",
+    ],
+)
+conn = connect(credentials=credentials)
+
+# Perform SQL query on the Google Sheet.
+# Uses st.cache to only rerun when the query changes or after 10 min.
+@st.cache(ttl=60)
+def run_query(query):
+    rows = conn.execute(query, headers=1)
+    rows = rows.fetchall()
+    return rows
+
+sheet_url = st.secrets["private_gsheets_url"]
+rows = run_query(f'SELECT * FROM "{sheet_url}"')
+
+# Print results.
+for row in rows:
+    st.write(f"{row.name} has a :{row.pet}:")
