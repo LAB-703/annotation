@@ -391,7 +391,7 @@ if select_event == "시간대":
     from pytz import timezone
     from datetime import datetime
     today = datetime.now(timezone('Asia/Seoul'))
-    st.markdwon(today)
+    st.markdown(today)
     from pytz import timezone
     from datetime import datetime
 
@@ -399,7 +399,7 @@ if select_event == "시간대":
     KST = timezone('Asial/Seoul')
 
     today = datetime.now()
-    st.markdwon(today)
+    st.markdown(today)
     today = today.astimezone(KST)
-    st.markdwon(today)
+    st.markdown(today)
     
