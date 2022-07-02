@@ -183,6 +183,7 @@ select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "�
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['학술지'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
@@ -325,7 +326,7 @@ if select_event == "📌 개발":
     with col2 :
         st.markdown('''<p align="left" style="font-size: 90%;">☕️ 개발자에게 커피 한잔은 큰 힘이 됩니다<br><br>
                         🎭 후원은 익명으로 가능합니다<br> <br>
-                        👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=15px>로 연결됩니다<br> </p>''', unsafe_allow_html=True)
+                        👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=13px>로 연결됩니다<br> </p>''', unsafe_allow_html=True)
     st.markdown("---")
     st.markdown('<p align="left" style=" font-size: 140%;"><b>📆 개발 기록</b></p>', unsafe_allow_html=True)
     st.markdown('<code>📌 기능 추가</code> <code>🐞 버그 수정</code>', unsafe_allow_html=True)
