@@ -9,12 +9,11 @@ import random
 import pandas as pd
 import google_auth_httplib2
 import httplib2
-import pandas as pd
-import streamlit as st
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 from pytz import timezone
+from gsheetsdb import connect
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1grpTFuy11UDNnqLVxiD3JyY24t7H8DMS-eAznhG43hU"
@@ -183,7 +182,7 @@ if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 gsheet_connector = connect_to_gsheet()
-#likes_cnt=st.sidebar.markdown(get_data(gsheet_connector))#['좋아요'][1])
+likes_cnt=st.sidebar.markdown(get_data(gsheet_connector))#['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
@@ -357,7 +356,7 @@ if select_event=="new":
 
     # Perform SQL query on the Google Sheet.
     # Uses st.cache to only rerun when the query changes or after 10 min.
-    @st.cache(ttl=60)
+    @st.cache(ttl=5)
     def run_query(query):
         rows = conn.execute(query, headers=1)
         rows = rows.fetchall()
