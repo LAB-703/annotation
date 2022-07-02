@@ -322,7 +322,7 @@ if select_event == "📌 개발":
         st.markdown("<br>개발자에게 커피 한잔은 큰 힘이 됩니다☕️<br>후원은 익명으로 가능합니다🎭<br> QR코드를 스캔하거나 클릭시 ![토스](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png)로 연결됩니다.", unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown(<'p align="right" style="font-color:#C0504D;">`📌 배포 완료` `🐞 버그 수정`</p>')
+    st.markdown('<p align="right" style="font-color:#C0504D;">`📌 배포 완료` `🐞 버그 수정`</p>')
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("2️⃣ 2022. 07. 02. beta 2.0 배포")
