@@ -261,8 +261,8 @@ if select_event == "👀 기사 인용 도우미":
                 st.code(CHICAGO,language="Markdown")
                 #clipboard.copy(CHICAGO)
                 st.write('오른쪽 복사버튼을 클릭하세요.')
-            else:
-                st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+            # else:
+            #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
                 
 
 #page2#######################################################################################################     
@@ -272,14 +272,14 @@ if select_event == "📜 학술지 목록":
     gsheet_connector = connect_to_gsheet()
     journal_list = st.selectbox('',list(get_data(gsheet_connector)['학술지']))
     st.write("---")
-    #st.write('학술지 추가를 원하신다면, 더보기 버튼을 클릭하세요.')
+    st.write(" ")
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
     journal=expander.text_input("추가할 학술지의 정식 한글 명칭을 입력해 주세요.")
     col1,col2=expander.columns([5,5])  
     with col1:
         st.markdown("[![Foo](https://www.kci.go.kr/kciportal/resources/newkci/image/kor/title/h1_logo.png)](https://www.kci.go.kr/kciportal/po/search/poSereSear.kci)")
     with col2:
-        st.markdown('<p style=" font-size: 100%; color:silver"> 🔍학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
+        st.markdown('<p style=" font-size: 90%; color:silver"> 🔍 학술지 검색이 가능합니다.</p>', unsafe_allow_html=True)
     dic = {'AUTHOR':'기자',
        'TITLE': '기사 제목',
        'COMPANY': '언론사', 
@@ -306,12 +306,16 @@ if select_event == "📜 학술지 목록":
     today=str(datetime.now().astimezone(timezone).strftime("%Y-%m-%d %H:%M:%S"))
     submitted = expander.button("추가")
     if submitted:
-        add_row_to_gsheet(
-            gsheet_connector,
-            [[journal, annotation,today]],
-        )
-        expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
-        expander.balloons()
+        if journal.isnull():
+            st.error('❗ 학술지 한글 명칭을 입력해 주세요.')
+            st.stop()
+        else:    
+            add_row_to_gsheet(
+                gsheet_connector,
+                [[journal, annotation,today]],
+            )
+            expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
+            expander.balloons()
 #page3#######################################################################################################
 if select_event == "📌 개발":
     st.subheader("👩🏻‍💻 개발자")
@@ -321,7 +325,7 @@ if select_event == "📌 개발":
     with col2 :
         st.markdown('''<p align="left" style="font-size: 90%;">☕️ 개발자에게 커피 한잔은 큰 힘이 됩니다<br><br>
                         🎭 후원은 익명으로 가능합니다<br> <br>
-                        👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=20px>로 연결됩니다.<br> </p>''', unsafe_allow_html=True)
+                        👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=15px>로 연결됩니다.<br> </p>''', unsafe_allow_html=True)
     st.markdown("---")
     st.subheader("📆 개발 기록")
     st.markdown('`📌 기능 추가` `🐞 버그 수정`')
@@ -329,10 +333,9 @@ if select_event == "📌 개발":
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("2️⃣ 2022. 07. 02. beta 2.0 배포")
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 최종검색일 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
-    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 학술지 페이지 오픈 `new!` 새로운 학술지 추가에 동참해주세요! </p>''', unsafe_allow_html=True)
+    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 학술지 페이지 오픈 <code>new!</code> 새로운 학술지 추가에 동참해주세요! </p>''', unsafe_allow_html=True)
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
-    st.markdown('''<a href="JavaScript:window.external.AddFavorite('http://yes-today.tistory.com', '내일을 만드는 어제와 오늘')"> 즐겨찾기 추가</a>''',
-               unsafe_allow_html=True)
+   # st.markdown('''<a href="JavaScript:window.external.AddFavorite('http://yes-today.tistory.com', '내일을 만드는 어제와 오늘')"> 즐겨찾기 추가</a>''', unsafe_allow_html=True)
     
 
 ####################
