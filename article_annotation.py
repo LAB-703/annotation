@@ -78,9 +78,6 @@ def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
 
-
-
-
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 
@@ -177,7 +174,7 @@ if "emoji" not in st.session_state:
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 gsheet_connector = connect_to_gsheet()
-#likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'].count())
+likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'].count())
 
 
 #page1#######################################################################################################
