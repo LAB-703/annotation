@@ -182,9 +182,9 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
-likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click="💖")
 gsheet_connector = connect_to_gsheet()
-likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['학술지'][1])
+likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
