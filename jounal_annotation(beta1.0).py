@@ -20,7 +20,6 @@ SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 SHEET_NAME = "Database"
-timezone = tz.tzlocal()
 
 
 @st.experimental_singleton()
