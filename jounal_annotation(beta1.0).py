@@ -328,7 +328,7 @@ if select_event == "📌 개발":
                         👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=15px>로 연결됩니다.<br> </p>''', unsafe_allow_html=True)
     st.markdown("---")
     st.subheader("📆 개발 기록")
-    st.markdown('<code> 📌 기능 추가</code> <code>🐞 버그 수정</code>')
+    st.markdown('<code>📌 기능 추가</code> <code>🐞 버그 수정</code>', unsafe_allow_html=True)
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
     beta2_0=st.expander("2️⃣ 2022. 07. 02. beta 2.0 배포")
