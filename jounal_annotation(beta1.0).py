@@ -364,7 +364,7 @@ if select_event == "시간대":
     st.markdown("### Using `datetime` module from standard library")
     body_datetime = """
     from datetime import datetime
-    local_now = datetime.now().astimezone()
+    local_now = datetime.now().astimezone(KST)
     print(local_now.isoformat())
     print(local_now.tzname())
     """
