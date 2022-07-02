@@ -319,7 +319,8 @@ if select_event == "📌 개발":
     with col1 :
         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
     with col2 :
-        st.markdown("<br>개발자에게 커피 한잔은 큰 힘이 됩니다☕️<br>후원은 익명으로 가능합니다🎭<br> QR코드를 스캔하거나 클릭시 ![토스](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png)로 연결됩니다.", unsafe_allow_html=True)
+        st.markdown('''<br>개발자에게 커피 한잔은 큰 힘이 됩니다☕️<br>후원은 익명으로 가능합니다🎭<br> QR코드를 스캔하거나 클릭시 
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=30px>로 연결됩니다.''', unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
     st.markdown('<p align="right" style="font-color:#C0504D;">`📌 배포 완료` `🐞 버그 수정`</p>')
