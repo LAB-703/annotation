@@ -162,7 +162,7 @@ footer {
 }
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT';
-    font-size: 10%;
+    font-size: 30%;
     display:block;
     position:relative;
     color:silver;
@@ -208,7 +208,7 @@ if select_event == "👀 기사 인용 도우미":
 # </style>
 # """, unsafe_allow_html=True)
             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
-            st.markdown('<p style=" font-size: 70%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
+            st.markdown('<p style=" font-size: 70%; color:silver"> <b>학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</b></p>', unsafe_allow_html=True)
     final_search=st.checkbox('최종 검색일(오늘) 추가')
     submit=st.button('인용')        
     if submit==True:
@@ -319,23 +319,16 @@ if select_event == "📌 개발":
     with col1 :
         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
     with col2 :
-        st.markdown("<br>개발자에게 커피 한잔은 큰 힘이 됩니다☕️<br>후원은 익명으로 가능합니다🎭", unsafe_allow_html=True)
+        st.markdown("<br>개발자에게 커피 한잔은 큰 힘이 됩니다☕️<br>후원은 익명으로 가능합니다🎭<br> QR코드를 스캔하거나 클릭시 ![토스](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png)로 연결됩니다.", unsafe_allow_html=True)
     st.markdown("---")
     st.header("📆 개발 기록")
-    st.markdown("`📌 배포 완료` `🐞 버그 수정`")
+    st.markdown(<'p align="right" style="font-color:#C0504D;">`📌 배포 완료` `🐞 버그 수정`</p>')
     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
-    beta2_0=st.expander("1️⃣ 2022. 07. 02. beta 2.0 배포")
+    beta2_0=st.expander("2️⃣ 2022. 07. 02. beta 2.0 배포")
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 최종검색일 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
     
     
-    
-#    #즐겨찾기 추가인데 윈도우에서만 먹혀
-#    a='''
-#    <a href="JavaScript:window.external.AddFavorite('https://blog.naver.com/hyoyeol/70152225558','늑대털쓴양 홈페이지')">
-#    '''
-#    st.markdown(a)
-#    st.markdown("[![Foo](https://postfiles.pstatic.net/MjAyMjA2MjZfOTgg/MDAxNjU2MjM0OTkwMjU5.OGRjH6YMCvGKy6AtjnTDjbGh-3MVP5yUsQmKHTlljNsg.6qk6L05rB42FP4F7P5M-TsF4gzRLKI23hIHBv_aW0nkg.PNG.faraway10/SE-f1959757-e2c6-4df0-85a5-1f2987b88c5d.png?type=w773)](https://postfiles.pstatic.net/MjAyMjA2MjZfMzYg/MDAxNjU2MjM1MDM1NDUz.hDsSoeeQATTXFBzlJ9DKBLoYS5rrYTLm8WekqElLNDAg.WqSp45bEruil_YHoScx-y_ZcF1t6Rub4DtJ7ObGGLiAg.PNG.faraway10/SE-9886a95b-a8ad-4edb-99b5-78bff09acb9d.png?type=w773)")
 
 ####################
