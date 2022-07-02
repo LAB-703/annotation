@@ -307,7 +307,7 @@ if select_event == "📜 학술지 목록":
     submitted = expander.button("추가")
     if submitted:
         if journal=="":
-            st.error('❗ 학술지 한글 명칭을 입력해 주세요.')
+            expander.error('❗ 학술지 한글 명칭을 입력해 주세요.')
             st.stop()
         else:    
             add_row_to_gsheet(
