@@ -15,7 +15,16 @@ from googleapiclient.http import HttpRequest
 from pytz import timezone
 from gsheetsdb import connect
 
+import google_auth_httplib2
+import httplib2
+import pandas as pd
+import streamlit as st
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import HttpRequest
+
 from googleapiclient import discovery
+
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
@@ -182,111 +191,16 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발","new"))
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
+
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 gsheet_connector = connect_to_gsheet()
-likes_cnt=st.sidebar.markdown(get_data(gsheet_connector))#['좋아요'][1])
+st.dataframe(get_data(gsheet_connector))
+#likes_cnt=st.sidebar.markdown(get_data(gsheet_connector))#['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 #page1#######################################################################################################
-def connect_to_gsheet():
-    # Create a connection object.
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=[SCOPE],
-    )
-    
-if select_event=="new":
-    
-    import streamlit as st
-    from google.oauth2 import service_account
-    from gsheetsdb import connect    
-    import gspread
-    from oauth2client.service_account import ServiceAccountCredentials
 
-    # Create a connection object.
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=[
-            "https://www.googleapis.com/auth/spreadsheets",
-        ],
-    )
-    conn = connect(credentials=credentials)
-
-    # Perform SQL query on the Google Sheet.
-    # Uses st.cache to only rerun when the query changes or after 10 min.
-    @st.cache(ttl=5)
-    def run_query(query):
-        rows = conn.execute(query, headers=1)
-        rows = rows.fetchall()
-        return rows
-
-    sheet_url = st.secrets["private_gsheets_url"]
-    
-    def build_request(http, *args, **kwargs):
-        new_http = google_auth_httplib2.AuthorizedHttp(
-            credentials, http=httplib2.Http()
-        )
-        return HttpRequest(new_http, *args, **kwargs)
-    
-    authorized_http = google_auth_httplib2.AuthorizedHttp(
-        credentials, http=httplib2.Http()
-    )
-    service = build(
-        "sheets",
-        "v4",
-        requestBuilder=build_request,
-        http=authorized_http,
-    )
-    gsheet_connector = service.spreadsheets()
-    
-    def get_data(gsheet_connector) -> pd.DataFrame:
-        values = (
-        gsheet_connector.values()
-        .get(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
-        )
-        .execute()
-    )
-
-        df = pd.DataFrame(values["values"])
-        df.columns = df.iloc[0]
-        df = df[1:]
-        return df
-
-    st.table(get_data(gsheet_connector))
-    
-#    gc = gspread.authorize(credentials)
-#    doc = gc.open_by_url(sheet_url)
-    
-    rows = run_query(f'SELECT * FROM "{sheet_url}"')
-    st.write(rows)
-    # 시트 선택하기
-    #worksheet = doc.worksheet('Database')    
-    #cell_data = worksheet.acell('B1').value
-    #st.write(cell_data)
-
-    # Print results.
-    for row in rows:
-        st.write(row)
-
-    import gspread
-    from oauth2client.service_account import ServiceAccountCredentials
-    SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    ]
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=[SCOPE],
-    )
-    gc = gspread.authorize(credentials)
-    spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1grpTFuy11UDNnqLVxiD3JyY24t7H8DMS-eAznhG43hU/edit#gid=0'    # 스프레스시트 문서 가져오기 
-    doc = gc.open_by_url(spreadsheet_url)
-    # 시트 선택하기
-    worksheet = doc.worksheet('Database')    
-    cell_data = worksheet.acell('B1').value
-    st.write(cell_data)
     #page1#######################################################################################################
 
 if select_event == "👀 기사 인용 도우미":
