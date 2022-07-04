@@ -227,6 +227,17 @@ if select_event=="new":
         )
         return HttpRequest(new_http, *args, **kwargs)
     
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
+        credentials, http=httplib2.Http()
+    )
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
+    gsheet_connector = service.spreadsheets()
+    
 #    gc = gspread.authorize(credentials)
 #    doc = gc.open_by_url(sheet_url)
     
@@ -251,8 +262,7 @@ if select_event=="new":
         scopes=[SCOPE],
     )
     gc = gspread.authorize(credentials)
-    spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1grpTFuy11UDNnqLVxiD3JyY24t7H8DMS-eAznhG43hU/edit#gid=0'
-    # 스프레스시트 문서 가져오기 
+    spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1grpTFuy11UDNnqLVxiD3JyY24t7H8DMS-eAznhG43hU/edit#gid=0'    # 스프레스시트 문서 가져오기 
     doc = gc.open_by_url(spreadsheet_url)
     # 시트 선택하기
     worksheet = doc.worksheet('Database')    
