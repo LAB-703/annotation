@@ -234,6 +234,7 @@ if select_event=="new":
         st.secrets["gcp_service_account"],
         scopes=[SCOPE],
     )
+    gc = gspread.authorize(credentials)
     spreadsheet_url = 'https://docs.google.com/spreadsheets/d/1grpTFuy11UDNnqLVxiD3JyY24t7H8DMS-eAznhG43hU/edit#gid=0'
     # 스프레스시트 문서 가져오기 
     doc = gc.open_by_url(spreadsheet_url)
