@@ -55,14 +55,33 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     df = df[1:]
     return df
 
+batch_update_values_request_body = {
+    'value_input_option': 'USER_ENTERED',
+    'data': [{
+        'range': 'A1:C3', # this defines the area you are editing
+        'values': [
+            [ 'A1', 'B1', 'C1' ],
+            [ 'A2', 'B2', 'C2' ],
+            [ 'A3', 'B3', 'C3' ]
+        ],
+        'major_dimension': 'ROWS' # this means the data values represent rows
+    }, {
+        # repeat as necessary
+    }],
+    'include_values_in_response': true
+}
 
-def add_row_to_gsheet(gsheet_connector, row) -> None:
-    gsheet_connector.values().append(
-        spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME}!A:E",
-        body=dict(values=row),
-        valueInputOption="USER_ENTERED",
-    ).execute()
+request = service.spreadsheets().values().batchUpdate(spreadsheetId=spreadsheet_id, body=batch_update_values_request_body)
+response = request.execute()
+
+
+# def add_row_to_gsheet(gsheet_connector, row) -> None:
+#     gsheet_connector.values().append(
+#         spreadsheetId=SPREADSHEET_ID,
+#         range=f"{SHEET_NAME}!A:E",
+#         body=dict(values=row),
+#         valueInputOption="USER_ENTERED",
+#     ).execute()
 
 
 st.set_page_config(page_title="Bug report", page_icon="🐞", layout="centered")
