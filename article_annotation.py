@@ -198,7 +198,9 @@ if select_event=="new":
     
     import streamlit as st
     from google.oauth2 import service_account
-    from gsheetsdb import connect
+    from gsheetsdb import connect    
+    import gspread
+    from oauth2client.service_account import ServiceAccountCredentials
 
     # Create a connection object.
     credentials = service_account.Credentials.from_service_account_info(
@@ -218,6 +220,11 @@ if select_event=="new":
         return rows
 
     sheet_url = st.secrets["private_gsheets_url"]
+    doc = gc.open_by_url(sheet_url)
+    # 시트 선택하기
+    worksheet = doc.worksheet('Database')    
+    cell_data = worksheet.acell('B1').value
+    st.write(cell_data)
     rows = run_query(f'SELECT * FROM "{sheet_url}"')
 
     # Print results.
