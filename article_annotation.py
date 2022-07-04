@@ -409,5 +409,5 @@ if select_event == "📌 개발":
 
 #####################
 if select_event=="new":
-
+    st.write("")
     
