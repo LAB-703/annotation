@@ -268,7 +268,7 @@ if select_event == "📜 학술지 목록":
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     gsheet_connector = connect_to_gsheet()
-   # journal_list = st.selectbox('',list(get_data(gsheet_connector)['학술지']))
+    journal_list = st.selectbox('',list(get_data(gsheet_connector)['학술지']))
     st.write("---")
     st.write(" ")
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
