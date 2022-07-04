@@ -27,52 +27,7 @@ def random_emoji():
 #        valueInputOption="USER_ENTERED",
 #    ).execute()
 #    
-SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAME = "Database"
-GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-@st.experimental_singleton()
-def connect_to_gsheet():
-    # Create a connection object.
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=[SCOPE],
-    )
 
-    # Create a new Http() object for every request
-    def build_request(http, *args, **kwargs):
-        new_http = google_auth_httplib2.AuthorizedHttp(
-            credentials, http=httplib2.Http()
-        )
-        return HttpRequest(new_http, *args, **kwargs)
-
-    authorized_http = google_auth_httplib2.AuthorizedHttp(
-        credentials, http=httplib2.Http()
-    )
-    service = build(
-        "sheets",
-        "v4",
-        requestBuilder=build_request,
-        http=authorized_http,
-    )
-    service = discovery.build('sheets', 'v4', credentials=credentials)
-    gsheet_connector = service.spreadsheets()
-    return gsheet_connector
-
-def get_data(gsheet_connector) -> pd.DataFrame:
-    values = (
-        gsheet_connector.values()
-        .get(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
-        )
-        .execute()
-    )
-
-    df = pd.DataFrame(values["values"])
-    df.columns = df.iloc[0]
-    df = df[1:]
-    return df   
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 
@@ -167,6 +122,57 @@ select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "�
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 
+    
+################################################################################################33    
+SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+SHEET_NAME = "Database"
+GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+
+@st.experimental_singleton()
+def connect_to_gsheet():
+    # Create a connection object.
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=[SCOPE],
+    )
+
+    # Create a new Http() object for every request
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
+
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
+        credentials, http=httplib2.Http()
+    )
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
+    service = discovery.build('sheets', 'v4', credentials=credentials)
+    gsheet_connector = service.spreadsheets()
+    return gsheet_connector
+
+def get_data(gsheet_connector) -> pd.DataFrame:
+    values = (
+        gsheet_connector.values()
+        .get(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME}!A:E",
+        )
+        .execute()
+    )
+
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    return df       
+################################################################################################33    
+    
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 gsheet_connector = connect_to_gsheet()
 likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
