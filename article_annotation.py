@@ -212,7 +212,7 @@ if select_event == "📜 학술지 목록":
     SHEET_NAME = "Database"
     GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
     #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
-    #@st.cache(ttl=5)
+    @st.experimental_singleton()
     def connect_to_gsheet():
         # Create a connection object.
         credentials = service_account.Credentials.from_service_account_info(
@@ -270,7 +270,6 @@ if select_event == "📜 학술지 목록":
     gsheet_connector = connect_to_gsheet()
     journal_df=get_data(gsheet_connector)
     journal_list = st.selectbox('',list(journal_df['학술지']))
-    #journal_df.iloc[journal_df.loc[journal_df.학술지 ==journal_list].index[0]]['인용 양식']
     st.markdown(str(journal_df.loc[journal_df['학술지']==journal_list]['인용 양식'][1]), unsafe_allow_html=True)
     #if journal_list==
     st.write("---")
