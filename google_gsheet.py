@@ -55,6 +55,8 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     df = df[1:]
     return df
 
+service = discovery.build('sheets', 'v4', credentials=credentials)
+
 batch_update_values_request_body = {
     'value_input_option': 'USER_ENTERED',
     'data': [{
