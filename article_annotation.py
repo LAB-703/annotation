@@ -270,6 +270,7 @@ if select_event == "📜 학술지 목록":
     gsheet_connector = connect_to_gsheet()
     journal_df=get_data(gsheet_connector)
     journal_list = st.selectbox('',list(journal_df['학술지']))
+    st.markdown(journal_df.loc[journal_df['학술지']==journal_list][1], unsafe_allow_html=True)
     #if journal_list==
     st.write("---")
     st.write(" ")
