@@ -272,6 +272,7 @@ if select_event == "📜 학술지 목록":
     journal_list = st.selectbox('',list(journal_df['학술지']))
     
     st.markdown(str(journal_df.iloc[journal_df.loc[journal_df.학술지 ==journal_list].index[0]]['인용 양식']), unsafe_allow_html=True)
+    st.stop()
     #if journal_list==
     st.write("---")
     st.write(" ")
