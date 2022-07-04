@@ -27,7 +27,10 @@ def random_emoji():
 #        valueInputOption="USER_ENTERED",
 #    ).execute()
 #    
-
+SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+SHEET_NAME = "Database"
+GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 @st.experimental_singleton()
 def connect_to_gsheet():
     # Create a connection object.
