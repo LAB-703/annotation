@@ -416,21 +416,7 @@ if select_event=="new":
             valueInputOption="USER_ENTERED",
         ).execute()
 
-
-    st.set_page_config(page_title="Bug report", page_icon="🐞", layout="centered")
-
-    st.title("🐞 Bug report!")
-
     gsheet_connector = connect_to_gsheet()
-
-    st.sidebar.write(
-        f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
-    )
-
-    st.sidebar.write(
-        f"[Read more](https://docs.streamlit.io/knowledge-base/tutorials/databases/public-gsheet) about connecting your Streamlit app to Google Sheets."
-    )
-
     form = st.form(key="annotation")
 
     with form:
