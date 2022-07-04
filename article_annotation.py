@@ -221,6 +221,12 @@ if select_event=="new":
 
     sheet_url = st.secrets["private_gsheets_url"]
     
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
+    
 #    gc = gspread.authorize(credentials)
 #    doc = gc.open_by_url(sheet_url)
     
