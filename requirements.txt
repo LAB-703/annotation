@@ -9,7 +9,7 @@ clipboard
 pandas
 pyperclip
 gsheetsdb
-google_api_python_client
+google_api_python_client==2.52.0
 pytz
 gspread
 oauth2client
