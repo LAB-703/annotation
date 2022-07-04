@@ -15,12 +15,14 @@ from googleapiclient.http import HttpRequest
 from pytz import timezone
 from gsheetsdb import connect
 
+from googleapiclient import discovery
+
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-SPREADSHEET_ID = "1grpTFuy11UDNnqLVxiD3JyY24t7H8DMS-eAznhG43hU"
-GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
 SHEET_NAME = "Database"
+GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
-
+#https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
 @st.experimental_singleton()
 def connect_to_gsheet():
     # Create a connection object.
@@ -29,7 +31,7 @@ def connect_to_gsheet():
         scopes=[SCOPE],
     )
 
-      # Create a new Http() object for every request
+    # Create a new Http() object for every request
     def build_request(http, *args, **kwargs):
         new_http = google_auth_httplib2.AuthorizedHttp(
             credentials, http=httplib2.Http()
@@ -45,6 +47,7 @@ def connect_to_gsheet():
         requestBuilder=build_request,
         http=authorized_http,
     )
+    service = discovery.build('sheets', 'v4', credentials=credentials)
     gsheet_connector = service.spreadsheets()
     return gsheet_connector
 
@@ -63,7 +66,6 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     df.columns = df.iloc[0]
     df = df[1:]
     return df
-
 
 def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
