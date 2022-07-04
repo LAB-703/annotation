@@ -220,6 +220,8 @@ if select_event=="new":
         return rows
 
     sheet_url = st.secrets["private_gsheets_url"]
+    
+    gc = gspread.authorize(credentials)
     doc = gc.open_by_url(sheet_url)
     # 시트 선택하기
     worksheet = doc.worksheet('Database')    
