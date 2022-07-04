@@ -221,13 +221,15 @@ if select_event=="new":
 
     sheet_url = st.secrets["private_gsheets_url"]
     
-    gc = gspread.authorize(credentials)
-    doc = gc.open_by_url(sheet_url)
-    # 시트 선택하기
-    worksheet = doc.worksheet('Database')    
-    cell_data = worksheet.acell('B1').value
-    st.write(cell_data)
+#    gc = gspread.authorize(credentials)
+#    doc = gc.open_by_url(sheet_url)
+    
     rows = run_query(f'SELECT * FROM "{sheet_url}"')
+    st.write(rows)
+    # 시트 선택하기
+    #worksheet = doc.worksheet('Database')    
+    #cell_data = worksheet.acell('B1').value
+    #st.write(cell_data)
 
     # Print results.
     for row in rows:
