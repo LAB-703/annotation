@@ -58,13 +58,6 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     df = df[1:]
     return df
 
-def add_row_to_gsheet(gsheet_connector, row) -> None:
-    gsheet_connector.values().append(
-        spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME}!A:E",
-        body=dict(values=row),
-        valueInputOption="USER_ENTERED",
-    ).execute()
 
 ##########
 import streamlit as st
@@ -418,6 +411,13 @@ if select_event == "📌 개발":
 #####################
 if select_event=="new":
     
+    def add_row_to_gsheet(gsheet_connector, row) -> None:
+    gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME}!A:E",
+        body=dict(values=row),
+        valueInputOption="USER_ENTERED",
+    ).execute()
 
     gsheet_connector = connect_to_gsheet()
     form = st.form(key="annotation")
