@@ -239,7 +239,7 @@ if select_event=="new":
     gsheet_connector = service.spreadsheets()
     
     def get_data(gsheet_connector) -> pd.DataFrame:
-    values = (
+        values = (
         gsheet_connector.values()
         .get(
             spreadsheetId=SPREADSHEET_ID,
@@ -248,10 +248,10 @@ if select_event=="new":
         .execute()
     )
 
-    df = pd.DataFrame(values["values"])
-    df.columns = df.iloc[0]
-    df = df[1:]
-    return df
+        df = pd.DataFrame(values["values"])
+        df.columns = df.iloc[0]
+        df = df[1:]
+        return df
 
     st.table(get_data(gsheet_connector))
     
