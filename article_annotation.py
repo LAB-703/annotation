@@ -412,12 +412,12 @@ if select_event == "📌 개발":
 if select_event=="new":
     
     def add_row_to_gsheet(gsheet_connector, row) -> None:
-    gsheet_connector.values().append(
+        gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
         range=f"{SHEET_NAME}!A:E",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
-    ).execute()
+        ).execute()
 
     gsheet_connector = connect_to_gsheet()
     form = st.form(key="annotation")
