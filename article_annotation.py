@@ -28,7 +28,34 @@ def random_emoji():
 #    ).execute()
 #    
 
+@st.experimental_singleton()
+    def connect_to_gsheet():
+        # Create a connection object.
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["gcp_service_account"],
+            scopes=[SCOPE],
+        )
 
+        # Create a new Http() object for every request
+        def build_request(http, *args, **kwargs):
+            new_http = google_auth_httplib2.AuthorizedHttp(
+                credentials, http=httplib2.Http()
+            )
+            return HttpRequest(new_http, *args, **kwargs)
+
+        authorized_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        service = build(
+            "sheets",
+            "v4",
+            requestBuilder=build_request,
+            http=authorized_http,
+        )
+        service = discovery.build('sheets', 'v4', credentials=credentials)
+        gsheet_connector = service.spreadsheets()
+        return gsheet_connector
+    
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 
