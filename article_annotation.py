@@ -403,11 +403,11 @@ if select_event == "📜 학술지 목록":
         if journal=="":
             expander.error('❗ 학술지 한글 명칭을 입력해 주세요.')
             st.stop()
-        else:    
+        else:   
             add_row_to_gsheet(
-                gsheet_connector,
-                [[journal, annotation,TODAY]],
-            )
+        gsheet_connector,
+        [[journal, annotation,TODAY]],
+    )
             expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
             expander.balloons()
 #page3#######################################################################################################
