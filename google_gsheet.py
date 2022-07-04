@@ -71,7 +71,7 @@ batch_update_values_request_body = {
     'include_values_in_response': True
 }
 
-request = service.spreadsheets().values().batchUpdate(spreadsheetId=spreadsheet_id, body=batch_update_values_request_body)
+request = service.spreadsheets().values().batchUpdate(spreadsheetId=SPREADSHEET_ID, body=batch_update_values_request_body)
 response = request.execute()
 
 
