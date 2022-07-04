@@ -238,8 +238,7 @@ if select_event=="new":
     import gspread
     from oauth2client.service_account import ServiceAccountCredentials
     SCOPE = [
-    'https://spreadsheets.google.com/feeds',
-    'https://www.googleapis.com/auth/drive',
+    "https://www.googleapis.com/auth/spreadsheets",
     ]
     credentials = service_account.Credentials.from_service_account_info(
         st.secrets["gcp_service_account"],
