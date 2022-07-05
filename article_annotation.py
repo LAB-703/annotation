@@ -293,13 +293,14 @@ if select_event == "📜 학술지 목록":
           'DOT2':'.',
           'DOT3':'.',
           'DOT4':'.'}
+    reverse_dict= dict(map(reversed,dic.items()))
      
     multiselect= expander.multiselect('순서대로 놓아주세요.',
                                 list(dic.values()), 
                                 list(dic.values())[:2]) #default
-    st.write(multiselect)
     annotation=""
     for selection in multiselect:
+        st.write(reverse_dict.get(selection))    
         if selection in list(dic.values())[:6]:
             annotation+=selection
         elif selection in list(dic.values())[6]:
