@@ -97,10 +97,9 @@ code {
     background: linen;
     font-family: 'Source Code Pro';
 }
-<div id="viewerBadge_link__1S137" style="visibility: hidden">
 
-#viewerBadge_link__1S137 {
-    visibility:visible;
+div.viewerBadge_link__1S137 {
+    visibility:hidden;
 }    
     
     
