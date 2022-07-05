@@ -53,19 +53,6 @@ font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, '
 }
     </style>""",unsafe_allow_html=True)
 
-#전체 버튼
-st.markdown("""
-<style>
-div.stButton > button:first-child {
-font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-  font-size:100%;
-    background-color: #FCF9F6;
-    font-color: #C0504D;
-}
-</style>""", unsafe_allow_html=True)
-
-
-#전체 multiselect
 
 
 #st.markdown("""        <style>
@@ -110,8 +97,13 @@ code {
     background: linen;
     font-family: 'Source Code Pro';
 }
-<div class="viewerBadge_link__1S137" style="visibility: hidden;">
+<div id="viewerBadge_link__1S137" style="visibility: hidden">
 
+.viewerBadge_link__1S137 {
+    visibility:visible;
+}    
+    
+    
 div.stButton > button:first-child {
 font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
   font-size:100%;
