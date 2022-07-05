@@ -15,56 +15,6 @@ from googleapiclient.http import HttpRequest
 from pytz import timezone
 from gsheetsdb import connect
 
-SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAME = "Database"
-GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-#https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
-@st.experimental_singleton()
-def connect_to_gsheet():
-    # Create a connection object.
-    credentials = service_account.Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=[SCOPE],
-    )
-
-    # Create a new Http() object for every request
-    def build_request(http, *args, **kwargs):
-        new_http = google_auth_httplib2.AuthorizedHttp(
-            credentials, http=httplib2.Http()
-        )
-        return HttpRequest(new_http, *args, **kwargs)
-
-    authorized_http = google_auth_httplib2.AuthorizedHttp(
-        credentials, http=httplib2.Http()
-    )
-    service = build(
-        "sheets",
-        "v4",
-        requestBuilder=build_request,
-        http=authorized_http,
-    )
-    service = discovery.build('sheets', 'v4', credentials=credentials)
-    gsheet_connector = service.spreadsheets()
-    return gsheet_connector
-
-def get_data(gsheet_connector) -> pd.DataFrame:
-    values = (
-        gsheet_connector.values()
-        .get(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
-        )
-        .execute()
-    )
-
-    df = pd.DataFrame(values["values"])
-    df.columns = df.iloc[0]
-    df = df[1:]
-    return df
-
-
-
 #def likes(gsheet_connector, row) -> None:
 #    gsheet_connector.values().append(
 #        spreadsheetId=SPREADSHEET_ID,
@@ -111,6 +61,13 @@ font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
   font-size:100%;
     background-color: #FCF9F6;
     font-color: #C0504D;
+}
+</style>""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.viewerBadge_link__1S137 {
+    visibility: hidden;
 }
 </style>""", unsafe_allow_html=True)
 
@@ -174,8 +131,8 @@ if "emoji" not in st.session_state:
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 gsheet_connector = connect_to_gsheet()
-st.sidebar.table(get_data(gsheet_connector))
-likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
+
+#likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 #############################################################33    
@@ -185,9 +142,6 @@ likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 
 
 #page1#######################################################################################################
-
-    #page1#######################################################################################################
-
 if select_event == "👀 기사 인용 도우미":
     st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
 
