@@ -321,7 +321,7 @@ if select_event == "👀 기사 인용 도우미":
 # """, unsafe_allow_html=True)
             def connect_to_gsheet():
             # Create a connection object.
-            credentials = service_account.Credentials.from_service_account_info(
+                credentials = service_account.Credentials.from_service_account_info(
                 st.secrets["gcp_service_account"],
                 scopes=[SCOPE],
             )
