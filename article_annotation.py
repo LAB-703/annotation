@@ -308,9 +308,9 @@ if select_event == "📜 학술지 목록":
                                 list(dic.values())[:2]) #default
     annotation=""
     for selection in multiselect:
-        if selection in list(dic.values())[:7]:
+        if selection in list(dic.values())[:6]:
             annotation+=selection
-        elif selection in list(dic.values())[7]:
+        elif selection in list(dic.values())[6]:
             annotation+=" "+selection
         else :
             annotation+=selection+" "
