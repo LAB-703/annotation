@@ -64,12 +64,6 @@ font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
 }
 </style>""", unsafe_allow_html=True)
 
-st.markdown("""
-<style>
-.viewerBadge_link__1S137 {
-    visibility: hidden;
-}
-</style>""", unsafe_allow_html=True)
 
 #전체 multiselect
 
@@ -109,12 +103,20 @@ footer:after{
     position:relative;
     color:silver;
     font-family: 'Pretendard';
+}
 code {
     color: sienna;
     overflow-wrap: break-word;
     background: linen;
     font-family: 'Source Code Pro';
 }
+<div class="viewerBadge_link__1S137" style="display: hidden;">
+
+div.stButton > button:first-child {
+font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  font-size:100%;
+    background-color: #FCF9F6;
+    font-color: #C0504D;
 }
 
 </style>
@@ -162,7 +164,7 @@ if select_event == "👀 기사 인용 도우미":
 # </style>
 # """, unsafe_allow_html=True)
             gsheet_connector = connect_to_gsheet()
-            #option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
+            option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
     final_search=st.checkbox('최종 검색일(오늘) 추가')
     submit=st.button('인용')        
