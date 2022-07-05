@@ -98,7 +98,7 @@ code {
     font-family: 'Source Code Pro';
 }
 
-a.viewerBadge_container__1QSob {
+#root > div:nth-child(1) > div > div > a > div.viewerBadge_container__1QSob {
     visibility:hidden;
 }    
     
