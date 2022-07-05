@@ -139,8 +139,64 @@ likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_
 #############################################################33    
 
 ################################################################################################33    
-    
+SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+SHEET_NAME = "Database"
+GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+#https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
+@st.experimental_singleton()
+def connect_to_gsheet():
+    # Create a connection object.
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=[SCOPE],
+    )
 
+    # Create a new Http() object for every request
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
+
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
+        credentials, http=httplib2.Http()
+    )
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
+    service = discovery.build('sheets', 'v4', credentials=credentials)
+    gsheet_connector = service.spreadsheets()
+    return gsheet_connector
+
+def get_data(gsheet_connector) -> pd.DataFrame:
+    values = (
+        gsheet_connector.values()
+        .get(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME}!A:E",
+        )
+        .execute()
+    )
+
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    return df
+
+def add_row_to_gsheet(gsheet_connector, row) -> None:
+    gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME}!D:E",
+        body=dict(values=row),
+        valueInputOption="USER_ENTERED",
+    ).execute() 
+
+gsheet_connector = connect_to_gsheet()    
+st.sidebar.table(get_data(gsheet_connector))
 
 #page1#######################################################################################################
 if select_event == "👀 기사 인용 도우미":
@@ -266,7 +322,7 @@ if select_event == "📜 학술지 목록":
     def add_row_to_gsheet(gsheet_connector, row) -> None:
         gsheet_connector.values().append(
             spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
+            range=f"{SHEET_NAME}!A:C",
             body=dict(values=row),
             valueInputOption="USER_ENTERED",
         ).execute() 
