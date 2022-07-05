@@ -266,7 +266,7 @@ if select_event == "📜 학술지 목록":
     def add_row_to_gsheet(gsheet_connector, row) -> None:
         gsheet_connector.values().append(
             spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
+            range=f"{SHEET_NAME}!A:E5000",
             body=dict(values=row),
             valueInputOption="USER_ENTERED",
         ).execute() 
@@ -319,9 +319,14 @@ if select_event == "📜 학술지 목록":
             st.stop()
         else:   
             add_row_to_gsheet(
-        gsheet_connector,
-        [[journal, annotation,TODAY]],
-    )
+            gsheet_connector,
+            [[journal, annotation,TODAY]],
+            ).get('values', [])
+            
+            last_row = rows[-1] if rows else None
+            last_row_id = len(rows)
+            print(last_row_id, last_row)
+            
             gsheet_connector = connect_to_gsheet()
             expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
             expander.balloons()
