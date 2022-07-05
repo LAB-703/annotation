@@ -272,7 +272,6 @@ if select_event == "📜 학술지 목록":
         ).execute() 
 
     gsheet_connector = connect_to_gsheet()
-student_card.iat[student_card.loc[student_card.ID ==20190531]['name'].index[0],1]
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     gsheet_connector = connect_to_gsheet()
