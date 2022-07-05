@@ -99,7 +99,7 @@ code {
 }
 <div id="viewerBadge_link__1S137" style="visibility: hidden">
 
-.viewerBadge_link__1S137 {
+#viewerBadge_link__1S137 {
     visibility:visible;
 }    
     
