@@ -321,7 +321,7 @@ if select_event == "📜 학술지 목록":
             add_row_to_gsheet(
             gsheet_connector,
             [[journal, annotation,TODAY]],
-            ).get('values', [])
+            )
             gsheet_connector = connect_to_gsheet()
             expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
             expander.balloons()
