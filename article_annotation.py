@@ -276,7 +276,7 @@ if select_event == "📜 학술지 목록":
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     gsheet_connector = connect_to_gsheet()
     journal_df=get_data(gsheet_connector)
-    journal_list = st.selectbox('',list(journal_df['학술지']))
+    journal_list = st.selectbox('',list(journal_df['학술지']))                    #-1 때문에 마지막 열 받아올 수 있었음 🟡
     st.markdown(str(journal_df.iat[journal_df.loc[journal_df.학술지==journal_list].index[0]-1,1]), unsafe_allow_html=True)
     #if journal_list==
     st.write("---")
@@ -322,6 +322,7 @@ if select_event == "📜 학술지 목록":
             gsheet_connector,
             [[journal, annotation,TODAY]],
             )
+            @st.cache(ttl=5)
             gsheet_connector = connect_to_gsheet()
             expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
             expander.balloons()
