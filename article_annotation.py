@@ -294,22 +294,27 @@ if select_event == "📜 학술지 목록":
        'DATE_write':'기사작성일',
        'URL' :'기사 URL',
        'FINAL_SEARCH':'최종검색일',
-           'COMMA':',',
            'LEFT':'(',
         'RIGHT':')',
-          'DOT':'.'}
+           'COMMA1':',',
+           'COMMA2':',',
+           'COMMA3':',',
+           
+          'DOT1':'.',
+          'DOT2':'.',
+          'DOT3':'.'}
      
     multiselect= expander.multiselect('순서대로 놓아주세요.',
                                 list(dic.values()), 
                                 list(dic.values())[:2]) #default
     annotation=""
     for selection in multiselect:
-        if selection in list(dic.values())[:6]:
-            annotation+=selection+". "
-        elif selection in list(dic.values())[6]:
-            annotation+=selection+" "
-        else :
+        if selection in list(dic.values())[:8]:
             annotation+=selection
+       # elif selection in list(dic.values())[8]:
+       #     annotation+=selection+" "
+        else :
+            annotation+=selection+" "
     expander.markdown(annotation)
     TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y-%m-%d %H:%M:%S"))
     submitted = expander.button("추가")
