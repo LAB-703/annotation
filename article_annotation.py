@@ -153,8 +153,11 @@ if select_event == "👀 기사 인용 도우미":
 # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
 # </style>
 # """, unsafe_allow_html=True)
-
-        #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
+            SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+            SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+            SHEET_NAME = "Database"
+            GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+            #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
             @st.experimental_singleton()
             def connect_to_gsheet():
                 # Create a connection object.
@@ -206,7 +209,7 @@ if select_event == "👀 기사 인용 도우미":
                     valueInputOption="USER_ENTERED",
                 ).execute() 
 
-            connect_to_gsheet()
+            gsheet_connector=connect_to_gsheet()
         
             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
