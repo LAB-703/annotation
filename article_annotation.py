@@ -299,7 +299,6 @@ if select_event == "📜 학술지 목록":
            'COMMA1':',',
            'COMMA2':',',
            'COMMA3':',',
-           
           'DOT1':'.',
           'DOT2':'.',
           'DOT3':'.'}
@@ -311,7 +310,7 @@ if select_event == "📜 학술지 목록":
     for selection in multiselect:
         if selection in list(dic.values())[:8]:
             annotation+=selection
-        elif selection in list(dic.values())[8]:
+        elif selection in list(dic.values())[9]:
             annotation+=" "+selection
         else :
             annotation+=selection+" "
