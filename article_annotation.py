@@ -155,9 +155,9 @@ if select_event == "👀 기사 인용 도우미":
 # </style>
 # """, unsafe_allow_html=True)
             gsheet_connector = connect_to_gsheet()SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-        SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-        SHEET_NAME = "Database"
-        GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+            SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+            SHEET_NAME = "Database"
+            GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
     final_search=st.checkbox('최종 검색일(오늘) 추가')
