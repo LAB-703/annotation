@@ -119,6 +119,7 @@ code {
 
 </style>
 '''
+
 st.markdown(hide_menu, unsafe_allow_html=True)
 
 def random_emoji():
@@ -219,7 +220,7 @@ if select_event == "📜 학술지 목록":
     SHEET_NAME = "Database"
     GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
     #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
-    @st.experimental_singleton()
+    @st.cache(tts=5)
     def connect_to_gsheet():
         # Create a connection object.
         credentials = service_account.Credentials.from_service_account_info(
