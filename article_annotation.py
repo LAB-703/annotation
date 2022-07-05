@@ -152,65 +152,7 @@ if select_event == "👀 기사 인용 도우미":
 # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
 # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
 # </style>
-# """, unsafe_allow_html=True)
-            SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-            SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-            SHEET_NAME = "Database"
-            GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-            #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
-            @st.experimental_singleton()
-            def connect_to_gsheet():
-                # Create a connection object.
-                credentials = service_account.Credentials.from_service_account_info(
-                    st.secrets["gcp_service_account"],
-                    scopes=[SCOPE],
-                )
-
-                # Create a new Http() object for every request
-                def build_request(http, *args, **kwargs):
-                    new_http = google_auth_httplib2.AuthorizedHttp(
-                        credentials, http=httplib2.Http()
-                    )
-                    return HttpRequest(new_http, *args, **kwargs)
-
-                authorized_http = google_auth_httplib2.AuthorizedHttp(
-                    credentials, http=httplib2.Http()
-                )
-                service = build(
-                    "sheets",
-                    "v4",
-                    requestBuilder=build_request,
-                    http=authorized_http,
-                )
-                service = discovery.build('sheets', 'v4', credentials=credentials)
-                gsheet_connector = service.spreadsheets()
-                return gsheet_connector
-
-            def get_data(gsheet_connector) -> pd.DataFrame:
-                values = (
-                    gsheet_connector.values()
-                    .get(
-                        spreadsheetId=SPREADSHEET_ID,
-                        range=f"{SHEET_NAME}!A:E",
-                    )
-                    .execute()
-                )
-
-                df = pd.DataFrame(values["values"])
-                df.columns = df.iloc[0]
-                df = df[1:]
-                return df
-
-            def add_row_to_gsheet(gsheet_connector, row) -> None:
-                gsheet_connector.values().append(
-                    spreadsheetId=SPREADSHEET_ID,
-                    range=f"{SHEET_NAME}!A:C",
-                    body=dict(values=row),
-                    valueInputOption="USER_ENTERED",
-                ).execute() 
-
-            gsheet_connector=connect_to_gsheet()
-        
+# """, unsafe_allow_html=True)        
             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
     final_search=st.checkbox('최종 검색일(오늘) 추가')
@@ -355,6 +297,7 @@ if select_event == "📜 학술지 목록":
     multiselect= expander.multiselect('순서대로 놓아주세요.',
                                 list(dic.values()), 
                                 list(dic.values())[:2]) #default
+    st.write(multiselect)
     annotation=""
     for selection in multiselect:
         if selection in list(dic.values())[:6]:
