@@ -301,7 +301,8 @@ if select_event == "📜 학술지 목록":
            'COMMA3':',',
           'DOT1':'.',
           'DOT2':'.',
-          'DOT3':'.'}
+          'DOT3':'.',
+          'DOT4':'.'}
      
     multiselect= expander.multiselect('순서대로 놓아주세요.',
                                 list(dic.values()), 
