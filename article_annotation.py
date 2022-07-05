@@ -202,8 +202,6 @@ if select_event == "👀 기사 인용 도우미":
                 st.write('오른쪽 복사버튼을 클릭하세요.')
             # else:
             #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-                
-
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
     SCOPE = "https://www.googleapis.com/auth/spreadsheets"
@@ -239,6 +237,7 @@ if select_event == "📜 학술지 목록":
         gsheet_connector = service.spreadsheets()
         return gsheet_connector
 
+
     def get_data(gsheet_connector) -> pd.DataFrame:
         values = (
             gsheet_connector.values()
@@ -248,6 +247,19 @@ if select_event == "📜 학술지 목록":
             )
             .execute()
         )
+
+        df = pd.DataFrame(values["values"])
+        df.columns = df.iloc[0]
+        df = df[1:]
+        return df
+
+    def add_row_to_gsheet(gsheet_connector, row) -> None:
+        gsheet_connector.values().append(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME}!A:E",
+            body=dict(values=row),
+            valueInputOption="USER_ENTERED",
+        ).execute()
 
         df = pd.DataFrame(values["values"])
         df.columns = df.iloc[0]
