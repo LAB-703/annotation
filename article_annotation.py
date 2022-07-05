@@ -155,7 +155,7 @@ if select_event == "👀 기사 인용 도우미":
 # """, unsafe_allow_html=True)
             def connect_to_gsheet():
             # Create a connection object.
-            credentials = service_account.Credentials.from_service_account_info(
+                credentials = service_account.Credentials.from_service_account_info(
                 st.secrets["gcp_service_account"],
                 scopes=[SCOPE],
             )
@@ -168,22 +168,20 @@ if select_event == "👀 기사 인용 도우미":
                 return HttpRequest(new_http, *args, **kwargs)
 
             authorized_http = google_auth_httplib2.AuthorizedHttp(
-           import streamlit as st
-import streamlit.components.v1 as components
-from urllib import parse
-import requests
-from bs4 import BeautifulSoup as bs
-from datetime import datetime, timedelta
-import clipboard
-import random
-import pandas as pd
-import google_auth_httplib2
-import httplib2
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
-from googleapiclient.http import HttpRequest
-from pytz import timezone
-from gsheetsdb import connect
+                credentials, http=httplib2.Http()
+            )
+            service = build(
+                "sheets",
+                "v4",
+                requestBuilder=build_request,
+                http=authorized_http,
+            )
+            service = discovery.build('sheets', 'v4', credentials=credentials)
+            gsheet_connector = service.spreadsheets()
+            return gsheet_connector
+        
+            gsheet_connector = connect_to_gsheet()
+            
 
 #def likes(gsheet_connector, row) -> None:
 #    gsheet_connector.values().append(
