@@ -209,7 +209,7 @@ if select_event == "👀 기사 인용 도우미":
                 valueInputOption="USER_ENTERED",
             ).execute() 
 
-        gsheet_connector = connect_to_gsheet()
+        connect_to_gsheet()
         
             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
