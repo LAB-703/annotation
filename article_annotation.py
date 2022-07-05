@@ -131,6 +131,8 @@ if "emoji" not in st.session_state:
 ###################################
 select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+# gsheet_connector = connect_to_gsheet()
+
 #likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
@@ -218,7 +220,7 @@ if select_event == "📜 학술지 목록":
     SHEET_NAME = "Database"
     GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
     #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
-    @st.cache(ttl=5)
+    @st.experimental_singleton()
     def connect_to_gsheet():
         # Create a connection object.
         credentials = service_account.Credentials.from_service_account_info(
