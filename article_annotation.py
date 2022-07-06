@@ -216,10 +216,9 @@ if submitted:
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()    
 
+form = st.form(key="annotation")
 
-
-
-
+st.form()
 
 with form:
     cols = st.columns((1, 1))
