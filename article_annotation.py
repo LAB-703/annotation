@@ -23,9 +23,66 @@ from gsheetsdb import connect
 #        valueInputOption="USER_ENTERED",
 #    ).execute()
 #    
+SCOPE = "https://www.googleapis.com/auth/spreadsheets"
+SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
+SHEET_NAME = "Database"
+GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+#https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
+@st.experimental_singleton()
+def connect_to_gsheet():
+    # Create a connection object.
+    credentials = service_account.Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=[SCOPE],
+    )
+    # Create a new Http() object for every request
+    def build_request(http, *args, **kwargs):
+        new_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        return HttpRequest(new_http, *args, **kwargs)
 
+    authorized_http = google_auth_httplib2.AuthorizedHttp(
+        credentials, http=httplib2.Http()
+    )
+    service = build(
+        "sheets",
+        "v4",
+        requestBuilder=build_request,
+        http=authorized_http,
+    )
+    service = discovery.build('sheets', 'v4', credentials=credentials)
+    gsheet_connector = service.spreadsheets()
+    return gsheet_connector
+
+
+def get_data(gsheet_connector) -> pd.DataFrame:
+    values = (
+        gsheet_connector.values()
+        .get(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME}!A:E",
+        )
+        .execute()
+    )
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    return df
+
+def add_row_to_gsheet(gsheet_connector, row) -> None:
+    gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME}!A:E",
+        body=dict(values=row),
+        valueInputOption="USER_ENTERED",
+    ).execute()
+
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    return df
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
-
 
 #전체 페이지
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
@@ -38,6 +95,9 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
         'About': '''SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT'''
     }
 )
+head='<head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head>'
+
+st.components.v1.html('<head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head>', width=None, height=None, scrolling=False)
 
 st.markdown("""<style> @font-face {font-family: 'Pretendard';}</style>""", unsafe_allow_html=True)
 #전체 폰트 
@@ -68,7 +128,7 @@ font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, '
 #    font-size: 20px;
 #    }
 #    </style>""",unsafe_allow_html=True)
-
+ 
 # 메인메뉴 없애고, 저작권 표시
 hide_menu='''
 <style>
@@ -122,7 +182,7 @@ def random_emoji():
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 ###################################
-select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
+select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
 
@@ -204,67 +264,6 @@ if select_event == "👀 기사 인용 도우미":
             #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
 #page2#######################################################################################################     
 if select_event == "📜 학술지 목록":
-    SCOPE = "https://www.googleapis.com/auth/spreadsheets"
-    SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-    SHEET_NAME = "Database"
-    GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
-    #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
-    @st.experimental_singleton()
-    def connect_to_gsheet():
-        # Create a connection object.
-        credentials = service_account.Credentials.from_service_account_info(
-            st.secrets["gcp_service_account"],
-            scopes=[SCOPE],
-        )
-        # Create a new Http() object for every request
-        def build_request(http, *args, **kwargs):
-            new_http = google_auth_httplib2.AuthorizedHttp(
-                credentials, http=httplib2.Http()
-            )
-            return HttpRequest(new_http, *args, **kwargs)
-
-        authorized_http = google_auth_httplib2.AuthorizedHttp(
-            credentials, http=httplib2.Http()
-        )
-        service = build(
-            "sheets",
-            "v4",
-            requestBuilder=build_request,
-            http=authorized_http,
-        )
-        service = discovery.build('sheets', 'v4', credentials=credentials)
-        gsheet_connector = service.spreadsheets()
-        return gsheet_connector
-
-
-    def get_data(gsheet_connector) -> pd.DataFrame:
-        values = (
-            gsheet_connector.values()
-            .get(
-                spreadsheetId=SPREADSHEET_ID,
-                range=f"{SHEET_NAME}!A:E",
-            )
-            .execute()
-        )
-        df = pd.DataFrame(values["values"])
-        df.columns = df.iloc[0]
-        df = df[1:]
-        return df
-
-    def add_row_to_gsheet(gsheet_connector, row) -> None:
-        gsheet_connector.values().append(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
-            body=dict(values=row),
-            valueInputOption="USER_ENTERED",
-        ).execute()
-
-        df = pd.DataFrame(values["values"])
-        df.columns = df.iloc[0]
-        df = df[1:]
-        return df
-
-    gsheet_connector = connect_to_gsheet()
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     gsheet_connector = connect_to_gsheet()
@@ -342,4 +341,17 @@ if select_event == "📌 개발":
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 학술지 페이지 오픈 <code>new!</code> 새로운 학술지 추가에 동참해주세요! </p>''', unsafe_allow_html=True)
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
    # st.markdown('''<a href="JavaScript:window.external.AddFavorite('http://yes-today.tistory.com', '내일을 만드는 어제와 오늘')"> 즐겨찾기 추가</a>''', unsafe_allow_html=True)
-    
+if select_event == "⏳ 개발중":    
+    change_text = """
+    <style>
+    div.st-cs.st-c5.st-bc.st-ct.st-cu {visibility: hidden;}
+    div.st-cs.st-c5.st-bc.st-ct.st-cu:before {content: "Wähle eine Option"; visibility: visible;}
+    </style>
+    """
+    st.markdown(change_text, unsafe_allow_html=True)
+
+    options = st.multiselect(
+         'What are your favorite colors',
+         ['Green', 'Yellow', 'Red', 'Blue'],)
+
+    st.write('You selected:', options)
