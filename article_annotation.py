@@ -26,8 +26,7 @@ from gsheetsdb import connect
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
-head='<html> <head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head></html>'
-st.markdown(head, unsafe_allow_html=True)
+
 #전체 페이지
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
     page_icon="👀",
@@ -39,7 +38,8 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
         'About': '''SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT'''
     }
 )
-
+head='<html> <head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head></html>'
+st.markdown(head, unsafe_allow_html=True)
 st.markdown("""<style> @font-face {font-family: 'Pretendard';}</style>""", unsafe_allow_html=True)
 #전체 폰트 
 st.markdown("""
