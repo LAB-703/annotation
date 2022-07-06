@@ -26,7 +26,7 @@ from gsheetsdb import connect
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
-
+st.components.v1.html('<head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head>', width=None, height=None, scrolling=False)
 #전체 페이지
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
     page_icon="👀",
@@ -78,9 +78,6 @@ hide_menu='''
 }
 #document{
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-}
-header {
-<meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" />
 }
 footer {
     visibility:visible;
