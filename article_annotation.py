@@ -38,7 +38,7 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
         'About': '''SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT'''
     }
 )
-head='<html> <head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head></html>'
+head='<style> <head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head></style>'
 st.markdown(head, unsafe_allow_html=True)
 st.markdown("""<style> @font-face {font-family: 'Pretendard';}</style>""", unsafe_allow_html=True)
 #전체 폰트 
