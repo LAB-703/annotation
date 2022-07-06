@@ -69,7 +69,7 @@ font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, '
 #    font-size: 20px;
 #    }
 #    </style>""",unsafe_allow_html=True)
-
+ 
 # 메인메뉴 없애고, 저작권 표시
 hide_menu='''
 <style>
@@ -78,6 +78,9 @@ hide_menu='''
 }
 #document{
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+header {
+<meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" />
 }
 footer {
     visibility:visible;
