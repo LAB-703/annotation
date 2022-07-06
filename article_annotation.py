@@ -192,14 +192,59 @@ with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
     st.dataframe(get_data(gsheet_connector))
     
-##page2#######################################################################################################
+##page3#######################################################################################################
 if select_event == "📜 학술지 목록":
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
+    @st.experimental_singleton()
+    def connect_to_gsheet():
+        # Create a connection object.
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["gcp_service_account"],
+            scopes=[SCOPE],
+        )
+
+        # Create a new Http() object for every request
+        def build_request(http, *args, **kwargs):
+            new_http = google_auth_httplib2.AuthorizedHttp(
+                credentials, http=httplib2.Http()
+            )
+            return HttpRequest(new_http, *args, **kwargs)
+
+        authorized_http = google_auth_httplib2.AuthorizedHttp(
+            credentials, http=httplib2.Http()
+        )
+        service = build(
+            "sheets",
+            "v4",
+            requestBuilder=build_request,
+            http=authorized_http,
+        )
+        service = discovery.build('sheets', 'v4', credentials=credentials)
+        gsheet_connector = service.spreadsheets()
+        return gsheet_connector
+
+
+    def get_data(gsheet_connector) -> pd.DataFrame:
+        values = (
+            gsheet_connector.values()
+            .get(
+                spreadsheetId=SPREADSHEET_ID,
+                range=f"{SHEET_NAME}!A:E",
+            )
+            .execute()
+        )
+
+        df = pd.DataFrame(values["values"])
+        df.columns = df.iloc[0]
+        df = df[1:]
+        return df
+
     gsheet_connector = connect_to_gsheet()
     journal_df=get_data(gsheet_connector)
     journal_list = st.selectbox('',list(journal_df['학술지']))                    #-1 때문에 마지막 열 받아올 수 있었음 🟡
     st.markdown(str(journal_df.iat[journal_df.loc[journal_df.학술지==journal_list].index[0]-1,1]), unsafe_allow_html=True)
+    #if journal_list==
     st.write("---")
     st.write(" ")
     expander = st.expander("학술지 추가를 원하신다면 클릭하세요.")
