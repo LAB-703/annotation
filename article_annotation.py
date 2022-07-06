@@ -266,7 +266,6 @@ if select_event == "📜 학술지 목록":
         df = df[1:]
         return df
 
-    gsheet_connector = connect_to_gsheet()
     #st.subheader("⏳ 개발 중")
     st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
     gsheet_connector = connect_to_gsheet()
