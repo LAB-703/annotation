@@ -17,6 +17,18 @@ from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 from googleapiclient import discovery
 
+#전체 페이지
+st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
+    page_icon="👀",
+    layout="wide",
+    initial_sidebar_state="auto",
+    menu_items={
+        'Get Help': 'https://github.com/LAB-703',
+        'Report a bug': "https://github.com/LAB-703",
+        'About': '''SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT'''
+    }
+)
+
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
@@ -127,17 +139,6 @@ font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
 
 st.markdown(hide_menu, unsafe_allow_html=True)
 
-#전체 페이지
-st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
-    page_icon="👀",
-    layout="wide",
-    initial_sidebar_state="auto",
-    menu_items={
-        'Get Help': 'https://github.com/LAB-703',
-        'Report a bug': "https://github.com/LAB-703",
-        'About': '''SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT'''
-    }
-)
 
 gsheet_connector = connect_to_gsheet()
 
