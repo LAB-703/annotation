@@ -124,7 +124,7 @@ def random_emoji():
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"
 ###################################
-select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발"))
+select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
 
@@ -344,4 +344,17 @@ if select_event == "📌 개발":
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 학술지 페이지 오픈 <code>new!</code> 새로운 학술지 추가에 동참해주세요! </p>''', unsafe_allow_html=True)
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
    # st.markdown('''<a href="JavaScript:window.external.AddFavorite('http://yes-today.tistory.com', '내일을 만드는 어제와 오늘')"> 즐겨찾기 추가</a>''', unsafe_allow_html=True)
-    
+if select_event == "⏳ 개발중":    
+    change_text = """
+    <style>
+    div.st-cs.st-c5.st-bc.st-ct.st-cu {visibility: hidden;}
+    div.st-cs.st-c5.st-bc.st-ct.st-cu:before {content: "Wähle eine Option"; visibility: visible;}
+    </style>
+    """
+    st.markdown(change_text, unsafe_allow_html=True)
+
+    options = st.multiselect(
+         'What are your favorite colors',
+         ['Green', 'Yellow', 'Red', 'Blue'],)
+
+    st.write('You selected:', options)
