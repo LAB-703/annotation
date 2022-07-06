@@ -27,14 +27,16 @@ SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
 SHEET_NAME = "Database"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
+
 #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
-#@st.experimental_singleton()
+@st.experimental_singleton()
 def connect_to_gsheet():
     # Create a connection object.
     credentials = service_account.Credentials.from_service_account_info(
         st.secrets["gcp_service_account"],
         scopes=[SCOPE],
     )
+
     # Create a new Http() object for every request
     def build_request(http, *args, **kwargs):
         new_http = google_auth_httplib2.AuthorizedHttp(
@@ -65,6 +67,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
         )
         .execute()
     )
+
     df = pd.DataFrame(values["values"])
     df.columns = df.iloc[0]
     df = df[1:]
@@ -77,11 +80,8 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
-
-    df = pd.DataFrame(values["values"])
-    df.columns = df.iloc[0]
-    df = df[1:]
-    return df
+    
+    
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
 #전체 페이지
