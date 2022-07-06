@@ -26,7 +26,8 @@ from gsheetsdb import connect
 
 headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36'}
 
-
+head='<html> <head><meta name="google-site-verification" content="Ybg5GezDEqUn3EegiOoWQd55orkL-kNVnipzuctXE_M" /></head></html>'
+st.markdown(head, unsafe_allow_html=True)
 #전체 페이지
 st.set_page_config(page_title="척척 석박의 기사 인용 도우미",          
     page_icon="👀",
@@ -216,7 +217,6 @@ if select_event == "📜 학술지 목록":
             st.secrets["gcp_service_account"],
             scopes=[SCOPE],
         )
-
         # Create a new Http() object for every request
         def build_request(http, *args, **kwargs):
             new_http = google_auth_httplib2.AuthorizedHttp(
@@ -247,7 +247,6 @@ if select_event == "📜 학술지 목록":
             )
             .execute()
         )
-
         df = pd.DataFrame(values["values"])
         df.columns = df.iloc[0]
         df = df[1:]
@@ -265,14 +264,6 @@ if select_event == "📜 학술지 목록":
         df.columns = df.iloc[0]
         df = df[1:]
         return df
-
-    def add_row_to_gsheet(gsheet_connector, row) -> None:
-        gsheet_connector.values().append(
-            spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:C",
-            body=dict(values=row),
-            valueInputOption="USER_ENTERED",
-        ).execute() 
 
     gsheet_connector = connect_to_gsheet()
     #st.subheader("⏳ 개발 중")
