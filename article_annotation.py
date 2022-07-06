@@ -218,8 +218,6 @@ if submitted:
 
 form = st.form(key="annotation")
 
-st.form()
-
 with form:
     cols = st.columns((1, 1))
     author = cols[0].text_input("Report author:")
