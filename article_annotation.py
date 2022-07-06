@@ -158,9 +158,7 @@ likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 #if likes:
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
-st.subheader("⏳ 개발 중")
 st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
-gsheet_connector = connect_to_gsheet()
 journal_df=get_data(gsheet_connector)
 journal_list = st.selectbox('',list(journal_df['학술지']))                    #-1 때문에 마지막 열 받아올 수 있었음 🟡
 st.markdown(str(journal_df.iat[journal_df.loc[journal_df.학술지==journal_list].index[0]-1,1]), unsafe_allow_html=True)
@@ -203,6 +201,7 @@ for selection in multiselect:
 expander.markdown(annotation)
 TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y-%m-%d %H:%M:%S"))
 submitted = expander.button("추가")
+
 if submitted:
     if journal=="":
         expander.error('❗ 학술지 한글 명칭을 입력해 주세요.')
@@ -216,31 +215,6 @@ if submitted:
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()    
 
-form = st.form(key="annotation")
-
-with form:
-    cols = st.columns((1, 1))
-    author = cols[0].text_input("Report author:")
-    bug_type = cols[1].selectbox(
-        "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
-    )
-    comment = st.text_area("Comment:")
-    cols = st.columns(2)
-    date = cols[0].date_input("Bug date occurrence:")
-    bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
-    submitted = st.form_submit_button(label="Submit")
-
-
-if submitted:
-    add_row_to_gsheet(
-        gsheet_connector,
-        [[author, bug_type, comment, str(date), bug_severity]],
-    )
-    st.success("Thanks! Your bug was recorded.")
-    st.balloons()
-
-expander = st.expander("See all records")
-with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
     st.dataframe(get_data(gsheet_connector))
     
