@@ -342,16 +342,40 @@ if select_event == "📌 개발":
     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
    # st.markdown('''<a href="JavaScript:window.external.AddFavorite('http://yes-today.tistory.com', '내일을 만드는 어제와 오늘')"> 즐겨찾기 추가</a>''', unsafe_allow_html=True)
 if select_event == "⏳ 개발중":    
-    change_text = """
-    <style>
-    div.st-cs.st-c5.st-bc.st-ct.st-cu {visibility: hidden;}
-    div.st-cs.st-c5.st-bc.st-ct.st-cu:before {content: "Wähle eine Option"; visibility: visible;}
-    </style>
-    """
-    st.markdown(change_text, unsafe_allow_html=True)
+    gsheet_connector = connect_to_gsheet()
 
-    options = st.multiselect(
-         'What are your favorite colors',
-         ['Green', 'Yellow', 'Red', 'Blue'],)
+    st.write(
+        f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
+    )
 
-    st.write('You selected:', options)
+    st.write(
+        f"[Read more](https://docs.streamlit.io/knowledge-base/tutorials/databases/public-gsheet) about connecting your Streamlit app to Google Sheets."
+    )
+
+    form = st.form(key="annotation")
+
+    with form:
+        cols = st.columns((1, 1))
+        author = cols[0].text_input("Report author:")
+        bug_type = cols[1].selectbox(
+            "Bug type:", ["Front-end", "Back-end", "Data related", "404"], index=2
+        )
+        comment = st.text_area("Comment:")
+        cols = st.columns(2)
+        date = cols[0].date_input("Bug date occurrence:")
+        bug_severity = cols[1].slider("Bug severity:", 1, 5, 2)
+        submitted = st.form_submit_button(label="Submit")
+
+
+    if submitted:
+        add_row_to_gsheet(
+            gsheet_connector,
+            [[author, bug_type, comment, str(date), bug_severity]],
+        )
+        st.success("Thanks! Your bug was recorded.")
+        st.balloons()
+
+    expander = st.expander("See all records")
+    with expander:
+        st.write(f"Open original [Google Sheet]({GSHEET_URL})")
+        st.dataframe(get_data(gsheet_connector))
