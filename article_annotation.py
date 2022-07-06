@@ -142,6 +142,22 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 
 gsheet_connector = connect_to_gsheet()
 
+def random_emoji():
+    emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
+    st.session_state.emoji = random.choice(emojis)
+    
+if "emoji" not in st.session_state:
+    st.session_state.emoji = "🤍"
+###################################
+select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중"))
+likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+# gsheet_connector = connect_to_gsheet()
+
+likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
+#if likes:
+#    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+
+
 
 form = st.form(key="annotation")
 
@@ -215,20 +231,7 @@ with expander:
 # #    </style>""",unsafe_allow_html=True)
  
 
-# def random_emoji():
-#     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
-#     st.session_state.emoji = random.choice(emojis)
-    
-# if "emoji" not in st.session_state:
-#     st.session_state.emoji = "🤍"
-# ###################################
-# select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중"))
-# likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
-# # gsheet_connector = connect_to_gsheet()
 
-# #likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
-# #if likes:
-# #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # #############################################################33    
 
 # ################################################################################################33    
