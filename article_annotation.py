@@ -132,8 +132,22 @@ font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
   font-size:100%;
     background-color: #FCF9F6;
     font-color: #C0504D;
+    
 }
-
+div.css-jgupqz {
+    opacity: 0;
+    height: 2.5rem;
+    padding: 0px;
+    width: 2.5rem;
+    transition: opacity 300ms ease 150ms, transform 300ms ease 150ms;
+    border: none;
+    background-color: brown;
+    visibility: visible;
+    /* display: contents; */
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 0.75rem;
+    transform: scale(0);
+}
 </style>
 '''
 
