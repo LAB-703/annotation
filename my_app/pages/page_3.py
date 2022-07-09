@@ -1,4 +1,4 @@
 import streamlit as st
 
-st.markdown("# Page 3 🎉")
-st.sidebar.markdown("# Page 3 🎉")
+st.markdown("# 📌 개발")
+st.sidebar.markdown("# 📌 개발")
