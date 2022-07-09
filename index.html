@@ -20,7 +20,7 @@ streamlitDoc.addEventListener('keydown', function(e) {
             break;
         case 'Enter':
             window.parent.navigator.clipboard.writeText(python_string)
-            //window.parent.navigator.clipboard.readText().then((d) => {console.log(d)})
+            window.parent.navigator.clipboard.readText().then((d) => {console.log(d)})
     }
 });
 </script>
