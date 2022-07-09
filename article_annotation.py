@@ -141,8 +141,9 @@ button.css-jgupqz.e10mrw3y2 {
     width: 2.5rem;
     transition: opacity 300ms ease 150ms, transform 300ms ease 150ms;
     border: none;
-    background-color: brown;
+    background-color: "#C0504D";
     visibility: visible;
+    display:block;
     color: rgba(0, 0, 0, 0.6);
     border-radius: 0.75rem;
     transform: scale(0);
