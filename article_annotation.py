@@ -169,8 +169,8 @@ if "emoji" not in st.session_state:
 #select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
-
-likes_cnt=st.sidebar.markdown(f'{get_data(gsheet_connector)['좋아요'].count()}')
+text=get_data(gsheet_connector)['좋아요'].count()+"명이 좋아합니다💖"
+likes_cnt=st.sidebar.markdown(text)
 
 # if likes:
 #     add_row_to_gsheet(
