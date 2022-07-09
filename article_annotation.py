@@ -292,74 +292,78 @@ if select_event == "📌 개발":
 
 
 # #page1#######################################################################################################
-# if select_event == "👀 기사 인용 도우미":
-#     st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
+if select_event == "👀 기사 인용 도우미":
+    st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
 
-#     URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
-#     col1,col2=st.columns([5,5])  
-#     with col1:
-#         STYLE=st.radio("인용 스타일을 선택해주세요.",
-#              ("APA", 
-#               'CHICAGO',
-#               'by JOURNAL')) # : ⏳ 개발 중'))        
-        
-#     with col2:
-#         if STYLE=="by JOURNAL":
-#             #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-# #             st.markdown("""<style>
-# # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
-# # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
-# # </style>
-# # """, unsafe_allow_html=True)
-#             #option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
-#             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
-#     final_search=st.checkbox('최종 검색일(오늘) 추가')
-#     submit=st.button('인용')        
-#     if submit==True:
-# #---------------------------------------------------------------------------------------------        
-#             if URL.find("n.news.naver.com/")>0: 
-#                 req =requests.get(URL,headers=headers)
-#                 html_doc = req.text  
-#                 soup = bs(html_doc, 'html.parser')
-#                 TITLE=soup.find("h2",{"class":"media_end_head_headline"}).get_text()
-#                 DATE_write=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text()[:10]
-#                 #DATE_modify=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME"}).get_text()[:10]
-                
-#                 AUTHOR=soup.find("em",{"class":"media_end_head_journalist_name"}).get_text().split()[0]
-#                 COMPANY=soup.find("em",{"class":"media_end_linked_more_point"}).get_text()
-#             elif URL.find("v.daum.net/")>0 :
-#                     html = requests.get(URL, headers = headers)
-#                     test_text= html.text  
-#                     soup = bs(test_text, 'html.parser')
-#                     DATE_write=soup.find("span",{"class":"num_date"}).get_text()[:12].replace(" ","")
-#                     COMPANY=soup.select_one('meta[property="og:article:author"]')['content']
-#                     TITLE=soup.find("h3",{"class":"tit_view"}).get_text()#.replace("\'",'"')
-#                     #--------------------기자 이름 
-#                     if soup.find("span",{"class":"txt_info"}).get_text().startswith("입력")==True:
-#                         AUTHOR="" #없을 시 빈칸
-#                     else: #기자가 붙어있으면 떼고, 앞에 언론사 붙어있으면 리스트로 분리해서 마지막 행만 가져오도록 
-#                         AUTHOR=soup.find("span",{"class":"txt_info"}).get_text().split()[0]
-# #---------------------------------------------------------------------------------------------------------
-#             else :
-#                 st.error('링크가 없거나 네이버/다음 포털뉴스의 링크가 아닙니다!')
-#                 st.stop()
-#             APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
-#             CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
-#             TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y.%m.%d."))
-#             if final_search==True:
-#                 APA=APA+", 최종검색일: "+TODAY
-#                 CHICAGO=CHICAGO+", 최종검색일: "+TODAY
-#             if STYLE=="APA":
-#                 st.code(APA,language="Markdown")
-#                 #clipboard.copy(APA)
-#                 st.write('오른쪽 복사버튼을 클릭하세요.')
-#             elif STYLE=="CHICAGO":
-#                 st.code(CHICAGO,language="Markdown")
-#                 #clipboard.copy(CHICAGO)
-#                 st.write('오른쪽 복사버튼을 클릭하세요.')
-#             # else:
-#             #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-# #page2#######################################################################################################     
+    URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
+    col1,col2=st.columns([5,5])  
+    with col1:
+        STYLE=st.radio("인용 스타일을 선택해주세요.",
+             ("APA", 
+              'CHICAGO',
+              'by JOURNAL')) # : ⏳ 개발 중'))        
+      
+    with col2:
+        if STYLE=="by JOURNAL":
+            #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+ #             st.markdown("""<style>
+ # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
+ # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
+ # </style>
+ # # """, unsafe_allow_html=True)
+             #option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
+             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
+    final_search=st.checkbox('최종 검색일(오늘) 추가')
+    submit=st.button('인용')        
+    if submit==True:
+ #---------------------------------------------------------------------------------------------        
+        if URL.find("n.news.naver.com/")>0: 
+            req =requests.get(URL,headers=headers)
+            html_doc = req.text  
+            soup = bs(html_doc, 'html.parser')
+            TITLE=soup.find("h2",{"class":"media_end_head_headline"}).get_text()
+            DATE_write=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text()[:10]
+            #DATE_modify=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME"}).get_text()[:10]
+          
+            AUTHOR=soup.find("em",{"class":"media_end_head_journalist_name"}).get_text().split()[0]
+            COMPANY=soup.find("em",{"class":"media_end_linked_more_point"}).get_text()
+        elif URL.find("v.daum.net/")>0 :
+                html = requests.get(URL, headers = headers)
+                test_text= html.text  
+                soup = bs(test_text, 'html.parser')
+                DATE_write=soup.find("span",{"class":"num_date"}).get_text()[:12].replace(" ","")
+                COMPANY=soup.select_one('meta[property="og:article:author"]')['content']
+                TITLE=soup.find("h3",{"class":"tit_view"}).get_text()#.replace("\'",'"')
+                #--------------------기자 이름 
+                if soup.find("span",{"class":"txt_info"}).get_text().startswith("입력")==True:
+                    AUTHOR="" #없을 시 빈칸
+                else: #기자가 붙어있으면 떼고, 앞에 언론사 붙어있으면 리스트로 분리해서 마지막 행만 가져오도록 
+                    AUTHOR=soup.find("span",{"class":"txt_info"}).get_text().split()[0]
+ #---------------------------------------------------------------------------------------------------------
+        else :
+            st.error('링크가 없거나 네이버/다음 포털뉴스의 링크가 아닙니다!')
+            st.stop()
+        APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
+        CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
+        TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y.%m.%d."))
+        if final_search==True:
+            APA=APA+", 최종검색일: "+TODAY
+            CHICAGO=CHICAGO+", 최종검색일: "+TODAY
+        if STYLE=="APA":
+            COPY=pd.DataFrame([APA])
+            COPY.to_clipboard(index=False,header=False)
+            #st.code(APA,language="Markdown")
+            #clipboard.copy(APA)
+            #st.write('오른쪽 복사버튼을 클릭하세요.')
+        elif STYLE=="CHICAGO":
+            COPY=pd.DataFrame([CHICAGO])
+            COPY.to_clipboard(index=False,header=False)
+            #st.code(CHICAGO,language="Markdown")
+            #clipboard.copy(CHICAGO)
+            #st.write('오른쪽 복사버튼을 클릭하세요.')
+        # else:
+        #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+ #page2#######################################################################################################     
 
 
 
