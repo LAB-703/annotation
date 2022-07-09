@@ -101,7 +101,9 @@ dic = {'AUTHOR':'기자',
       'DOT1':'.',
       'DOT2':'.',
       'DOT3':'.',
-      'DOT4':'.'}
+      'DOT4':'.',
+      'left quote':'"',
+      'right quote':'"'}
 multiselect= expander.multiselect('순서대로 놓아주세요.',
                             list(dic.values()), 
                             list(dic.values())[:2]) #default
@@ -130,5 +132,5 @@ if submitted:
         expander.success("추가되었습니다! 👀 기사 인용 도우미 페이지에서 확인할 수 있습니다.")
         expander.balloons()    
 
-    st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector))
+#    st.write(f"Open original [Google Sheet]({GSHEET_URL})")
+#    st.dataframe(get_data(gsheet_connector))
