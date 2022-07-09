@@ -32,7 +32,7 @@ st.set_page_config(page_title="척척 석박의 기사 인용 도우미",
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAME = "Database"
+SHEET_NAME = "좋아요"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
 #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
@@ -70,7 +70,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
         gsheet_connector.values()
         .get(
             spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!D:E",
+            range=f"{SHEET_NAME}!A:B",
         )
         .execute()
     )
@@ -83,7 +83,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME}!D:E",
+        range=f"{SHEET_NAME}!A:B",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
