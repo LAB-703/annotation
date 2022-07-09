@@ -160,7 +160,7 @@ def random_emoji():
     st.session_state.emoji = random.choice(emojis)
     add_row_to_gsheet(
          gsheet_connector,
-         [["❤"]],
+         [["💖"]],
          )
     
 if "emoji" not in st.session_state:
@@ -170,13 +170,13 @@ if "emoji" not in st.session_state:
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
 
-likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'].count())
+likes_cnt=st.sidebar.markdown(f'{get_data(gsheet_connector)['좋아요'].count()}')
 
-if likes:
-    add_row_to_gsheet(
-         gsheet_connector,
-         [["❤"]],
-         )
+# if likes:
+#     add_row_to_gsheet(
+#          gsheet_connector,
+#          [["❤"]],
+#          )
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 # st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
