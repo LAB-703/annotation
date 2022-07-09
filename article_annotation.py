@@ -149,7 +149,7 @@ def random_emoji():
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"  
 ###################################
-select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
+#select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
 
@@ -222,24 +222,24 @@ likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 # if select_event == "📜 학술지 목록":
 #     #
 # #page3#######################################################################################################
-if select_event == "📌 개발":
-    st.markdown('<p align="left" style=" font-size: 140%;"><b>👩🏻‍💻 개발자</b></p>', unsafe_allow_html=True)
-    col1,col2=st.columns([3,7])
-    with col1 :
-        st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
-    with col2 :
-        st.markdown('''<p align="left" style="font-size: 90%;"> <br> ☕️ 개발자에게 커피 한잔은 큰 힘이 됩니다<br><br>
-                        🎭 후원은 익명으로 가능합니다<br> <br>
-                        👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=13px>로 연결됩니다<br> </p>''', unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown('<p align="left" style=" font-size: 140%;"><b>📆 개발 기록</b></p>', unsafe_allow_html=True)
-    st.markdown('<code>📌 기능 추가</code> <code>🐞 버그 수정</code>', unsafe_allow_html=True)
-    beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
-    beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
-    beta2_0=st.expander("2️⃣ 2022. 07. 05. beta 2.0 배포")
-    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 최종검색일 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
-    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 학술지 페이지 오픈 <code>new!</code> 새로운 학술지 추가에 동참해주세요! </p>''', unsafe_allow_html=True)
-    beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
+#if select_event == "📌 개발":
+#     st.markdown('<p align="left" style=" font-size: 140%;"><b>👩🏻‍💻 개발자</b></p>', unsafe_allow_html=True)
+#     col1,col2=st.columns([3,7])
+#     with col1 :
+#         st.markdown('<a href="http://m.site.naver.com/0Z7nr"><img src="https://qrcodethumb-phinf.pstatic.net/20220702_173/1656698540984dDVVY_PNG/0Z7nr.png"/></a>', unsafe_allow_html=True)
+#     with col2 :
+#         st.markdown('''<p align="left" style="font-size: 90%;"> <br> ☕️ 개발자에게 커피 한잔은 큰 힘이 됩니다<br><br>
+#                         🎭 후원은 익명으로 가능합니다<br> <br>
+#                         👉 QR코드를 스캔하거나 클릭시 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Toss-logo.svg/800px-Toss-logo.svg.png" height=13px>로 연결됩니다<br> </p>''', unsafe_allow_html=True)
+#     st.markdown("---")
+#     st.markdown('<p align="left" style=" font-size: 140%;"><b>📆 개발 기록</b></p>', unsafe_allow_html=True)
+#     st.markdown('<code>📌 기능 추가</code> <code>🐞 버그 수정</code>', unsafe_allow_html=True)
+#     beta1_0=st.expander("1️⃣ 2022. 06. 28. beta 1.0 배포")
+#     beta1_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 네이버/다음 뉴스 APA, CHICAGO 스타일 인용 기능 추가</p>''', unsafe_allow_html=True)
+#     beta2_0=st.expander("2️⃣ 2022. 07. 05. beta 2.0 배포")
+#     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 🐞 최종검색일 타임존 UTC → KST 수정 </p>''', unsafe_allow_html=True)
+#     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 학술지 페이지 오픈 <code>new!</code> 새로운 학술지 추가에 동참해주세요! </p>''', unsafe_allow_html=True)
+#     beta2_0.markdown('''<p align="left" style="font-size: 70%; text-indent : 20px;"> 📌 개발자 커피 후원 기능 추가 </p>''', unsafe_allow_html=True)
    # st.markdown('''<a href="JavaScript:window.external.AddFavorite('http://yes-today.tistory.com', '내일을 만드는 어제와 오늘')"> 즐겨찾기 추가</a>''', unsafe_allow_html=True)
     
 # #def likes(gsheet_connector, row) -> None:
@@ -292,75 +292,75 @@ if select_event == "📌 개발":
 
 
 # #page1#######################################################################################################
-if select_event == "👀 기사 인용 도우미":
-    st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
+#if select_event == "👀 기사 인용 도우미":
+st.markdown('<p align="center" style=" font-size: 140%;"><b>👀 척척 석박들을 위한 기사 인용 도우미</b></p>', unsafe_allow_html=True)
 
-    URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
-    col1,col2=st.columns([5,5])  
-    with col1:
-        STYLE=st.radio("인용 스타일을 선택해주세요.",
-             ("APA", 
-              'CHICAGO',
-              'by JOURNAL')) # : ⏳ 개발 중'))        
+URL=st.text_input("네이버/다음 뉴스 url을 입력해주세요.")
+col1,col2=st.columns([5,5])  
+with col1:
+    STYLE=st.radio("인용 스타일을 선택해주세요.",
+         ("APA", 
+          'CHICAGO',
+          'by JOURNAL')) # : ⏳ 개발 중'))        
+  
+with col2:
+    if STYLE=="by JOURNAL":
+        #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+           st.markdown("""<style>
+iv.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
+iv.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
+/style>
+ """, unsafe_allow_html=True)
+         option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
+         st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
+final_search=st.checkbox('최종 검색일(오늘) 추가')
+submit=st.button('인용')        
+if submit==True:
+-------------------------------------------------------------------------------------------        
+    if URL.find("n.news.naver.com/")>0: 
+        req =requests.get(URL,headers=headers)
+        html_doc = req.text  
+        soup = bs(html_doc, 'html.parser')
+        TITLE=soup.find("h2",{"class":"media_end_head_headline"}).get_text()
+        DATE_write=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text()[:10]
+        #DATE_modify=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME"}).get_text()[:10]
       
-    with col2:
-        if STYLE=="by JOURNAL":
-            #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
- #             st.markdown("""<style>
- # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6 {visibility: hidden;}
- # div.st-be.st-bf.st-by.st-bz.st-c0.st-b4.st-c1.st-c2.st-bg.st-c3.st-c4.st-c5.st-c6:before {content: "찾으시는 학술지가 있나요?"; visibility: visible;}
- # </style>
- # # """, unsafe_allow_html=True)
-             option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
-             st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
-    final_search=st.checkbox('최종 검색일(오늘) 추가')
-    submit=st.button('인용')        
-    if submit==True:
- #---------------------------------------------------------------------------------------------        
-        if URL.find("n.news.naver.com/")>0: 
-            req =requests.get(URL,headers=headers)
-            html_doc = req.text  
-            soup = bs(html_doc, 'html.parser')
-            TITLE=soup.find("h2",{"class":"media_end_head_headline"}).get_text()
-            DATE_write=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_DATE_TIME"}).get_text()[:10]
-            #DATE_modify=soup.find("span",{"class":"media_end_head_info_datestamp_time _ARTICLE_MODIFY_DATE_TIME"}).get_text()[:10]
-          
-            AUTHOR=soup.find("em",{"class":"media_end_head_journalist_name"}).get_text().split()[0]
-            COMPANY=soup.find("em",{"class":"media_end_linked_more_point"}).get_text()
-        elif URL.find("v.daum.net/")>0 :
-                html = requests.get(URL, headers = headers)
-                test_text= html.text  
-                soup = bs(test_text, 'html.parser')
-                DATE_write=soup.find("span",{"class":"num_date"}).get_text()[:12].replace(" ","")
-                COMPANY=soup.select_one('meta[property="og:article:author"]')['content']
-                TITLE=soup.find("h3",{"class":"tit_view"}).get_text()#.replace("\'",'"')
-                #--------------------기자 이름 
-                if soup.find("span",{"class":"txt_info"}).get_text().startswith("입력")==True:
-                    AUTHOR="" #없을 시 빈칸
-                else: #기자가 붙어있으면 떼고, 앞에 언론사 붙어있으면 리스트로 분리해서 마지막 행만 가져오도록 
-                    AUTHOR=soup.find("span",{"class":"txt_info"}).get_text().split()[0]
- #---------------------------------------------------------------------------------------------------------
-        else :
-            st.error('링크가 없거나 네이버/다음 포털뉴스의 링크가 아닙니다!')
-            st.stop()
-        APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
-        CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
-        TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y.%m.%d."))
-        if final_search==True:
-            APA=APA+", 최종검색일: "+TODAY
-            CHICAGO=CHICAGO+", 최종검색일: "+TODAY
-        if STYLE=="APA":
-            COPY=pd.DataFrame([APA])
-            COPY.to_clipboard(index=False,header=False)
-            #st.code(APA,language="Markdown")
-            #clipboard.copy(APA)
-            #st.write('오른쪽 복사버튼을 클릭하세요.')
-        elif STYLE=="CHICAGO":
-            COPY=pd.DataFrame([CHICAGO])
-            COPY.to_clipboard(index=False,header=False)
-            #st.code(CHICAGO,language="Markdown")
-            #clipboard.copy(CHICAGO)
-            #st.write('오른쪽 복사버튼을 클릭하세요.')
-        # else:
-        #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+        AUTHOR=soup.find("em",{"class":"media_end_head_journalist_name"}).get_text().split()[0]
+        COMPANY=soup.find("em",{"class":"media_end_linked_more_point"}).get_text()
+    elif URL.find("v.daum.net/")>0 :
+            html = requests.get(URL, headers = headers)
+            test_text= html.text  
+            soup = bs(test_text, 'html.parser')
+            DATE_write=soup.find("span",{"class":"num_date"}).get_text()[:12].replace(" ","")
+            COMPANY=soup.select_one('meta[property="og:article:author"]')['content']
+            TITLE=soup.find("h3",{"class":"tit_view"}).get_text()#.replace("\'",'"')
+            #--------------------기자 이름 
+            if soup.find("span",{"class":"txt_info"}).get_text().startswith("입력")==True:
+                AUTHOR="" #없을 시 빈칸
+            else: #기자가 붙어있으면 떼고, 앞에 언론사 붙어있으면 리스트로 분리해서 마지막 행만 가져오도록 
+                AUTHOR=soup.find("span",{"class":"txt_info"}).get_text().split()[0]
+-------------------------------------------------------------------------------------------------------
+    else :
+        st.error('링크가 없거나 네이버/다음 포털뉴스의 링크가 아닙니다!')
+        st.stop()
+    APA=AUTHOR+". "+"("+DATE_write+"). "+TITLE+". "+COMPANY+". "+URL
+    CHICAGO=AUTHOR+', "'+TITLE+'" '+COMPANY+", "+DATE_write+", "+URL
+    TODAY = str(datetime.now(timezone('Asia/Seoul')).strftime("%Y.%m.%d."))
+    if final_search==True:
+        APA=APA+", 최종검색일: "+TODAY
+        CHICAGO=CHICAGO+", 최종검색일: "+TODAY
+    if STYLE=="APA":
+        COPY=pd.DataFrame([APA])
+        COPY.to_clipboard(index=False,header=False)
+        #st.code(APA,language="Markdown")
+        #clipboard.copy(APA)
+        #st.write('오른쪽 복사버튼을 클릭하세요.')
+    elif STYLE=="CHICAGO":
+        COPY=pd.DataFrame([CHICAGO])
+        COPY.to_clipboard(index=False,header=False)
+        #st.code(CHICAGO,language="Markdown")
+        #clipboard.copy(CHICAGO)
+        #st.write('오른쪽 복사버튼을 클릭하세요.')
+    # else:
+    #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
  #page2#######################################################################################################     
