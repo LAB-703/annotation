@@ -166,7 +166,7 @@ if "emoji" not in st.session_state:
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
 
-likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
+likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'].count())
 
 if likes:
     add_row_to_gsheet(
