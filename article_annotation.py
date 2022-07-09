@@ -65,7 +65,7 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector) -> pd.DataFrame:
+def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
@@ -80,7 +80,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     df = df[1:]
     return df
 
-def add_row_to_gsheet(gsheet_connector, row) -> None:
+def add_row_to_gsheet(gsheet_connector, row,SHEET_NAME) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
         range=f"{SHEET_NAME}!A:B",
@@ -170,7 +170,7 @@ if "emoji" not in st.session_state:
 #select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
-text=str(get_data(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
+text=str(get_data(gsheet_connector,"좋아요")['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
 
 # if likes:
