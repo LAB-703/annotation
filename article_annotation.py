@@ -134,7 +134,7 @@ font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
     font-color: #C0504D;
     
 }
-div.css-jgupqz {
+div.css-jgupqz e10mrw3y2 {
     opacity: 0;
     height: 2.5rem;
     padding: 0px;
@@ -143,7 +143,6 @@ div.css-jgupqz {
     border: none;
     background-color: brown;
     visibility: visible;
-    /* display: contents; */
     color: rgba(0, 0, 0, 0.6);
     border-radius: 0.75rem;
     transform: scale(0);
