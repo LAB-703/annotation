@@ -134,7 +134,7 @@ font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto,
     font-color: #C0504D;
     
 }
-div.css-jgupqz.e10mrw3y2 {
+button.css-jgupqz.e10mrw3y2 {
     opacity: 0;
     height: 2.5rem;
     padding: 0px;
