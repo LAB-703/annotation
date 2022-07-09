@@ -7,8 +7,8 @@ const buttons = Array.from(streamlitDoc.querySelectorAll('.stButton > button'));
 const left_button = buttons.find(el => el.innerText === 'Decrement');
 const right_button = buttons.find(el => el.innerText === 'Increment');
 
-left_button.style.backgroundColor = "coral"
-right_button.style.backgroundColor = "lightblue"
+left_button.style.backgroundColor = #FCF9F6
+right_button.style.backgroundColor = #FCF9F6
 
 streamlitDoc.addEventListener('keydown', function(e) {
     switch (e.key) {
