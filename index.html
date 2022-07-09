@@ -1,0 +1,26 @@
+<script>
+const streamlitDoc = window.parent.document;
+
+const buttons = Array.from(streamlitDoc.querySelectorAll('.stButton > button'));
+//console.log(buttons) // find buttons in console tab
+
+const left_button = buttons.find(el => el.innerText === 'Decrement');
+const right_button = buttons.find(el => el.innerText === 'Increment');
+
+left_button.style.backgroundColor = "coral"
+right_button.style.backgroundColor = "lightblue"
+
+streamlitDoc.addEventListener('keydown', function(e) {
+    switch (e.key) {
+        case 'ArrowLeft':
+            left_button.click();
+            break;
+        case 'ArrowRight':
+            right_button.click();
+            break;
+        case 'Enter':
+            window.parent.navigator.clipboard.writeText(python_string)
+            //window.parent.navigator.clipboard.readText().then((d) => {console.log(d)})
+    }
+});
+</script>
