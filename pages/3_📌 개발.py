@@ -23,7 +23,7 @@ footer:after{
     font-family: 'Pretendard';
 }
 code {
-    color: sienna;
+    color: #C0504D;
     overflow-wrap: break-word;
     background: linen;
     font-family: 'Source Code Pro';
