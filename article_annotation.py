@@ -83,7 +83,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME}!A:E",
+        range=f"{SHEET_NAME}!D:E",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
@@ -168,7 +168,11 @@ likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_
 
 likes_cnt=st.sidebar.markdown(get_data(gsheet_connector)['좋아요'][1])
 
-#if likes:
+if likes:
+    add_row_to_gsheet(
+         gsheet_connector,
+         [["❤"]],
+         )
 #    likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 
 # st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
