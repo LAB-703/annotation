@@ -404,10 +404,12 @@ if select_event=="개발":
         height=0,
         width=0,
     )
-
+    
+    from bokeh.io import show
+    from bokeh.models import Button, CustomJS
     
     import streamlit as st
-    from bokeh.models.widgets import Button
+   # from bokeh.models.widgets import Button
     from bokeh.models import CustomJS
     from streamlit_bokeh_events import streamlit_bokeh_events
     import pandas as pd
