@@ -1,5 +1,49 @@
 import streamlit as st
 
+# 메인메뉴 없애고, 저작권 표시
+hide_menu='''
+<style>
+#MainMenu {
+    visibility:hidden;
+}
+#document{
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+footer {
+    visibility:visible;
+    size: 10%;
+    font-family: 'Pretendard';
+}
+footer:after{
+    content: 'SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT';
+    font-size: 30%;
+    display:block;
+    position:relative;
+    color:silver;
+    font-family: 'Pretendard';
+}
+code {
+    color: sienna;
+    overflow-wrap: break-word;
+    background: linen;
+    font-family: 'Source Code Pro';
+}
+#root > div:nth-child(1) > div > div > a {
+    visibility:hidden;
+}    
+    
+    
+div.stButton > button:first-child {
+font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  font-size:100%;
+    background-color: #FCF9F6;
+    font-color: #C0504D;
+}
+</style>
+'''
+
+st.markdown(hide_menu, unsafe_allow_html=True)
+
 st.markdown('<p align="left" style=" font-size: 140%;"><b>👩🏻‍💻 개발자</b></p>', unsafe_allow_html=True)
 col1,col2=st.columns([3,7])
 with col1 :
