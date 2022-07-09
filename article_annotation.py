@@ -311,7 +311,7 @@ with col2:
 final_search=st.checkbox('최종 검색일(오늘) 추가')
 submit=st.button('인용')        
 if submit==True:
--------------------------------------------------------------------------------------------        
+#-------------------------------------------------------------------------------------------        
     if URL.find("n.news.naver.com/")>0: 
         req =requests.get(URL,headers=headers)
         html_doc = req.text  
