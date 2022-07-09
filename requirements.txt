@@ -13,5 +13,3 @@ google_api_python_client==2.52.0
 pytz
 gspread
 oauth2client
-Button
-show
