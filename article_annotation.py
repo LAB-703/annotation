@@ -143,7 +143,6 @@ button.css-jgupqz.e10mrw3y2 {
     border: none;
     background-color: "#C0504D";
     visibility: visible;
-    display:block;
     color: rgba(0, 0, 0, 0.6);
     border-radius: 0.75rem;
     transform: scale(0);
