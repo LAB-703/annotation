@@ -1,3 +1,5 @@
+import streamlit as st
+
 st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
 journal_df=get_data(gsheet_connector)
 journal_list = st.selectbox('',list(journal_df['학술지']))                    #-1 때문에 마지막 열 받아올 수 있었음 🟡
