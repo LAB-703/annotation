@@ -158,6 +158,10 @@ gsheet_connector = connect_to_gsheet()
 def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
+    add_row_to_gsheet(
+         gsheet_connector,
+         [["❤"]],
+         )
     
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍"  
