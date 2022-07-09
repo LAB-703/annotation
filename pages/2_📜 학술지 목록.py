@@ -1,4 +1,21 @@
 import streamlit as st
+import streamlit.components.v1 as components
+from urllib import parse
+import requests
+from bs4 import BeautifulSoup as bs
+from datetime import datetime, timedelta
+import clipboard
+import random
+import pandas as pd
+from pytz import timezone
+import google_auth_httplib2
+import httplib2
+import pandas as pd
+import streamlit as st
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from googleapiclient.http import HttpRequest
+from googleapiclient import discovery
 
 st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
 journal_df=get_data(gsheet_connector)
