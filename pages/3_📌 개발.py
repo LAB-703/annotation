@@ -1,3 +1,5 @@
+import streamlit as st
+
 st.markdown('<p align="left" style=" font-size: 140%;"><b>👩🏻‍💻 개발자</b></p>', unsafe_allow_html=True)
 col1,col2=st.columns([3,7])
 with col1 :
