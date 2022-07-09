@@ -345,17 +345,17 @@ if submit==True:
         APA=APA+", 최종검색일: "+TODAY
         CHICAGO=CHICAGO+", 최종검색일: "+TODAY
     if STYLE=="APA":
-        COPY=pd.DataFrame([APA])
-        COPY.to_clipboard(index=False,header=False)
-        #st.code(APA,language="Markdown")
+        #COPY=pd.DataFrame([APA])
+        #COPY.to_clipboard(index=False,header=False)
+        st.code(APA,language="Markdown")
         #clipboard.copy(APA)
-        #st.write('오른쪽 복사버튼을 클릭하세요.')
+        st.write('오른쪽 복사버튼을 클릭하세요.')
     elif STYLE=="CHICAGO":
-        COPY=pd.DataFrame([CHICAGO])
-        COPY.to_clipboard(index=False,header=False)
-        #st.code(CHICAGO,language="Markdown")
+        #COPY=pd.DataFrame([CHICAGO])
+        #COPY.to_clipboard(index=False,header=False)
+        st.code(CHICAGO,language="Markdown")
         #clipboard.copy(CHICAGO)
-        #st.write('오른쪽 복사버튼을 클릭하세요.')
+        st.write('오른쪽 복사버튼을 클릭하세요.')
     # else:
     #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
  #page2#######################################################################################################     
