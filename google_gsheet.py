@@ -43,7 +43,7 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
+def get_data(gsheet_connector, SHEET_NAME) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
@@ -113,4 +113,4 @@ if submitted:
 expander = st.expander("See all records")
 with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector,SHEET_NAMES))
+    st.dataframe(get_data(gsheet_connector,SHEET_NAMES,))
