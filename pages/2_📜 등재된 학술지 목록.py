@@ -90,6 +90,9 @@ div.streamlit-expanderHeader.st-ae.st-bq.st-ag.st-ah.st-ai.st-aj.st-br.st-bs.st-
 div.st-dc.st-ci.st-dd.st-de.st-df.st-co.st-dg.st-dh.st-di {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
+div.streamlit-expanderContent.st-ae.st-af.st-ag.st-ah.st-ai.st-aj.st-bt.st-br.st-cf.st-eh.st-bw.st-bx.st-as.st-at.st-by.st-bz.st-c0.st-c1.st-ch.st-ci.st-am.st-ei.st-cl.st-b1.st-cm.st-b3.st-c7.st-c8.st-c9 {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
 </style>
 '''
 
