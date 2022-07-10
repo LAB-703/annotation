@@ -43,7 +43,7 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector) -> pd.DataFrame:
+def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
@@ -63,7 +63,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 
 
 
-def add_row_to_gsheet(gsheet_connector, row) -> None:
+def add_row_to_gsheet(gsheet_connector, row,SHEET_NAME) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
         range=f"{SHEET_NAME}!A:E",
@@ -105,6 +105,7 @@ if submitted:
     add_row_to_gsheet(
         gsheet_connector,
         [[author, bug_type, comment, str(date), bug_severity]],
+        "Database",
     )
     st.success("Thanks! Your bug was recorded.")
     st.balloons()
@@ -112,4 +113,4 @@ if submitted:
 expander = st.expander("See all records")
 with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector))
+    st.dataframe(get_data(gsheet_connector,"Database"))
