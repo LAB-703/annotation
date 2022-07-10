@@ -194,13 +194,16 @@ def random_emoji():
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍" 
     st.session_state.disable_opt = False
+else :
+    
+    st.session_state.disable_opt = True
     
 def disable():
     st.session_state.disable_opt = False
     
 ###################################
 #select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
-likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji,on_change=disable)
+likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
 # gsheet_connector = connect_to_gsheet()
 text=str(get_data(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
