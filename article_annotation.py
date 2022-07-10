@@ -146,8 +146,13 @@ button.css-jgupqz.e10mrw3y2 {
     color: rgba(0, 0, 0, 0.6);
     border-radius: 0.75rem;
     transform: scale(0);
+}
 div.viewerBadge_link__1S137 {
     display:none;
+    background-color: #C0504D;
+}
+div.css-j7qwjs.e1fqkh3o5 {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
 </style>
 '''
