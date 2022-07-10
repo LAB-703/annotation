@@ -190,13 +190,12 @@ def random_emoji():
          gsheet_connector,
          [["❤"]],
          )
+    st.session_state.disable_opt = True
     
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍" 
     st.session_state.disable_opt = False
-else :
     
-    st.session_state.disable_opt = True
     
 def disable():
     st.session_state.disable_opt = False
