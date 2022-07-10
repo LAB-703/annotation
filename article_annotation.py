@@ -100,12 +100,12 @@ hide_menu='''
     visibility:hidden;
 }
 #document{
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-}
+    font-family:'Pretendard JP Variable', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Emoji', sans-serif;
+    }
 footer {
     visibility:visible;
     size: 10%;
-    font-family: 'Pretendard';
+    font-family: 'Pretendard JP Variable';
 }
 footer:after{
     content: 'SPDX-FileCopyrightText: © 2022 LAB-703 SPDX-License-Identifier: MIT';
@@ -113,7 +113,7 @@ footer:after{
     display:block;
     position:relative;
     color:silver;
-    font-family: 'Pretendard';
+    font-family: 'Pretendard JP Variable';
 }
 code {
     color: #C0504D;
