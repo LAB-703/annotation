@@ -187,8 +187,8 @@ dic = {'AUTHOR':'기자',
       'DOT2':'.',
       'DOT3':'.',
       'DOT4':'.',
-      'left quote':'"',
-      'right quote':'"'}
+      'left quote':'“',
+      'right quote':'”'}
 multiselect= expander.multiselect('순서대로 놓아주세요.',
                             list(dic.values()), 
                             list(dic.values())[:2]) #default
