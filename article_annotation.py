@@ -147,7 +147,6 @@ button.css-jgupqz.e10mrw3y2 {
     border-radius: 0.75rem;
     transform: scale(0);
 div.viewerBadge_link__1S137 {
-    background-color: brown;
     display:none;
 }
 </style>
