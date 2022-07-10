@@ -154,6 +154,14 @@ div.viewerBadge_link__1S137 {
 div.css-j7qwjs.e1fqkh3o5 {
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
 }
+a.viewerBadge_container__1QSob {
+    z-index: 50;
+    font-size: .875rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: none;
+}
 </style>
 '''
 
