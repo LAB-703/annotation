@@ -185,7 +185,7 @@ gsheet_connector = connect_to_gsheet()
 
 if "emoji" not in st.session_state:
     st.session_state.emoji = "🤍" 
-    st.session_state.disable_opt = False
+    st.session_state["disabled"] = False
     
 def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
@@ -194,26 +194,11 @@ def random_emoji():
          gsheet_connector,
          [["❤"]],
          )
-    st.session_state.disable_opt = True
-   
-    
-def disable():
-    st.session_state.disable_opt = True
-    
-###################################
-import streamlit as st
-
-if "disabled" not in st.session_state:
-    st.session_state["disabled"] = False
-
-def disable():
     st.session_state["disabled"] = True
 
-st.text_input(
-    "Enter some text", 
-    disabled=st.session_state.disabled, 
-    on_change=disable
-)
+    
+###################################
+
 #select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji,
     disabled=st.session_state.disabled)
