@@ -12,6 +12,8 @@ from googleapiclient.discovery import build
 from googleapiclient.http import HttpRequest
 from googleapiclient import discovery
 
+with open( "style.css" ) as css:
+    st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
