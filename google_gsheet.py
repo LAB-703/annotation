@@ -113,4 +113,4 @@ if submitted:
 expander = st.expander("See all records")
 with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector,"Database"))
+    st.dataframe(get_data(gsheet_connector,SHEET_NAME))
