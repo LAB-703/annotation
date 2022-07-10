@@ -1,5 +1,7 @@
 import streamlit as st
-
+with open( "style.css" ) as css:
+    st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
+    
 # 메인메뉴 없애고, 저작권 표시
 hide_menu='''
 <style>
