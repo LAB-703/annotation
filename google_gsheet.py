@@ -99,6 +99,9 @@ st.title("🐞 Bug report!")
 
 gsheet_connector = connect_to_gsheet()
 
+text=str(get_data2(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
+likes_cnt=st.sidebar.markdown(text)
+
 st.sidebar.write(
     f"This app shows how a Streamlit app can interact easily with a [Google Sheet]({GSHEET_URL}) to read or store data."
 )
