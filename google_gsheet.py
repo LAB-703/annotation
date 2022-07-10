@@ -77,14 +77,21 @@ def get_data2(gsheet_connector) -> pd.DataFrame:
 
 
 
-def add_row_to_gsheet(gsheet_connector, row,SHEET_NAME) -> None:
+def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
-        range=f"{SHEET_NAME}!A:E",
+        range=f"{SHEET_NAME1}!A:E",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
     ).execute()
-
+    
+def add_row_to_gsheet2(gsheet_connector, row) -> None:
+    gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
+        range=f"{SHEET_NAME2}!A:E",
+        body=dict(values=row),
+        valueInputOption="USER_ENTERED",
+    ).execute()
 
 st.set_page_config(page_title="Bug report", page_icon="🐞", layout="centered")
 
@@ -119,7 +126,6 @@ if submitted:
     add_row_to_gsheet(
         gsheet_connector,
         [[author, bug_type, comment, str(date), bug_severity]],
-        SHEET_NAMES,
     )
     st.success("Thanks! Your bug was recorded.")
     st.balloons()
