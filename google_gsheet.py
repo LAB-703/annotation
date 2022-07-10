@@ -10,7 +10,8 @@ from googleapiclient import discovery
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAMES = "Database"
+SHEET_NAME1 = "Database"
+SHEET_NAME2 = "좋아요"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
 #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
@@ -43,12 +44,12 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector, SHEET_NAME) -> pd.DataFrame:
+def get_data(gsheet_connector) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
             spreadsheetId=SPREADSHEET_ID,
-            range=f"{SHEET_NAME}!A:E",
+            range=f"{SHEET_NAME1}!A:E",
         )
         .execute()
     )
@@ -58,7 +59,20 @@ def get_data(gsheet_connector, SHEET_NAME) -> pd.DataFrame:
     df = df[1:]
     return df
 
+def get_data2(gsheet_connector) -> pd.DataFrame:
+    values = (
+        gsheet_connector.values()
+        .get(
+            spreadsheetId=SPREADSHEET_ID,
+            range=f"{SHEET_NAME2}!A:E",
+        )
+        .execute()
+    )
 
+    df = pd.DataFrame(values["values"])
+    df.columns = df.iloc[0]
+    df = df[1:]
+    return df
 
 
 
@@ -113,4 +127,4 @@ if submitted:
 expander = st.expander("See all records")
 with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector,SHEET_NAMES,))
+    st.dataframe(get_data(gsheet_connector))
