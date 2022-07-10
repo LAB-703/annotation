@@ -99,6 +99,20 @@ st.title("🐞 Bug report!")
 
 gsheet_connector = connect_to_gsheet()
 
+def random_emoji():
+    emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
+    st.session_state.emoji = random.choice(emojis)
+    add_row_to_gsheet(
+         gsheet_connector,
+         [["❤"]],
+         )
+    
+if "emoji" not in st.session_state:
+    st.session_state.emoji = "🤍" 
+    st.session_state.disable_opt = False
+###################################
+likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+
 text=str(get_data2(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
 
