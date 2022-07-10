@@ -202,7 +202,7 @@ def disable():
     
 ###################################
 #select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
-likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji)
+likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji,on_change=disable)
 # gsheet_connector = connect_to_gsheet()
 text=str(get_data(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
