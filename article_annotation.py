@@ -183,6 +183,10 @@ st.markdown(hide_menu, unsafe_allow_html=True)
 
 gsheet_connector = connect_to_gsheet()
 
+if "emoji" not in st.session_state:
+    st.session_state.emoji = "🤍" 
+    st.session_state.disable_opt = False
+    
 def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
@@ -191,14 +195,10 @@ def random_emoji():
          [["❤"]],
          )
     st.session_state.disable_opt = True
-    
-if "emoji" not in st.session_state:
-    st.session_state.emoji = "🤍" 
-    st.session_state.disable_opt = False
-    
+   
     
 def disable():
-    st.session_state.disable_opt = False
+    st.session_state.disable_opt = True
     
 ###################################
 #select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
