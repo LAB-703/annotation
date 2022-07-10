@@ -10,7 +10,7 @@ from googleapiclient import discovery
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAME = "Database"
+SHEET_NAMES = "Database"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
 #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
@@ -105,7 +105,7 @@ if submitted:
     add_row_to_gsheet(
         gsheet_connector,
         [[author, bug_type, comment, str(date), bug_severity]],
-        "Database",
+        SHEET_NAMES,
     )
     st.success("Thanks! Your bug was recorded.")
     st.balloons()
@@ -113,4 +113,4 @@ if submitted:
 expander = st.expander("See all records")
 with expander:
     st.write(f"Open original [Google Sheet]({GSHEET_URL})")
-    st.dataframe(get_data(gsheet_connector,SHEET_NAME))
+    st.dataframe(get_data(gsheet_connector,SHEET_NAMES))
