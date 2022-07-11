@@ -211,7 +211,8 @@ source_code = HtmlFile.read()
 print(source_code)
 components.html(source_code, height=450,  scrolling=False)
 
-
+p = open("google52b343991595ad94.html")
+components.html(p.read())
 with open("google52b343991595ad94.html", "r") as file:
      btn = st.download_button(
              label="Download image",
