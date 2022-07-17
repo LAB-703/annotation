@@ -206,20 +206,6 @@ likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_
 text=str(get_data(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
 
-HtmlFile = open("google52b343991595ad94.html", 'r',encoding='utf-8')
-source_code = HtmlFile.read() 
-print(source_code)
-components.html(source_code, height=450,  scrolling=False)
-
-p = open("google52b343991595ad94.html")
-components.html(p.read())
-with open("google52b343991595ad94.html", "r") as file:
-     btn = st.download_button(
-             label="Download image",
-             data=file,
-             file_name="google52b343991595ad94.html"
-        #     mime="image/png"
-           )
 # if likes:
 #     add_row_to_gsheet(
 #          gsheet_connector,
