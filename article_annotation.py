@@ -68,7 +68,7 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector,spreadsheetId) -> pd.DataFrame:
+def get_data(gsheet_connector,spreadsheet_id) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
@@ -83,7 +83,7 @@ def get_data(gsheet_connector,spreadsheetId) -> pd.DataFrame:
     df = df[1:]
     return df
 
-def add_row_to_gsheet(gsheet_connector,spreadsheetId, row) -> None:
+def add_row_to_gsheet(gsheet_connector,spreadsheet_id, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=spreadsheet_id,
         range=f"{SHEET_NAME}!A:E",
