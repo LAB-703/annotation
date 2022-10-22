@@ -35,7 +35,7 @@ with open( "style.css" ) as css:
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAME = "좋아요"
+SHEET_NAME = ["Database","좋아요"]
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
 #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
@@ -68,7 +68,7 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector) -> pd.DataFrame:
+def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
@@ -203,7 +203,7 @@ def random_emoji():
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji,
     disabled=st.session_state.disabled)
 # gsheet_connector = connect_to_gsheet()
-text=str(get_data(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
+text=str(get_data(gsheet_connector,"좋아요")['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
 
 # if likes:
@@ -361,6 +361,7 @@ with col1:
 with col2:
     if STYLE=="by JOURNAL":
         #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
+        gsheet_connector = connect_to_gsheet()
         option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
         st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
 final_search=st.checkbox('최종 검색일(오늘) 추가')
