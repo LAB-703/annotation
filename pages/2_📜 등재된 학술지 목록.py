@@ -148,7 +148,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     df = df[1:]
     return df
 
-def add_row_to_gsheet(gsheet_connector, row) -> None:
+def add_row_to_gsheet(gsheet_connector,SHEET_NAME, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
         range=f"{SHEET_NAME}!A:E",
@@ -159,7 +159,7 @@ def add_row_to_gsheet(gsheet_connector, row) -> None:
 gsheet_connector = connect_to_gsheet()
 
 st.markdown('<p align="center" style=" font-size: 140%;"><b>📜 등재된 학술지 목록</b></p>', unsafe_allow_html=True)
-journal_df=get_data(gsheet_connector)
+journal_df=get_data(gsheet_connector,'좋아요')
 journal_list = st.selectbox('',list(journal_df['학술지']))                    #-1 때문에 마지막 열 받아올 수 있었음 🟡
 st.markdown(str(journal_df.iat[journal_df.loc[journal_df.학술지==journal_list].index[0]-1,1]), unsafe_allow_html=True)
 #if journal_list==
