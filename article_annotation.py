@@ -191,7 +191,7 @@ def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
     add_row_to_gsheet(
-         gsheet_connector,'좋아요',
+         gsheet_connector,
          [["❤"]],
          )
     st.session_state["disabled"] = True
