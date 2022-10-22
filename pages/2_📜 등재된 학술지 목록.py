@@ -133,7 +133,7 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector) -> pd.DataFrame:
+def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
@@ -210,7 +210,7 @@ if submitted:
         st.stop()
     else:   
         add_row_to_gsheet(
-        gsheet_connector,
+        gsheet_connector, 'Database',
         [[journal, annotation,TODAY]],
         )
         gsheet_connector = connect_to_gsheet()
