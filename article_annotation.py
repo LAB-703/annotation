@@ -68,11 +68,11 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
+def get_data(gsheet_connector,spreadsheetId) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
-            spreadsheetId=SPREADSHEET_ID,
+            spreadsheetId=spreadsheet_id,
             range=f"{SHEET_NAME}!A:E",
         )
         .execute()
@@ -83,9 +83,9 @@ def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
     df = df[1:]
     return df
 
-def add_row_to_gsheet(gsheet_connector, row) -> None:
+def add_row_to_gsheet(gsheet_connector,spreadsheetId, row) -> None:
     gsheet_connector.values().append(
-        spreadsheetId=SPREADSHEET_ID,
+        spreadsheetId=spreadsheet_id,
         range=f"{SHEET_NAME}!A:E",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
@@ -191,7 +191,7 @@ def random_emoji():
     emojis = ["💖","🧡","💛","💚","💙","💜","🤎","🖤"]  
     st.session_state.emoji = random.choice(emojis)
     add_row_to_gsheet(
-         gsheet_connector,
+         gsheet_connector,'좋아요',
          [["❤"]],
          )
     st.session_state["disabled"] = True
