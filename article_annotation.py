@@ -35,7 +35,7 @@ with open( "style.css" ) as css:
 
 SCOPE = "https://www.googleapis.com/auth/spreadsheets"
 SPREADSHEET_ID = "1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg"
-SHEET_NAME = ["Database","좋아요"]
+SHEET_NAME = "좋아요"
 GSHEET_URL = f"https://docs.google.com/spreadsheets/d/{SPREADSHEET_ID}"
 
 #https://docs.google.com/spreadsheets/d/1Ym2nbTDvApMRUErsPoT4frr_-6TAZY2gzrX2sfgaWLg/edit?usp=sharing
@@ -68,11 +68,10 @@ def connect_to_gsheet():
     return gsheet_connector
 
 
-def get_data(gsheet_connector,sheet_name) -> pd.DataFrame:
+def get_data(gsheet_connector) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
-            SHEET_NAME=sheet_name,
             range=f"{SHEET_NAME}!A:E",
         )
         .execute()
@@ -83,9 +82,8 @@ def get_data(gsheet_connector,sheet_name) -> pd.DataFrame:
     df = df[1:]
     return df
 
-def add_row_to_gsheet(gsheet_connector,sheet_name, row) -> None:
+def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
-        SHEET_NAME=sheet_name,
         range=f"{SHEET_NAME}!A:E",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
@@ -203,7 +201,7 @@ def random_emoji():
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji,
     disabled=st.session_state.disabled)
 # gsheet_connector = connect_to_gsheet()
-text=str(get_data(gsheet_connector,"좋아요")['좋아요'].count())+"명이 좋아합니다💖"
+text=str(get_data(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
 
 # if likes:
