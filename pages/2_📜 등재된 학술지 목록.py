@@ -148,7 +148,7 @@ def get_data(gsheet_connector,SHEET_NAME) -> pd.DataFrame:
     df = df[1:]
     return df
 
-def add_row_to_gsheet(gsheet_connector,SHEET_NAME, row) -> None:
+def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
         spreadsheetId=SPREADSHEET_ID,
         range=f"{SHEET_NAME}!A:E",
