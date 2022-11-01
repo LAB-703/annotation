@@ -72,6 +72,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
     values = (
         gsheet_connector.values()
         .get(
+            spreadsheetId=SPREADSHEET_ID,
             range=f"{SHEET_NAME}!A:E",
         )
         .execute()
@@ -84,6 +85,7 @@ def get_data(gsheet_connector) -> pd.DataFrame:
 
 def add_row_to_gsheet(gsheet_connector, row) -> None:
     gsheet_connector.values().append(
+        spreadsheetId=SPREADSHEET_ID,
         range=f"{SHEET_NAME}!A:E",
         body=dict(values=row),
         valueInputOption="USER_ENTERED",
@@ -122,7 +124,6 @@ code {
     background: linen;
     font-family: 'Source Code Pro';
 }
-
 #root > div:nth-child(1) > div > div > a {
     visibility:hidden;
 }    
@@ -167,7 +168,6 @@ div.streamlit-expanderHeader.st-ae.st-bq.st-ag.st-ah.st-ai.st-aj.st-br.st-bs.st-
     font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
     font-weight: 200;
 }
-
 </style>
 '''
 
@@ -200,7 +200,7 @@ def random_emoji():
 #select_event = st.sidebar.selectbox("🎈", ("👀 기사 인용 도우미", "📜 학술지 목록","📌 개발", "⏳ 개발중","개발"))
 likes=st.sidebar.button(f" 좋아요 {st.session_state.emoji}", on_click=random_emoji,
     disabled=st.session_state.disabled)
-gsheet_connector = connect_to_gsheet()
+# gsheet_connector = connect_to_gsheet()
 text=str(get_data(gsheet_connector)['좋아요'].count())+"명이 좋아합니다💖"
 likes_cnt=st.sidebar.markdown(text)
 
@@ -359,7 +359,6 @@ with col1:
 with col2:
     if STYLE=="by JOURNAL":
         #st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
-        gsheet_connector = connect_to_gsheet()
         option = st.selectbox('찾으시는 학술지가 있나요?',list(get_data(gsheet_connector)['학술지']))
         st.markdown('<p style=" font-size: 90%; color:silver"> 학술지가 없다면, 📜 학술지 목록 페이지에서 추가에 동참해 주세요.</p>', unsafe_allow_html=True)
 final_search=st.checkbox('최종 검색일(오늘) 추가')
@@ -412,4 +411,4 @@ if submit==True:
         st.write('오른쪽 복사버튼을 클릭하세요.')
     # else:
     #     st.markdown('<p style=" font-size: 100%; color:silver"> ⏳개발 중', unsafe_allow_html=True)
- #page2#######################################################################################################     
+ #page2#######################################################################################################  
